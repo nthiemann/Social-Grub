@@ -23,6 +23,6 @@ Users will be able to post their recipes and search recipe results. This will al
 ## Task Allocation
 * Kyle Karacadag - Worked on documentation
 * Nicholas Thiemann - 
-* Ricardo Mangandi - 
+* Ricardo Mangandi - Worked on documentation
 * Allec Pereira - 
 * Rudolph Garcia - 
