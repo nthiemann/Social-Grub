@@ -21,8 +21,8 @@ Users will be able to post their recipes and search recipe results. This will al
 * [Velocity Chart](https://docs.google.com/spreadsheets/d/e/2PACX-1vQkWsc8JReQQ-xzByQGBkx_F-xLm6B3c5SysSs-EmDRi_49yQxRQ9Bl6ErLmIdnV6WFs4mOYTOFZjI6/pubchart?oid=594171331&format=interactive)
 
 ## Task Allocation
-* Kyle Karacadag - Worked on documentation and researched development
+* Kyle Karacadag - Worked on documentation
 * Nicholas Thiemann - Created Hello World App and Firebase
-* Ricardo Mangandi - 
+* Ricardo Mangandi - Worked on documentation and completed research for the project.
 * Allec Pereira - 
 * Rudolph Garcia - 
