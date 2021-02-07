@@ -25,4 +25,4 @@ Users will be able to post their recipes and search recipe results. This will al
 * Nicholas Thiemann - Created Hello World App and Firebase
 * Ricardo Mangandi - Worked on documentation and completed research for the project.
 * Allec Pereira - Worked on documentation
-* Rudolph Garcia - 
+* Rudolph Garcia - Worked on documentation and completed research for the project.
