@@ -26,3 +26,13 @@ Users will be able to post their recipes and search recipe results. This will al
 * Ricardo Mangandi - Worked on documentation and completed research for the project.
 * Allec Pereira - Worked on documentation
 * Rudolph Garcia - Worked on documentation and completed research for the project.
+
+# Sprint 2
+
+
+## Task Allocation
+* Kyle Karacadag - 
+* Nicholas Thiemann - 
+* Ricardo Mangandi - 
+* Allec Pereira - 
+* Rudolph Garcia - 
