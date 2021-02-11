@@ -28,7 +28,13 @@ Users will be able to post their recipes and search recipe results. This will al
 * Rudolph Garcia - Worked on documentation and completed research for the project.
 
 # Sprint 2
-
+* [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
+* Burndown Chart
+* Velocity Chart
+* System Architecture
+* Source Code
+* Automated Tests
+* Product Demonstration
 
 ## Task Allocation
 * Kyle Karacadag - 
