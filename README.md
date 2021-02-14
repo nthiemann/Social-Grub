@@ -38,5 +38,5 @@ Users will be able to post their recipes and search recipe results. This will al
 * Kyle Karacadag - 
 * Nicholas Thiemann - 
 * Ricardo Mangandi - 
-* Allec Pereira - 
+* Allec Pereira - Designed UI for login and register page
 * Rudolph Garcia - 
