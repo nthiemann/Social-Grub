@@ -35,8 +35,8 @@ Users will be able to post their recipes and search recipe results. This will al
 * [Product Demonstration](https://youtu.be/CQyXEk4xvY4)
 
 ## Task Allocation
-* Kyle Karacadag - Worked on documentation and researched for the project
+* Kyle Karacadag - Worked on documentation and research for the project
 * Nicholas Thiemann - 
 * Ricardo Mangandi - 
 * Allec Pereira - Designed UI for login and register page
-* Rudolph Garcia - 
+* Rudolph Garcia - Worked on documentation and research for the project
