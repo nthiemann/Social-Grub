@@ -32,8 +32,7 @@ Users will be able to post their recipes and search recipe results. This will al
 * [Burndown Chart](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ25FpSl4v-ElIgSLfLX2Dgk2LPNacqzJ9RUFu8GJMSpDq3CZ9gkmP5fa5fI51KvyllzgD45xUFu6eB/pubchart?oid=1725909335&format=interactive)
 * [Velocity Chart](https://docs.google.com/spreadsheets/d/e/2PACX-1vQkWsc8JReQQ-xzByQGBkx_F-xLm6B3c5SysSs-EmDRi_49yQxRQ9Bl6ErLmIdnV6WFs4mOYTOFZjI6/pubchart?oid=594171331&format=interactive)
 * [System Architecture]
-* [Product Demonstration]
-* [Demo Video](https://youtu.be/CQyXEk4xvY4)
+* [Product Demonstration](https://youtu.be/CQyXEk4xvY4)
 
 ## Task Allocation
 * Kyle Karacadag - 
