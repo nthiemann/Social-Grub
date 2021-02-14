@@ -33,6 +33,7 @@ Users will be able to post their recipes and search recipe results. This will al
 * [Velocity Chart]
 * [System Architecture]
 * [Product Demonstration]
+* [Demo Video] (https://youtu.be/CQyXEk4xvY4)
 
 ## Task Allocation
 * Kyle Karacadag - 
