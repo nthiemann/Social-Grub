@@ -30,7 +30,7 @@ Users will be able to post their recipes and search recipe results. This will al
 # Sprint 2
 * [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
 * [Burndown Chart](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ25FpSl4v-ElIgSLfLX2Dgk2LPNacqzJ9RUFu8GJMSpDq3CZ9gkmP5fa5fI51KvyllzgD45xUFu6eB/pubchart?oid=1725909335&format=interactive)
-* [Velocity Chart]
+* [Velocity Chart] (https://docs.google.com/spreadsheets/d/1DaXBAFoioV92z5xFTxQAV2fOvUss0lyIdFZZhVPS0Ac/edit?usp=sharing)
 * [System Architecture]
 * [Product Demonstration]
 * [Demo Video](https://youtu.be/CQyXEk4xvY4)
