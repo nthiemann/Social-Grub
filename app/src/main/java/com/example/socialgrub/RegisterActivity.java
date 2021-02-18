@@ -29,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
+
     // change password to text password
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,7 +131,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         if(password.length() < requiredPasswordLength)
         {
-            editTextPassword.setError("Password mut be at least " + requiredPasswordLength + " characters long");
+            editTextPassword.setError("Password must be at least " + requiredPasswordLength + " characters long");
             editTextPassword.requestFocus();
             return;
         }
@@ -158,6 +159,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
                                     Toast.makeText(RegisterActivity.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
+
+
+
+
+
                                     }
                                     else
                                     {
