@@ -40,3 +40,17 @@ Users will be able to post their recipes and search recipe results. This will al
 * Ricardo Mangandi - Worked on documentation and research for the project
 * Allec Pereira - Designed UI for login and register page
 * Rudolph Garcia - Worked on documentation and research for the project
+
+# Sprint 3
+* [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
+* [Burndown Chart]
+* [Velocity Chart]
+* [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
+* [Product Demonstration]
+
+## Task Allocation
+* Kyle Karacadag - 
+* Nicholas Thiemann - 
+* Ricardo Mangandi - 
+* Allec Pereira - 
+* Rudolph Garcia - 
