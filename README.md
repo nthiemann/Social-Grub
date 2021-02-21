@@ -55,5 +55,5 @@ Users will be able to post their recipes and search recipe results. This will al
 * Kyle Karacadag - Worked on documentation and added "Forgot Password" functionality
 * Nicholas Thiemann - Wrote tests, implemented register activity, changed names to coding standard.
 * Ricardo Mangandi - 
-* Allec Pereira - 
+* Allec Pereira - Wrote tests, and created demonstration video 
 * Rudolph Garcia - 
