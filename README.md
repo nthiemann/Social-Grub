@@ -50,6 +50,7 @@ Users will be able to post their recipes and search recipe results. This will al
 * [Velocity Chart]
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Product Demonstration]
+* [Testing](https://github.com/Jixster07/Social-Grub/blob/master/Testing.md)
 
 ## Task Allocation
 * Kyle Karacadag - Worked on documentation and added "Forgot Password" functionality
