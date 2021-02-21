@@ -45,7 +45,8 @@ Users will be able to post their recipes and search recipe results. This will al
 
 # Sprint 3
 * [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
-* [Burndown Chart]
+* Burndown Chart: 
+* ![sprint3BurndownChart](https://user-images.githubusercontent.com/62866287/108640549-64b5f800-7468-11eb-93b5-f5a43bf43526.png)
 * [Velocity Chart]
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Product Demonstration]
