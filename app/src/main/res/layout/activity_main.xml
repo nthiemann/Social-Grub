@@ -67,5 +67,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.726" />
 
+    <Button
+        android:id="@+id/forgotPassword"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="140dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="198dp"
+        android:layout_marginLeft="198dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginRight="73dp"
+        android:layout_marginBottom="19dp"
+        android:background="#00000000"
+        android:text="Forgot Password"
+        android:textColor="#000000"
+        android:textSize="8sp"
+        app:backgroundTint="#00000000"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/sign_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_password"
+        app:rippleColor="#FFFFFF" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

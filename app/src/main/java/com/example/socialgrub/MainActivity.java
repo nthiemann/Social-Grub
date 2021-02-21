@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button registerBtn;
+    Button forgotPass;
     EditText editTextEmail;
     EditText editTextPassword;
 
@@ -44,6 +45,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //progressBar = (progressBar) findViewById(R.id.progressBarID);
 
         mAuth = FirebaseAuth.getInstance();
+
+        forgotPass = findViewById(R.id.forgotPassword);
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ForgotPasswordActivity.class));
+            }
+        });
 
     }
         @Override
@@ -72,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String password = editTextPassword.getText().toString().trim();
 
                 if(email.isEmpty()) {
-
                     editTextEmail.setError("Email is required!");
                     editTextEmail.requestFocus();
                     return;
@@ -121,5 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
 
+
         }
+
 
