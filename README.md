@@ -53,7 +53,7 @@ Users will be able to post their recipes and search recipe results. This will al
 
 ## Task Allocation
 * Kyle Karacadag - 
-* Nicholas Thiemann - 
+* Nicholas Thiemann - Wrote tests, implemented register activity, changed names to coding standard.
 * Ricardo Mangandi - 
 * Allec Pereira - 
 * Rudolph Garcia - 
