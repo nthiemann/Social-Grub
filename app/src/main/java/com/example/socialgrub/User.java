@@ -4,10 +4,6 @@ public class User{
 
     public String firstName, lastName, email, username;
 
-    public User(){
-
-    }
-
     public User(String firstName, String lastName, String email, String username)
     {
         this.firstName = firstName;

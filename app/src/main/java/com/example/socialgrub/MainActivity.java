@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextEmail = (EditText) findViewById(R.id.enter_email);
         editTextPassword = (EditText) findViewById(R.id.enter_password);
 
-        //progressBar = (progressBar) findViewById(R.id.progressBarID);
-
         mAuth = FirebaseAuth.getInstance();
 
     }
@@ -97,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     editTextPassword.requestFocus();
                     return;
                 }
-
                 mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
                     @Override

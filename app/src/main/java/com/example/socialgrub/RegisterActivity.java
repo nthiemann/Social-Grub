@@ -38,14 +38,14 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-        Button backbutton = (Button) findViewById(R.id.backbutton);
-        Button registerButton = (Button) findViewById(R.id.button2);
+        Button backbutton = (Button) findViewById(R.id.backButton);
+        Button registerButton = (Button) findViewById(R.id.confirmRegister);
 
-        editTextFirstName = (EditText) findViewById(R.id.register_enter_name);
-        editTextLastName = (EditText) findViewById(R.id.edit_lastname);
-        editTextEmail = (EditText) findViewById(R.id.enter_email);
-        editTextUsername = (EditText) findViewById(R.id.register_enter_username);
-        editTextPassword = (EditText) findViewById(R.id.register_enter_password);
+        editTextFirstName = (EditText) findViewById(R.id.registerEnterName);
+        editTextLastName = (EditText) findViewById(R.id.editLastname);
+        editTextEmail = (EditText) findViewById(R.id.enterEmail);
+        editTextUsername = (EditText) findViewById(R.id.registerEnterUsername);
+        editTextPassword = (EditText) findViewById(R.id.registerEnterPassword);
 
 
 
@@ -61,28 +61,12 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 registerUser();
-                //Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
-                //startActivity(intent);
-
             }
         });
 
 
 
     }
-
-    /*public void onClick(View v){
-
-        switch (v.getId()){
-            case R.id.backbutton:
-                startActivity(new Intent(RegisterActivity.this,MainActivity.class));
-                break;
-            case R.id.register_button:
-                registerUser();
-                break;
-        }
-    */
-
 
     private void registerUser() {
 
