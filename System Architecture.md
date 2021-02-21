@@ -1,25 +1,40 @@
 # Program Organization
-Our mobile application will be based on user entries and information provided by the user. We are using a firebase database to interact with user entries to store,modify, and delete user entries. For example, a user can create a password with their account to keep their information secure. The password created happens to be stored in the firebase database where it can always be retrieved and modified. There are very few API calls that our system makes which are demonstrated in the diagrams. 
+Context Diagram:
+Our mobile application Social Grub will be based on user entries and information provided by the user. We are using firebase to maintain and interact with the data being supplied by the user. The diagram below expresses how each portion interacts with user story ids. As we continue to add additional features this diagram will be changing along with development changes. 
 
-[Context Diagram](https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=ContextDiagram#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D10RZph3hUoe_Zam2a9zN7is9nyKuxTqLo%26export%3Ddownload)
-[Container Diagram](https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=ContainerDiagram.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1e0b-F1im4_plfJuo3hIauKduAwMtVSFk%26export%3Ddownload)
-[Component Diagram](https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=ComponentDiagram.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1sw1rXp6UCVfK1h8jeatgnL8I_1W_gm6l%26export%3Ddownload)
+![contextDiagram](https://user-images.githubusercontent.com/62866287/108636334-8efcbb00-7452-11eb-9829-9648fb32dc03.png)
+
+
+Container Diagram:
+All basic features of the application will have functionality through the UI of the application. The application will make 
+API calls to the firebase database and google services to attain information stored and a user's camera. Depending on more user stories added there may be more pending API calls to add to our architecture.
+
+![containerDiagram](https://user-images.githubusercontent.com/62866287/108636608-5d84ef00-7454-11eb-8c59-13fac41c94c4.png)
+
+
+Component Diagram:
+The vital API calls made for security purposes are being made to our database which handles resetTing passwords and communicates with the user via email. The functionality feature that makes an API call is to Google services for camera access which is an essential feature of our app mapping to user story ID: 005.
+
+![compDiagram](https://user-images.githubusercontent.com/62866287/108637392-6081de80-7458-11eb-9103-c0597f414584.png)
+
 
 # Code Design
 The major classes of our design are based on the class User, class RecipePost, and class ExplorePage. The class User contains all user information and different methods that describe actions that the user can do in the app such as the method editProfile, etc. The class ExplorePage has methods to filter a search result or go to the basic search bar. The class RecipePost has multiple subclasses underneath it that the diagram will display.
 
-[UML Diagram](https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=UML.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1AotSCkR7CvBqSHkG9sNNN_QBrtKiwv85%26export%3Ddownload) 
+![UMLdiagram](https://user-images.githubusercontent.com/62866287/108637725-cc187b80-7459-11eb-8063-509b4564bcdc.png)
+
 
 
 # Database Diagram (ER)
-We are using Firebase which is a NoSQL cloud database to store user information as well as other classes that our code will contain.
+We are using Firebase which is a NoSQL cloud database to store user information as well as other classes that our code will contain. The entities describe our major classes which are class User, class Post, class RecipeList, class commentSection. 
 
-[ER Diagram](https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=ER%20Diagram%20SG.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1EzRK9jxCOUsRtjK-dmy1Jt-xKUDvZJpx%26export%3Ddownload)
+![erDiagram](https://user-images.githubusercontent.com/62866287/108637759-01bd6480-745a-11eb-9174-7de7fa88acde.png)
+
 
 # UI Design
 The user will be able to interact with the UI of the app based on the app layout. The user will have numerous options from creating a post, viewing a post, searching a post, etc. Additionally we will supply UI where making a post is accessible and easy for the user such as providing user text boxes. 
+![UIdiagram](https://user-images.githubusercontent.com/62866287/108638201-06831800-745c-11eb-9ca2-be660028bbc1.png)
 
-[UI Design](https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=Ui.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1fkA_jLhNuLvKR3LF7bOw-DyTiRJ8pbLk%26export%3Ddownload)
 
 # Business Rules
 We will ensure user security. Additionally, all user accounts will be public and viewable by a follower and following based environment to maintain a social media feel to the application. 

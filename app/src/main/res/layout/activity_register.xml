@@ -13,80 +13,80 @@
         android:text="Register"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/register_enter_name"
+        app:layout_constraintBottom_toTopOf="@+id/registerEnterName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backbutton" />
+        app:layout_constraintTop_toBottomOf="@+id/backButton" />
 
     <EditText
-        android:id="@+id/register_enter_name"
+        android:id="@+id/registerEnterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Enter first name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/edit_lastname"
+        app:layout_constraintBottom_toTopOf="@+id/editLastname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Register" />
 
     <EditText
-        android:id="@+id/register_enter_password"
+        android:id="@+id/registerEnterPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Enter password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/register_enter_username"
+        app:layout_constraintBottom_toTopOf="@+id/confirmRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enter_email" />
+        app:layout_constraintTop_toBottomOf="@+id/enterEmail" />
 
     <EditText
-        android:id="@+id/register_enter_username"
+        android:id="@+id/registerEnterUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Enter username"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/enterEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_enter_password" />
+        app:layout_constraintTop_toBottomOf="@+id/editLastname" />
 
     <EditText
-        android:id="@+id/edit_lastname"
+        android:id="@+id/editLastname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
 
+        android:ems="10"
         android:hint="Enter last name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/enter_email"
+        app:layout_constraintBottom_toTopOf="@+id/registerEnterUsername"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_enter_name" />
+        app:layout_constraintTop_toBottomOf="@+id/registerEnterName" />
 
     <EditText
-        android:id="@+id/enter_email"
+        android:id="@+id/enterEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Enter email"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/register_enter_password"
+        app:layout_constraintBottom_toTopOf="@+id/registerEnterPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_lastname" />
+        app:layout_constraintTop_toBottomOf="@+id/registerEnterUsername" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/confirmRegister"
         android:layout_width="188dp"
         android:layout_height="63dp"
         android:text="Register"
@@ -94,10 +94,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_enter_username" />
+        app:layout_constraintTop_toBottomOf="@+id/registerEnterPassword" />
 
     <Button
-        android:id="@+id/backbutton"
+        android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
