@@ -38,13 +38,13 @@ Tests if the credentials the user entered in the sign up page gets sent to the f
 3. The user shall have their password sent to the firebase
 
 Test U001 R002 - Manual<br />
-1. Tests if the user can see the name of the page they are on at the top
+Tests if the user can see the name of the page they are on at the top
 2. The user shall see “Log In” at the top of the screen when they are at the login screen 
 3. The user shall see “Sign Up” at the top of the screen when they are at the signup screen 
 4. The user shall see “Social Grub” when they first open the app
 
 Test U001 R001 - Manual<br />
-1. Test if the two main buttons of the app, the profile button and the explore page button, are displayed and working correctly.
+Test if the two main buttons of the app, the profile button and the explore page button, are displayed and working correctly.
 2. When a user selects the profile button, the user shall be directed to the profile page.
 3. When a user selects the explore page button, the user shall be directed to the explore page button.
 
