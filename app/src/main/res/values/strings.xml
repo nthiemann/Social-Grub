@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SocialGrub</string>
+
+    <string-array name="filters">
+        <item>Filters</item>
+        <item>Vegetarian</item>
+        <item>Vegan</item>
+        <item>Nut-free</item>
+        <item>Gluten-free</item>
+    </string-array>
+
 </resources>

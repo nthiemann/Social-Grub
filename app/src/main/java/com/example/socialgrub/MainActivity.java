@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if(task.isSuccessful()) {
 
                             //redirect to user profile
-                            startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                            startActivity(new Intent(MainActivity.this, ExploreActivity.class));
                         }
 
                         else {
