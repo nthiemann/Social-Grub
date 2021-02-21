@@ -1,6 +1,4 @@
 # Program Organization
-Our mobile application will be based on user entries and information provided by the user. We are using a firebase database to interact with user entries to store,modify, and delete user entries. For example, a user can create a password with their account to keep their information secure. The password created happens to be stored in the firebase database where it can always be retrieved and modified. There are very few API calls that our system makes which are demonstrated in the diagrams. 
-
 Context Diagram:
 Our mobile application Social Grub will be based on user entries and information provided by the user. We are using firebase to maintain and interact with the data being supplied by the user. The diagram below expresses how each portion interacts with user story ids. As we continue to add additional features this diagram will be changing along with development changes. 
 

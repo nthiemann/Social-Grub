@@ -16,7 +16,8 @@ Users will be able to post their recipes and search recipe results. This will al
 # Sprint 1
 * [Product Backlog / Sprint Backlog / Requirements](https://trello.com/b/08WbAgdr/social-grub)
 
-* [Burndown Chart](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ25FpSl4v-ElIgSLfLX2Dgk2LPNacqzJ9RUFu8GJMSpDq3CZ9gkmP5fa5fI51KvyllzgD45xUFu6eB/pubchart?oid=1725909335&format=interactive)
+* Burndown Chart:
+* ![sprint1BurndownChart](https://user-images.githubusercontent.com/62866287/108640115-e0fb0c00-7465-11eb-8fb5-883ce00a13bf.png)
 
 * [Velocity Chart](https://docs.google.com/spreadsheets/d/e/2PACX-1vQkWsc8JReQQ-xzByQGBkx_F-xLm6B3c5SysSs-EmDRi_49yQxRQ9Bl6ErLmIdnV6WFs4mOYTOFZjI6/pubchart?oid=594171331&format=interactive)
 
@@ -29,7 +30,8 @@ Users will be able to post their recipes and search recipe results. This will al
 
 # Sprint 2
 * [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
-* [Burndown Chart](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ25FpSl4v-ElIgSLfLX2Dgk2LPNacqzJ9RUFu8GJMSpDq3CZ9gkmP5fa5fI51KvyllzgD45xUFu6eB/pubchart?oid=1725909335&format=interactive)
+* Burndown Chart:
+* ![sprint2BurndownChart](https://user-images.githubusercontent.com/62866287/108639949-2965fa00-7465-11eb-85c1-40c5e6f463b6.png)
 * [Velocity Chart](https://docs.google.com/spreadsheets/d/e/2PACX-1vQkWsc8JReQQ-xzByQGBkx_F-xLm6B3c5SysSs-EmDRi_49yQxRQ9Bl6ErLmIdnV6WFs4mOYTOFZjI6/pubchart?oid=594171331&format=interactive)
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Product Demonstration](https://youtu.be/CQyXEk4xvY4)
@@ -43,7 +45,8 @@ Users will be able to post their recipes and search recipe results. This will al
 
 # Sprint 3
 * [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
-* [Burndown Chart]
+* Burndown Chart: 
+* ![sprint3BurndownChart](https://user-images.githubusercontent.com/62866287/108640549-64b5f800-7468-11eb-93b5-f5a43bf43526.png)
 * [Velocity Chart]
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Product Demonstration]
