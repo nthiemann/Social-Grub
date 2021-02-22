@@ -47,7 +47,8 @@ Users will be able to post their recipes and search recipe results. This will al
 * [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
 * Burndown Chart: 
 * ![sprint3BurndownChart](https://user-images.githubusercontent.com/62866287/108640549-64b5f800-7468-11eb-93b5-f5a43bf43526.png)
-* [Velocity Chart]
+* Velocity Chart:
+* ![Velocity Chart](https://user-images.githubusercontent.com/63211233/108644913-eb75cf80-747e-11eb-89d0-9fbe00a64c3a.png)
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Product Demonstration]
 * [Testing](https://github.com/Jixster07/Social-Grub/blob/master/Testing.md)
@@ -57,4 +58,4 @@ Users will be able to post their recipes and search recipe results. This will al
 * Nicholas Thiemann - Wrote tests, implemented register activity, changed names to coding standard.
 * Ricardo Mangandi - Wrote tests, implemented sign in feature, and modified architecture documentation.
 * Allec Pereira - Wrote tests, and created demonstration video 
-* Rudolph Garcia - 
+* Rudolph Garcia - Wrote tests, worked on the Explore Page of the app
