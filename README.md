@@ -32,7 +32,8 @@ Users will be able to post their recipes and search recipe results. This will al
 * [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
 * Burndown Chart:
 * ![sprint2BurndownChart](https://user-images.githubusercontent.com/62866287/108639949-2965fa00-7465-11eb-85c1-40c5e6f463b6.png)
-* [Velocity Chart](https://docs.google.com/spreadsheets/d/e/2PACX-1vQkWsc8JReQQ-xzByQGBkx_F-xLm6B3c5SysSs-EmDRi_49yQxRQ9Bl6ErLmIdnV6WFs4mOYTOFZjI6/pubchart?oid=594171331&format=interactive)
+* Velocity Chart:
+* ![Velocity Chart (2)](https://user-images.githubusercontent.com/63211233/108645079-8b335d80-747f-11eb-8b14-8aa52c15ea78.png)
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Product Demonstration](https://youtu.be/CQyXEk4xvY4)
 
