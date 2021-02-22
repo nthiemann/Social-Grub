@@ -52,7 +52,7 @@ Users will be able to post their recipes and search recipe results. This will al
 * Velocity Chart:
 * ![Velocity Chart](https://user-images.githubusercontent.com/63211233/108644913-eb75cf80-747e-11eb-89d0-9fbe00a64c3a.png)
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
-* [Product Demonstration]
+* [Product Demonstration](https://youtu.be/3df74Bb8Z7I)
 * [Testing](https://github.com/Jixster07/Social-Grub/blob/master/Testing.md)
 
 ## Task Allocation
