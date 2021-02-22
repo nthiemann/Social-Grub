@@ -19,7 +19,8 @@ Users will be able to post their recipes and search recipe results. This will al
 * Burndown Chart:
 * ![sprint1BurndownChart](https://user-images.githubusercontent.com/62866287/108640115-e0fb0c00-7465-11eb-8fb5-883ce00a13bf.png)
 
-* [Velocity Chart](https://docs.google.com/spreadsheets/d/e/2PACX-1vQkWsc8JReQQ-xzByQGBkx_F-xLm6B3c5SysSs-EmDRi_49yQxRQ9Bl6ErLmIdnV6WFs4mOYTOFZjI6/pubchart?oid=594171331&format=interactive)
+* Velocity Chart:
+* ![Velocity Chart (3)](https://user-images.githubusercontent.com/63211233/108645146-d77e9d80-747f-11eb-8a8b-9108a91d7545.png)
 
 ## Task Allocation
 * Kyle Karacadag - Worked on documentation
