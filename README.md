@@ -19,7 +19,8 @@ Users will be able to post their recipes and search recipe results. This will al
 * Burndown Chart:
 * ![sprint1BurndownChart](https://user-images.githubusercontent.com/62866287/108640115-e0fb0c00-7465-11eb-8fb5-883ce00a13bf.png)
 
-* [Velocity Chart](https://docs.google.com/spreadsheets/d/e/2PACX-1vQkWsc8JReQQ-xzByQGBkx_F-xLm6B3c5SysSs-EmDRi_49yQxRQ9Bl6ErLmIdnV6WFs4mOYTOFZjI6/pubchart?oid=594171331&format=interactive)
+* Velocity Chart:
+* ![Velocity Chart (3)](https://user-images.githubusercontent.com/63211233/108645146-d77e9d80-747f-11eb-8a8b-9108a91d7545.png)
 
 ## Task Allocation
 * Kyle Karacadag - Worked on documentation
@@ -32,7 +33,8 @@ Users will be able to post their recipes and search recipe results. This will al
 * [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
 * Burndown Chart:
 * ![sprint2BurndownChart](https://user-images.githubusercontent.com/62866287/108639949-2965fa00-7465-11eb-85c1-40c5e6f463b6.png)
-* [Velocity Chart](https://docs.google.com/spreadsheets/d/e/2PACX-1vQkWsc8JReQQ-xzByQGBkx_F-xLm6B3c5SysSs-EmDRi_49yQxRQ9Bl6ErLmIdnV6WFs4mOYTOFZjI6/pubchart?oid=594171331&format=interactive)
+* Velocity Chart:
+* ![Velocity Chart (2)](https://user-images.githubusercontent.com/63211233/108645079-8b335d80-747f-11eb-8b14-8aa52c15ea78.png)
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Product Demonstration](https://youtu.be/CQyXEk4xvY4)
 
@@ -47,14 +49,15 @@ Users will be able to post their recipes and search recipe results. This will al
 * [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
 * Burndown Chart: 
 * ![sprint3BurndownChart](https://user-images.githubusercontent.com/62866287/108640549-64b5f800-7468-11eb-93b5-f5a43bf43526.png)
-* [Velocity Chart]
+* Velocity Chart:
+* ![Velocity Chart](https://user-images.githubusercontent.com/63211233/108644913-eb75cf80-747e-11eb-89d0-9fbe00a64c3a.png)
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
-* [Product Demonstration]
+* [Product Demonstration](https://youtu.be/3df74Bb8Z7I)
 * [Testing](https://github.com/Jixster07/Social-Grub/blob/master/Testing.md)
 
 ## Task Allocation
 * Kyle Karacadag - Worked on documentation and added "Forgot Password" functionality
 * Nicholas Thiemann - Wrote tests, implemented register activity, changed names to coding standard.
-* Ricardo Mangandi - 
+* Ricardo Mangandi - Wrote tests, implemented sign in feature, and modified architecture documentation.
 * Allec Pereira - Wrote tests, and created demonstration video 
-* Rudolph Garcia - 
+* Rudolph Garcia - Wrote tests, worked on the Explore Page of the app
