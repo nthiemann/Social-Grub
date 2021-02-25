@@ -22,7 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private TextView registerUser;
-    private EditText editTextFirstName, editTextLastName, editTextEmail, editTextUsername, editTextPassword;
+    private EditText editTextFirstName, editTextLastName, editTextEmail, editTextUsername, editTextPassword, editTextPasswordConfirm;
 
 
     private FirebaseAuth mAuth;
@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         editTextEmail = (EditText) findViewById(R.id.enterEmail);
         editTextUsername = (EditText) findViewById(R.id.registerEnterUsername);
         editTextPassword = (EditText) findViewById(R.id.registerEnterPassword);
-
+        editTextPasswordConfirm = (EditText) findViewById(R.id.registerConfirmPassword);
 
 
 
@@ -74,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        String confirmPassword = editTextPasswordConfirm.getText().toString().trim();
         String firstName = editTextFirstName.getText().toString().trim();
         String lastName = editTextLastName.getText().toString().trim();
         String userName = editTextUsername.getText().toString().trim();
@@ -93,6 +94,12 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+        if (userName.isEmpty())
+        {
+            editTextUsername.setError("Username required");
+            editTextUsername.requestFocus();
+            return;
+        }
         if(email.isEmpty())
         {
             editTextEmail.setError("Email required");
@@ -120,11 +127,10 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-
-        if (userName.isEmpty())
+        if(!confirmPassword.equals(password))
         {
-            editTextUsername.setError("Username required");
-            editTextUsername.requestFocus();
+            editTextPasswordConfirm.setError("Passwords do not match");
+            editTextPasswordConfirm.requestFocus();
             return;
         }
 

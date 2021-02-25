@@ -15,7 +15,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/registerEnterName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButton" />
 
@@ -28,7 +27,6 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editLastname"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Register" />
 
@@ -39,11 +37,22 @@
         android:ems="10"
         android:hint="Enter password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/confirmRegister"
+        app:layout_constraintBottom_toTopOf="@+id/registerConfirmPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enterEmail" />
+
+    <EditText
+        android:id="@+id/registerConfirmPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Confirm password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/confirmRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerEnterPassword" />
 
     <EditText
         android:id="@+id/registerEnterUsername"
@@ -54,7 +63,6 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/enterEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editLastname" />
 
@@ -68,7 +76,6 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/registerEnterUsername"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerEnterName" />
 
@@ -81,7 +88,6 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/registerEnterPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerEnterUsername" />
 
@@ -92,9 +98,8 @@
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerEnterPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/registerConfirmPassword" />
 
     <Button
         android:id="@+id/backButton"
@@ -103,7 +108,6 @@
         android:text="Back"
         app:layout_constraintBottom_toTopOf="@+id/Register"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" /><![CDATA[
 
