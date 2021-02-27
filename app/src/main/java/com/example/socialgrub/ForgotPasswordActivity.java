@@ -2,6 +2,8 @@ package com.example.socialgrub;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -42,7 +44,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             Toast.makeText(ForgotPasswordActivity.this,
                                     "Your password has been sent to your email", Toast.LENGTH_LONG).show();
-                        } else {
+
+                            startActivity(new Intent( ForgotPasswordActivity.this, MainActivity.class));
+                            finishAffinity();
+                        }
+
+                        else {
                             Toast.makeText(ForgotPasswordActivity.this,
                                     task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
