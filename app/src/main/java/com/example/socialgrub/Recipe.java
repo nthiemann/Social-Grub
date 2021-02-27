@@ -6,6 +6,9 @@ public class Recipe
 {
     public String recipeTitle;
     public String description;
+    public Recipe(String title, String description)
+    {
 
+    }
 
 }

@@ -14,9 +14,10 @@ import android.widget.Spinner;
 public class CreatePost extends AppCompatActivity {
 
     String recipeTitle;
+    String recipeDescription;
 
     EditText recipeTitleInput;
-
+    EditText recipeDescriptionInput;
     Button postCancelButton;
     Button postRecipeButton;
 
@@ -26,12 +27,14 @@ public class CreatePost extends AppCompatActivity {
         setContentView(R.layout.activity_create_post);
 
         recipeTitleInput = (EditText) findViewById(R.id.recipeTitleInput);
+        recipeDescriptionInput = (EditText) findViewById(R.id.descriptionBox);
 
         postRecipeButton = (Button) findViewById(R.id.postRecipeButton);
         postRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recipeTitle = recipeTitleInput.getText().toString();
+
+                uploadPost();
             }
         });
 
@@ -51,5 +54,27 @@ public class CreatePost extends AppCompatActivity {
         unitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         units.setAdapter(unitAdapter);
 
+    }
+
+    private void uploadPost()
+    {
+        recipeTitle = recipeTitleInput.getText().toString();
+        recipeDescription = recipeDescriptionInput.getText().toString();
+
+        // Check for bad input
+        if (recipeTitle.isEmpty())
+        {
+            recipeTitleInput.setError("Recipe title required");
+            recipeTitleInput.requestFocus();
+            return;
+        }
+        if (recipeDescription.isEmpty())
+        {
+            recipeDescriptionInput.setError("Please provide a brief description");
+            recipeDescriptionInput.requestFocus();
+            return;
+        }
+
+        // Here: create the recipe object under a user
     }
 }
