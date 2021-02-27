@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SocialGrub</string>
 
+    <!-- Spinner for food filters on the Explore Page -->
     <string-array name="filters">
         <item>Filters</item>
         <item>Vegetarian</item>
@@ -24,5 +25,19 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    
+    <!-- Spinner for measurement of ingredients in the recipe post page -->
+    <string-array name="measurememnt">
+        <item>Measurement</item>
+        <item>Cup</item>
+        <item>Tablespoon</item>
+        <item>Teaspoon</item>
+        <item>Pounds(lb)</item>
+        <item>Ounces</item>
+        <item>Gram(g)</item>
+        <item>Milligram(mg)</item>
+        <item>Milliliter(mL)</item>
+    </string-array>
+
 
 </resources>

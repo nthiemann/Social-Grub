@@ -12,6 +12,8 @@ import android.widget.ImageButton;
 public class ExploreActivity extends AppCompatActivity {
 
     ImageButton settingButton;
+    ImageButton createPostButton;
+    ImageButton goToProfileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +41,23 @@ public class ExploreActivity extends AppCompatActivity {
             }
         });
 
+        createPostButton = (ImageButton) findViewById(R.id.createRecipePage);
+        createPostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToCreatePostActivityPage = new Intent(ExploreActivity.this, CreatePost.class);
+                startActivity(goToCreatePostActivityPage);
+            }
+        });
 
-
+        goToProfileButton = (ImageButton) findViewById(R.id.profileButton);
+        goToProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToProfilePage = new Intent(ExploreActivity.this, ProfileActivity.class);
+                startActivity(goToProfilePage);
+            }
+        });
 
 
 

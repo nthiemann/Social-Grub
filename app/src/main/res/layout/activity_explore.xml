@@ -8,29 +8,28 @@
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="161dp"
-        android:layout_height="101dp"
+        android:layout_width="109dp"
+        android:layout_height="79dp"
         android:contentDescription="TODO"
         android:src="@android:drawable/ic_menu_mapmode"
         android:tint="#9C27B0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintHorizontal_bias="0.056"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.978" />
+        app:layout_constraintVertical_bias="0.964" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="161dp"
-        android:layout_height="101dp"
+        android:id="@+id/profileButton"
+        android:layout_width="109dp"
+        android:layout_height="79dp"
         android:tint="#9C27B0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.936"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.979"
+        app:layout_constraintVertical_bias="0.964"
         app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
 
     <androidx.appcompat.widget.Toolbar
@@ -97,6 +96,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.02"
         app:srcCompat="@drawable/settings_icon" />
+
+    <ImageButton
+        android:id="@+id/createRecipePage"
+        android:layout_width="109dp"
+        android:layout_height="79dp"
+        android:tint="#9C27B0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/containsSearchFilterSettings"
+        app:layout_constraintVertical_bias="0.964"
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
