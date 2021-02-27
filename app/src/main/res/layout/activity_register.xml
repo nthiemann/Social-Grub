@@ -6,18 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
-    <TextView
-        android:id="@+id/Register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/registerEnterName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButton" />
-
     <EditText
         android:id="@+id/registerEnterName"
         android:layout_width="wrap_content"
@@ -27,8 +15,10 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editLastname"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Register" />
+        app:layout_constraintTop_toBottomOf="@+id/backButton"
+        app:layout_constraintVertical_bias="0.938" />
 
     <EditText
         android:id="@+id/registerEnterPassword"
@@ -61,10 +51,12 @@
         android:ems="10"
         android:hint="Enter username"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/enterEmail"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editLastname" />
+        app:layout_constraintTop_toBottomOf="@+id/editLastname"
+        app:layout_constraintVertical_bias="0.054" />
 
     <EditText
         android:id="@+id/editLastname"
@@ -74,10 +66,12 @@
         android:ems="10"
         android:hint="Enter last name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/registerEnterUsername"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerEnterName" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.479" />
 
     <EditText
         android:id="@+id/enterEmail"
@@ -88,6 +82,7 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/registerEnterPassword"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerEnterUsername" />
 
@@ -106,10 +101,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
-        app:layout_constraintBottom_toTopOf="@+id/Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.038" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="260dp"
+        android:layout_height="97dp"
+        app:layout_constraintBottom_toTopOf="@+id/registerEnterName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" /><![CDATA[
+        app:layout_constraintTop_toBottomOf="@+id/backButton"
+        app:srcCompat="@drawable/socialgrublogohorizontal" /><![CDATA[
 
     32dp"
     tools:layout_editor_absoluteY="445dp" />32dp"

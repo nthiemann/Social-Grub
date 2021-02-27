@@ -9,11 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class SettingsActivity extends AppCompatActivity {
 
     Button resetPassword;
     Button logOutOfAccount;
-    Button changeUsername;
     ImageButton outOfSettings;
 
 
@@ -40,8 +41,9 @@ public class SettingsActivity extends AppCompatActivity {
         logOutOfAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent( SettingsActivity.this, MainActivity.class));
+                finishAffinity();
             }
         });
 
