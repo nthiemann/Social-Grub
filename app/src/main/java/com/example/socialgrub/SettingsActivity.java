@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import static android.app.PendingIntent.getActivity;
+
 public class SettingsActivity extends AppCompatActivity {
 
     Button resetPassword;
@@ -52,7 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent( SettingsActivity.this, ExploreActivity.class));
+                SettingsActivity.super.onBackPressed();
             }
         });
 
