@@ -16,19 +16,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
 
     private TextView registerUser;
     private EditText editTextFirstName, editTextLastName, editTextEmail, editTextUsername, editTextPassword, editTextPasswordConfirm;
-
-
+    private FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
+    private DatabaseReference ref = db.getReference().child("Users");
     private FirebaseAuth mAuth;
-
-
-
 
     // change password to text password
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,19 +140,25 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
-                            User user = new User(firstName, lastName, email, userName);
+                            HashMap<String,String> userMap = new HashMap<>();
+                            userMap.put("First name",firstName);
+                            userMap.put("Last name",lastName);
+                            userMap.put("Username",userName);
+                            userMap.put("Email",email);
+                            DatabaseReference newRef = ref.push();
+                            newRef.setValue(userMap);
 
-                            FirebaseDatabase.getInstance().getReference("Users")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                            mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
-                                    Toast.makeText(RegisterActivity.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
+                                    if (task.isSuccessful()){
+                                        Toast.makeText(RegisterActivity.this, "User has been registered successfully.Please check email for verification link", Toast.LENGTH_LONG).show();
                                     }
-                                    else
-                                    {
-                                        Toast.makeText(RegisterActivity.this, "Failed to register user", Toast.LENGTH_LONG).show();
+                                    else{
+                                        Toast.makeText(RegisterActivity.this,"Failed to register user",Toast.LENGTH_LONG).show();
+                                        return;
+
                                     }
                                 }
                             });

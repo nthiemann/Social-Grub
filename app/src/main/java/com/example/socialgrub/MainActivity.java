@@ -111,11 +111,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(task.isSuccessful()) {
+                            // User has entered the correct credentials and email has been verified by the user
+                            if (mAuth.getCurrentUser().isEmailVerified()){
+                                startActivity(new Intent(MainActivity.this, ExploreActivity.class));
 
-                            //redirect to user profile
-                            startActivity(new Intent(MainActivity.this, ExploreActivity.class));
+                            }
+                            // user entered the correct credentials, however user has not verified email
+                            else {
+                                Toast.makeText(MainActivity.this, "Please verify account by clicking on link sent to email associated with this account", Toast.LENGTH_LONG).show();
+                            }
                         }
 
+                        // user entered incorrect credentials
                         else {
 
                             Toast.makeText(MainActivity.this, "Failed to login, Please check your credentials", Toast.LENGTH_LONG).show();
