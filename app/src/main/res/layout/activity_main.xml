@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/mainID"
     tools:context=".MainActivity">
 
     <EditText
@@ -76,7 +77,7 @@
         app:rippleColor="#FFFFFF" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/socialGrubLogo_horizontalID"
         android:layout_width="332dp"
         android:layout_height="99dp"
         app:layout_constraintBottom_toTopOf="@+id/enter_email"
