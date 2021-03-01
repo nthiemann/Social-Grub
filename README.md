@@ -77,7 +77,7 @@ Users will be able to post their recipes and search recipe results. This will al
 
 ## Task Allocation
 * Kyle Karacadag - Worked the functionality to the user's posts on their profile page and added character limit to the title when creating a recipe
-* Nicholas Thiemann -
+* Nicholas Thiemann - Worked on the recipe post creation page (Desription and general layout) and adedd the two password confirmation
 * Ricardo Mangandi - Wrote espresso unit tests for all working functionalities and completed the settings function in the app.
 * Allec Pereira - Worked on feature that allows user to select picture from camera roll, and account verification feature
 * Rudolph Garcia - Created a post recipe page with functionality to add ingredients, create a title for the recipe, cancel the recipe post, and added a button to the explore page to access the post recipe page
