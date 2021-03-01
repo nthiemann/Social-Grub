@@ -75,7 +75,7 @@ Users will be able to post their recipes and search recipe results. This will al
 
 
 ## Task Allocation
-* Kyle Karacadag -
+* Kyle Karacadag - Added the functionality to the user's posts on their profile page
 * Nicholas Thiemann -
 * Ricardo Mangandi - Wrote espresso unit tests for all working functionalities and completed the settings function in the app.
 * Allec Pereira -
