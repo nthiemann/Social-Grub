@@ -61,3 +61,22 @@ Users will be able to post their recipes and search recipe results. This will al
 * Ricardo Mangandi - Wrote tests, implemented sign in feature, and modified architecture documentation.
 * Allec Pereira - Wrote tests, and created demonstration video 
 * Rudolph Garcia - Wrote tests, worked on the Explore Page of the app
+
+# Sprint 4
+* [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
+* Burndown Chart:
+* ![Burndown Chart Sprint 4](https://user-images.githubusercontent.com/62866287/109437786-b88a8900-79f4-11eb-9282-b0d6d14fcaf0.png)
+* Velocity Chart:
+*
+* [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
+* [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
+* [Automated Tests](https://github.com/Jixster07/Social-Grub/tree/master/app/src/androidTest/java/com/example/socialgrub)
+* Product Demonstration
+
+
+## Task Allocation
+* Kyle Karacadag -
+* Nicholas Thiemann -
+* Ricardo Mangandi - Wrote espresso unit tests for all working functionalities and completed the settings function in the app.
+* Allec Pereira -
+* Rudolph Garcia
