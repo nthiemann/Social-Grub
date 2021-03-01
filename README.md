@@ -79,4 +79,4 @@ Users will be able to post their recipes and search recipe results. This will al
 * Nicholas Thiemann -
 * Ricardo Mangandi - Wrote espresso unit tests for all working functionalities and completed the settings function in the app.
 * Allec Pereira - Worked on feature that allows user to select picture from camera roll, and account verification feature
-* Rudolph Garcia
+* Rudolph Garcia - Created a post recipe page with functionality to add ingredients, create a title for the recipe, cancel the recipe post, and added a button to access the post   recipe
