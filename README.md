@@ -78,5 +78,5 @@ Users will be able to post their recipes and search recipe results. This will al
 * Kyle Karacadag - Worked the functionality to the user's posts on their profile page and added character limit to the title when creating a recipe
 * Nicholas Thiemann -
 * Ricardo Mangandi - Wrote espresso unit tests for all working functionalities and completed the settings function in the app.
-* Allec Pereira -
+* Allec Pereira - Worked on feature that allows user to select picture from camera roll, and account verification feature
 * Rudolph Garcia
