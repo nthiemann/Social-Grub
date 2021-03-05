@@ -134,6 +134,8 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+
+
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
