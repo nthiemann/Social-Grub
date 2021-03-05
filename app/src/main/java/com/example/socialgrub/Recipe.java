@@ -26,6 +26,10 @@ public class Recipe
         this.recipeExtraTags = recipeExtraTags;
         this.recipeMeasurements = recipeMeasurements;
     }
+    public Recipe(String imageURI)
+    {
+        ;
+    }
 
     public String getRecipeTitle() {
         return recipeTitle;
