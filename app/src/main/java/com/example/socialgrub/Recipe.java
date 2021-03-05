@@ -1,35 +1,72 @@
 package com.example.socialgrub;
 
+import android.net.Uri;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class Recipe
 {
     public String recipeTitle;
     public String recipeDescription;
-    public String recipeTagOne;
+    public Uri uri;
+    public String ImageURL;
+
+ /*   public String recipeTagOne;
     public String recipeTagTwo;
     public String recipeTagThree;
+
     public ArrayList<String> recipeIngredientList;
     public ArrayList<String> recipeExtraTags;
     public ArrayList<String> recipeMeasurements;
+*/
 
-    public Recipe(String recipeTitle, String recipeDescription, String recipeTagOne,
-                  String recipeTagTwo, String recipeTagThree,
-                  ArrayList<String> recipeIngredientList, ArrayList<String> recipeExtraTags,
-                  ArrayList<String> recipeMeasurements) {
-        this.recipeTitle = recipeTitle;
-        this.recipeDescription = recipeDescription;
-        this.recipeTagOne = recipeTagOne;
+
+
+    public Recipe(String imageURL) {
+       // this.recipeTitle = recipeTitle;
+       // this.recipeDescription = recipeDescription;
+        /*this.recipeTagOne = recipeTagOne;
         this.recipeTagTwo = recipeTagTwo;
         this.recipeTagThree = recipeTagThree;
         this.recipeIngredientList = recipeIngredientList;
         this.recipeExtraTags = recipeExtraTags;
         this.recipeMeasurements = recipeMeasurements;
+*/
+        //for image
+        //this.uri = uri;
+
+        this.ImageURL = imageURL;
     }
     public Recipe(String imageURI)
     {
         ;
     }
+
+/*
+    public Uri getUri() {
+        return uri;
+    }
+
+    public void setUri(Uri uri) {
+        this.uri = uri;
+    }
+    */
+
+
+
+    public String getImageURL() {
+        return ImageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        ImageURL = imageURL;
+    }
+
+
+
 
     public String getRecipeTitle() {
         return recipeTitle;
@@ -46,7 +83,7 @@ public class Recipe
     public void setRecipeDescription(String recipeDescription) {
         this.recipeDescription = recipeDescription;
     }
-
+/*
     public String getRecipeTagOne() {
         return recipeTagOne;
     }
@@ -94,4 +131,6 @@ public class Recipe
     public void setRecipeMeasurements(ArrayList<String> recipeMeasurements) {
         this.recipeMeasurements = recipeMeasurements;
     }
+
+    */
 }

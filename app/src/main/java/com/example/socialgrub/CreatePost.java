@@ -1,100 +1,138 @@
 
-
-
 package com.example.socialgrub;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.Nullable;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.UUID;
 
-import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class CreatePost extends AppCompatActivity {
 
     String recipeTitle;
     String recipeDescription;
+    String imageUrl;
 
     EditText recipeTitleInput;
     EditText recipeDescriptionInput;
+
     Button postCancelButton;
-    Button postRecipeButton;
-
-    Button selectImageFromGalleryButton;
+    Button continueRecipeButton; //will upload image to Firebase Storage
+    Button selectAnImageButton;
     Button openCameraButton;
-    Uri imageUri;
+
     ImageView pictureToPost;
-    String pathToFile;
-    Recipe recipe;
 
+    Uri imageUri;
 
-    FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
+    Bitmap image;
 
-    DatabaseReference getStoresRecipe = db.getReference("Recipe");
-    FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
     StorageReference reference = FirebaseStorage.getInstance().getReference();
 
 
-
+   FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
+   DatabaseReference getStoresRecipe = db.getReference("Image Dish");
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
-
         recipeTitleInput = (EditText) findViewById(R.id.recipeTitleInput);
         recipeDescriptionInput = (EditText) findViewById(R.id.descriptionBox);
+        continueRecipeButton = (Button) findViewById(R.id.continueRecipeButton);
+        pictureToPost = (ImageView) findViewById(R.id.pictureID);
+        selectAnImageButton = (Button) findViewById(R.id.selectAnImage);
+        openCameraButton = (Button) findViewById(R.id.openCameraButton);
 
-        postRecipeButton = (Button) findViewById(R.id.postRecipeButton);
-        postRecipeButton.setOnClickListener(new View.OnClickListener() {
+
+        //function will upload image to Firebase, there wont be any toast for now,
+        //give it like 30 seconds and you will see image in firebase
+        selectAnImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                uploadPost();
+
+                upLoad();
+
+
+            }
+        });
+
+        //function does not work DO NOT PRESS OPEN CAMERA BUTTON
+        openCameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               uploadNewImageWithCamera();
+
+
+
+            }
+        });
+
+
+        continueRecipeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                enterPostTitleNameDescriptionAndPhoto();
+                startActivity(new Intent(CreatePost.this,ProfileActivity.class));
             }
         });
 
@@ -107,53 +145,14 @@ public class CreatePost extends AppCompatActivity {
             }
         });
 
-        Spinner units = findViewById(R.id.measurementSpinner);
-        ArrayAdapter<String> unitAdapter = new ArrayAdapter<String>(CreatePost.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.measurememnt));
-
-        unitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        units.setAdapter(unitAdapter);
-
-
-        pictureToPost = (ImageView) findViewById(R.id.pictureID);
-
-        openCameraButton = (Button) findViewById(R.id.openCameraInCreatePost);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-            requestPermissions(new String[] {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    2);
-
-        }
-
-        openCameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadNewImageWithCamera();
-            }
-        });
-
-
-
-
-        selectImageFromGalleryButton = (Button) findViewById(R.id.selectAnImageInCreatePost);
-        selectImageFromGalleryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadImageFromGallery();
-            }
-        });
-
-
-
-
-
+            //CropImage.activity().start(CreatePost.this);
+           CropImage.activity().start(CreatePost.this);
     }
 
-    private void uploadPost() {
 
-
-        recipeTitle = recipeTitleInput.getText().toString();
-        recipeDescription = recipeDescriptionInput.getText().toString();
+    private void enterPostTitleNameDescriptionAndPhoto() {
+        //recipeTitle = recipeTitleInput.getText().toString();
+        //recipeDescription = recipeDescriptionInput.getText().toString();
 
         // Check for bad input
         if (recipeTitle.isEmpty()) {
@@ -180,34 +179,7 @@ public class CreatePost extends AppCompatActivity {
         }
 
 
-
-        if (userID == null) {
-
-            return;
-        }
-
-/*
-        String getsUserID = userID.getUid();
-
-
-        recipe = new Recipe(recipeTitle, recipeDescription);
-        getStoresRecipe.child(getsUserID).push().setValue(recipe);
-
-        Toast.makeText(CreatePost.this, "Information has been stored in database", Toast.LENGTH_LONG).show();
-
-
-
-
-
-       recipe = new Recipe(recipeTitle, recipeDescription, imageUri);
-        getStoresRecipe.child(getsUserID).push().setValue(recipe);
-        Toast.makeText(CreatePost.this, "Information has been stored in database", Toast.LENGTH_LONG).show();
-*/
-
     }
-
-
-
 
 
     private void uploadImageFromGallery() {
@@ -218,109 +190,42 @@ public class CreatePost extends AppCompatActivity {
     }
 
 
-
     private void uploadNewImageWithCamera() {
 
         //request for camera runtime permission
-        if(ContextCompat.checkSelfPermission( CreatePost.this, Manifest.permission.CAMERA)
+        if (ContextCompat.checkSelfPermission(CreatePost.this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions( CreatePost.this, new String[] {
+            ActivityCompat.requestPermissions(CreatePost.this, new String[]{
                     Manifest.permission.CAMERA
             }, 100);
         }
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent,  100);
+        startActivityForResult(intent, 100);
+
 
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
 
-        // Camera Upload
-        if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
-/*
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            pictureToPost.setImageBitmap(imageBitmap);
 
-
-            //Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            Uri uri = data.getData();
-            Bitmap bitmap = null;
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            imageUri = (Uri) data.getData();
-
-
-            if(imageUri == null)
-            {
-                Toast.makeText( CreatePost.this,  "imageUri null after taking pic", Toast.LENGTH_LONG).show();
-
-            }
-
+        if(resultCode == RESULT_OK && data != null && requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                imageUri = result.getUri();
                 pictureToPost.setImageURI(imageUri);
-                uploadToFirebase();
-            }
-        */
-
 
 
         }
-        else if(requestCode == 2 && resultCode == RESULT_OK && data != null) {
-            imageUri = (Uri) data.getData();
-            pictureToPost.setImageURI(data.getData());
-            uploadToFirebase();
+        else {
+            Toast.makeText(this, "Try again!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(CreatePost.this , ExploreActivity.class));
+            finish();
         }
-    }
 
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
-        //inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
-    }
-
-    private void uploadToFirebase() {
-
-        StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
-
-        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-
-                        //recipe = new Recipe(recipeTitle,recipeDescription,uri.toString());
-                        //String getUserID = userID.getUid();
-
-                        String getUserID = getStoresRecipe.push().getKey();
-
-                        recipe = new Recipe(imageUri.toString());
-
-                        getStoresRecipe.child(getUserID).setValue(recipe);
-                        Toast.makeText(CreatePost.this, "Uploaded Successfully", Toast.LENGTH_LONG).show();
-
-                    }
-                });
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                Toast.makeText( CreatePost.this,  "In progress", Toast.LENGTH_LONG).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-                Toast.makeText( CreatePost.this,  "Failed to upload", Toast.LENGTH_LONG).show();
-            }
-        });
 
     }
 
@@ -333,4 +238,78 @@ public class CreatePost extends AppCompatActivity {
     }
 
 
-}
+
+
+    private void upLoad() {
+        if (imageUri != null) {
+            final StorageReference filePath = FirebaseStorage.getInstance().getReference("Posts").child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
+
+            StorageTask uploadtask = filePath.putFile(imageUri);
+            uploadtask.continueWithTask(new Continuation() {
+                @Override
+                public Object then(@NonNull Task task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+
+                    return filePath.getDownloadUrl();
+                }
+
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    Uri downloadUri = task.getResult();
+                    imageUrl = downloadUri.toString();
+
+
+                    String postId = getStoresRecipe.push().getKey();
+
+
+                    //the map does not seem to get recipeDescription nor recipeTitle
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("postId", postId);
+                    map.put("imageUrl", imageUrl);
+                    map.put("description", recipeDescription);
+                    map.put("Title", recipeTitle);
+
+                    getStoresRecipe.child(postId).setValue(map);
+
+
+                }
+
+
+
+
+
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(CreatePost.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "No image was selected!", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
