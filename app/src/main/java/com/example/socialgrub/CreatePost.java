@@ -131,8 +131,8 @@ public class CreatePost extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                enterPostTitleNameDescriptionAndPhoto();
-                startActivity(new Intent(CreatePost.this,ProfileActivity.class));
+                if (enterPostTitleNameDescriptionAndPhoto())
+                    startActivity(new Intent(CreatePost.this,ProfileActivity.class));
             }
         });
 
@@ -146,24 +146,24 @@ public class CreatePost extends AppCompatActivity {
         });
 
             //CropImage.activity().start(CreatePost.this);
-           CropImage.activity().start(CreatePost.this);
+           CropImage.activity().start(CreatePost.this);5
     }
 
 
-    private void enterPostTitleNameDescriptionAndPhoto() {
-        //recipeTitle = recipeTitleInput.getText().toString();
-        //recipeDescription = recipeDescriptionInput.getText().toString();
+    private boolean enterPostTitleNameDescriptionAndPhoto() {
+        recipeTitle = recipeTitleInput.getText().toString();
+        recipeDescription = recipeDescriptionInput.getText().toString();
 
         // Check for bad input
         if (recipeTitle.isEmpty()) {
             recipeTitleInput.setError("Recipe title required");
             recipeTitleInput.requestFocus();
-            return;
+            return false;
         }
         if (recipeDescription.isEmpty()) {
             recipeDescriptionInput.setError("Please provide a brief description");
             recipeDescriptionInput.requestFocus();
-            return;
+            return false;
         }
 
 
@@ -174,10 +174,11 @@ public class CreatePost extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
             pictureToPost.requestFocus();
 
-            return;
+            return false;
 
         }
 
+        return true;
 
     }
 
@@ -266,13 +267,14 @@ public class CreatePost extends AppCompatActivity {
 
 
                     //the map does not seem to get recipeDescription nor recipeTitle
-                    HashMap<String, Object> map = new HashMap<>();
-                    map.put("postId", postId);
-                    map.put("imageUrl", imageUrl);
-                    map.put("description", recipeDescription);
-                    map.put("Title", recipeTitle);
+                    HashMap<String,Object> recipeMap = new HashMap<>();
+                    recipeMap.put("postId", postId);
+                    recipeMap.put("imageUrl", imageUrl);
+                    recipeMap.put("description", recipeDescription);
+                    recipeMap.put("Title", recipeTitle);
 
-                    getStoresRecipe.child(postId).setValue(map);
+
+                    getStoresRecipe.child(postId).setValue(recipeMap);
 
 
                 }

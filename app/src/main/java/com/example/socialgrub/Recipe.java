@@ -26,7 +26,7 @@ public class Recipe
 
 
     public Recipe(String imageURL) {
-       // this.recipeTitle = recipeTitle;
+       //  .recipeTitle = recipeTitle;
        // this.recipeDescription = recipeDescription;
         /*this.recipeTagOne = recipeTagOne;
         this.recipeTagTwo = recipeTagTwo;
@@ -40,11 +40,6 @@ public class Recipe
 
         this.ImageURL = imageURL;
     }
-    public Recipe(String imageURI)
-    {
-        ;
-    }
-
 /*
     public Uri getUri() {
         return uri;
