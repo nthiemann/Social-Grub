@@ -132,7 +132,7 @@ public class CreatePost extends AppCompatActivity {
                 if (enterPostTitleNameDescriptionAndPhoto())
                 {
                     Intent ingredientsIntent = new Intent(CreatePost.this,AddIngredients.class);
-                    ingredientsIntent.putExtra("recipePost", (Parcelable) recipePost);
+                    ingredientsIntent.putExtra("recipePost",recipePost);
                     startActivity(ingredientsIntent);
                 }
             }

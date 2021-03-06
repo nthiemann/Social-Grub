@@ -37,9 +37,9 @@ public class AddTags extends AppCompatActivity {
                     //change to confirmPost
                     startActivity(new Intent(AddTags.this,AddDirections.class));
 
-                    //Intent confirmPageIntent = new Intent(AddTags.this,ConfirmPost.class);
-                    //confirmPageIntent.putExtra("recipePost", (Parcelable) recipePost);
-                    //startActivity(confirmPageIntent);
+                    Intent confirmPageIntent = new Intent(AddTags.this,ConfirmPost.class);
+                    confirmPageIntent.putExtra("recipePost", recipePost);
+                    startActivity(confirmPageIntent);
 
 
                 }

@@ -22,6 +22,8 @@
         <activity android:name=".SettingsActivity" />
         <activity android:name=".ViewPost" />
         <activity android:name=".CreatePost" />
+        <activity android:name=".AddDirections" />
+        <activity android:name=".AddTags" />
         <activity android:name=".ExploreActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".ProfileActivity" />

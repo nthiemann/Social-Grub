@@ -31,7 +31,7 @@ public class AddIngredients extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent directionsIntent = new Intent(AddIngredients.this,AddDirections.class);
-                directionsIntent.putExtra("recipePost", (Parcelable) recipePost);
+                directionsIntent.putExtra("recipePost", recipePost);
                 startActivity(directionsIntent);
             }
         });

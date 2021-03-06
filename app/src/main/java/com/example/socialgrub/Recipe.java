@@ -1,6 +1,8 @@
 package com.example.socialgrub;
 
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -8,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Recipe
+public class Recipe implements Parcelable
 {
     private String recipeTitle;
     private String recipeDescription;
@@ -31,6 +33,32 @@ public class Recipe
     public Recipe() {
 
     }
+
+    protected Recipe(Parcel in) {
+        recipeTitle = in.readString();
+        recipeDescription = in.readString();
+        uri = in.readParcelable(Uri.class.getClassLoader());
+        imageURL = in.readString();
+        direction1 = in.readString();
+        recipeTagOne = in.readString();
+        recipeTagTwo = in.readString();
+        recipeTagThree = in.readString();
+        recipeIngredientList = in.createStringArrayList();
+        recipeExtraTags = in.createStringArrayList();
+        recipeMeasurements = in.createStringArrayList();
+    }
+
+    public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
+        @Override
+        public Recipe createFromParcel(Parcel in) {
+            return new Recipe(in);
+        }
+
+        @Override
+        public Recipe[] newArray(int size) {
+            return new Recipe[size];
+        }
+    };
 
     public void uploadRecipe()
     {
@@ -129,5 +157,28 @@ public class Recipe
         this.recipeMeasurements = recipeMeasurements;
     }
 
+
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public  void writeToParcel(Parcel parcel, int i)
+    {
+
+        parcel.writeString(recipeTitle);
+        parcel.writeString(recipeDescription);
+        parcel.writeParcelable(uri, i);
+        parcel.writeString(imageURL);
+        parcel.writeString(direction1);
+        parcel.writeString(recipeTagOne);
+        parcel.writeString(recipeTagTwo);
+        parcel.writeString(recipeTagThree);
+        parcel.writeStringList(recipeIngredientList);
+        parcel.writeStringList(recipeExtraTags);
+        parcel.writeStringList(recipeMeasurements);
+    }
 
 }

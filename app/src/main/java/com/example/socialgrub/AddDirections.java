@@ -29,12 +29,8 @@ public class AddDirections extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_directions);
 
-
-
         Intent intent = getIntent();
          recipePost = (Recipe) intent.getSerializableExtra("recipePost");
-
-
 
          nextButtonToGoToTags = (Button) findViewById(R.id.buttonNextToAddTags);
 
@@ -52,22 +48,13 @@ public class AddDirections extends AppCompatActivity {
                     startActivity(new Intent(AddDirections.this,AddTags.class));
 
                     Intent tagsPageIntent = new Intent(AddDirections.this,AddTags.class);
-                    tagsPageIntent.putExtra("recipePost", (Parcelable) recipePost);
+                    tagsPageIntent.putExtra("recipePost", recipePost);
                     startActivity(tagsPageIntent);
 
                 }
             }
         });
-
-
-
-
-
-
-
-
     }
-
 
     private boolean checksForDirectionsFilledIn() {
 
@@ -76,7 +63,6 @@ public class AddDirections extends AppCompatActivity {
         String descriptionBox3String = descriptionBox3.getText().toString();
         String descriptionBox4String = descriptionBox4.getText().toString();
         String descriptionBox5String = descriptionBox5.getText().toString();
-
 
 
         if(descriptionBox1String.isEmpty()) {
