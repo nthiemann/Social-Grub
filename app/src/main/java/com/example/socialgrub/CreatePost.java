@@ -271,7 +271,7 @@ public class CreatePost extends AppCompatActivity {
                     //the map does not seem to get recipeDescription nor recipeTitle
 
                     recipePost = new Recipe();
-                    recipePost.setPostID(postID);
+                    //recipePost.setPostID(postID);
                     recipePost.setImageURL(imageUrl);
                     recipePost.setRecipeTitle(recipeTitle);
                     recipePost.setRecipeDescription(recipeDescription);
@@ -284,7 +284,7 @@ public class CreatePost extends AppCompatActivity {
                     recipeMap.put("Title", recipeTitle);*/
 
 
-                    getStoresRecipe.child(postId).setValue(recipeMap);
+                    //getStoresRecipe.child(postId).setValue(recipeMap);
 
 
                 }
