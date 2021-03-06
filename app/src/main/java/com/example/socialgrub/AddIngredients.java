@@ -25,14 +25,12 @@ public class AddIngredients extends AppCompatActivity {
         Intent intent = getIntent();
         recipePost = (Recipe) intent.getSerializableExtra("recipePost");
 
-        //HashMap<String,Object> recipeMap = (HashMap<String,Object>)intent.getSerializableExtra("recipeMap");
-
         continueRecipeButton = (Button) findViewById(R.id.continueRecipeButton);
         continueRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent directionsIntent = new Intent(AddIngredients.this,Directions.class);
+                Intent directionsIntent = new Intent(AddIngredients.this,AddDirections.class);
                 directionsIntent.putExtra("recipePost", (Parcelable) recipePost);
                 startActivity(directionsIntent);
             }

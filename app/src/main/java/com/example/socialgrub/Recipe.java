@@ -10,18 +10,20 @@ import java.util.HashMap;
 
 public class Recipe
 {
-    public String recipeTitle;
-    public String recipeDescription;
-    public Uri uri;
-    public String ImageURL;
+    private String recipeTitle;
+    private String recipeDescription;
+    private Uri uri;
+    private String imageURL;
 
-    public String recipeTagOne;
-    public String recipeTagTwo;
-    public String recipeTagThree;
+    private String direction1;
 
-    public ArrayList<String> recipeIngredientList;
-    public ArrayList<String> recipeExtraTags;
-    public ArrayList<String> recipeMeasurements;
+    private String recipeTagOne;
+    private String recipeTagTwo;
+    private String recipeTagThree;
+
+    private ArrayList<String> recipeIngredientList;
+    private ArrayList<String> recipeExtraTags;
+    private ArrayList<String> recipeMeasurements;
 
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
     DatabaseReference getStoresRecipe = db.getReference("Image Dish");
@@ -33,27 +35,29 @@ public class Recipe
     public void uploadRecipe()
     {
         HashMap<String,Object> attributeMap = new HashMap();
-        /*
-        attributeMap.put();
-        attributeMap.put();
-        attributeMap.put();
-        attributeMap.put();
-        attributeMap.put();
-        attributeMap.put();
-        */
+
+        attributeMap.put("title", recipeTitle);
+        attributeMap.put("imageURL", imageURL);
+        attributeMap.put("description", recipeDescription);
+        //attributeMap.put();
+        //attributeMap.put();
+        //attributeMap.put();
+
         getStoresRecipe.push();
         String ID = getStoresRecipe.getKey();
         getStoresRecipe.child(ID).setValue(attributeMap);
+
+        // store ID under user here
 
 
     }
 
     public String getImageURL() {
-        return ImageURL;
+        return imageURL;
     }
 
     public void setImageURL(String imageURL) {
-        ImageURL = imageURL;
+        imageURL = imageURL;
     }
 
     public String getRecipeTitle() {
@@ -76,12 +80,12 @@ public class Recipe
     public void setRecipeDescription(String recipeDescription) {
         this.recipeDescription = recipeDescription;
     }
-/*
+
     public String getRecipeTagOne() {
         return recipeTagOne;
     }
 
-    public void setRecipeTagOne(String recipeTagOne) {
+    public void setTag1(String recipeTagOne) {
         this.recipeTagOne = recipeTagOne;
     }
 
@@ -89,7 +93,7 @@ public class Recipe
         return recipeTagTwo;
     }
 
-    public void setRecipeTagTwo(String recipeTagTwo) {
+    public void setTag2(String recipeTagTwo) {
         this.recipeTagTwo = recipeTagTwo;
     }
 
@@ -97,7 +101,7 @@ public class Recipe
         return recipeTagThree;
     }
 
-    public void setRecipeTagThree(String recipeTagThree) {
+    public void setTag3(String recipeTagThree) {
         this.recipeTagThree = recipeTagThree;
     }
 
@@ -105,14 +109,14 @@ public class Recipe
         return recipeIngredientList;
     }
 
-    public void setRecipeIngredientList(ArrayList<String> recipeIngredientList) {
-        this.recipeIngredientList = recipeIngredientList;
-    }
-
     public ArrayList<String> getRecipeExtraTags() {
         return recipeExtraTags;
     }
 
+    public void setRecipeDirection1(String direction)
+    {
+        this.direction1 = direction;
+    }
     public void setRecipeExtraTags(ArrayList<String> recipeExtraTags) {
         this.recipeExtraTags = recipeExtraTags;
     }
@@ -125,5 +129,5 @@ public class Recipe
         this.recipeMeasurements = recipeMeasurements;
     }
 
-    */
+
 }

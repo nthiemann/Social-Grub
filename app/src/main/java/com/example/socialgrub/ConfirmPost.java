@@ -47,7 +47,7 @@ public class ConfirmPost extends AppCompatActivity {
         changeIngredientsButton = (Button) findViewById(R.id.changeIngredientsButton);
         changeDirectionsButton = (Button) findViewById(R.id.changeDirectionsButton);
         changeTagsButton = (Button) findViewById(R.id.changeTagsButton);
-        postRecipeButton = (Button) findViewById(R.id.postRecipeButton);
+        postRecipeButton = (Button) findViewById(R.id.uploadPostButton);
 
         image = (ImageView) findViewById(R.id.image);
 
@@ -117,6 +117,7 @@ public class ConfirmPost extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 uploadPost();
+                startActivity(new Intent(ConfirmPost.this, ExploreActivity.class));
             }
         });
 

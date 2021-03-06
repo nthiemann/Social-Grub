@@ -28,7 +28,6 @@ public class AddTags extends AppCompatActivity {
 
         goToConfirmPage = (Button) findViewById(R.id.goToConfirmPost);
 
-
         goToConfirmPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +56,6 @@ public class AddTags extends AppCompatActivity {
 
         if (tagTest.isEmpty()) {
 
-
             recipeTagInput.setError("Enter Tag");
             recipeTagInput.requestFocus();
             return false;
@@ -65,8 +63,6 @@ public class AddTags extends AppCompatActivity {
 
             recipePost = new Recipe();
             recipePost.setTag1(tagTest);
-
-
         }
 
         return true;
