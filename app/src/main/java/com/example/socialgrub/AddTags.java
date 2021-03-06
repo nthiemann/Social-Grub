@@ -40,8 +40,6 @@ public class AddTags extends AppCompatActivity {
                     Intent confirmPageIntent = new Intent(AddTags.this,ConfirmPost.class);
                     confirmPageIntent.putExtra("recipePost", recipePost);
                     startActivity(confirmPageIntent);
-
-
                 }
             }
         });
