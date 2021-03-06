@@ -72,16 +72,14 @@ public class CreatePost extends AppCompatActivity {
     EditText recipeDescriptionInput;
 
     Button postCancelButton;
-    Button continueRecipeButton; //will upload image to Firebase Storage
-    Button selectAnImageButton;
-    Button openCameraButton;
+    Button continueRecipeButton;
 
     ImageView pictureToPost;
 
     Uri imageUri;
 
-    Bitmap image;
-    StorageReference reference = FirebaseStorage.getInstance().getReference();
+    HashMap<String,Object> recipeMap;
+
 
 
    FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
@@ -99,30 +97,9 @@ public class CreatePost extends AppCompatActivity {
         recipeDescriptionInput = (EditText) findViewById(R.id.descriptionBox);
         continueRecipeButton = (Button) findViewById(R.id.continueRecipeButton);
         pictureToPost = (ImageView) findViewById(R.id.pictureID);
-        selectAnImageButton = (Button) findViewById(R.id.selectAnImage);
-        openCameraButton = (Button) findViewById(R.id.openCameraButton);
 
 
-        //function will upload image to Firebase, there wont be any toast for now,
-        //give it like 30 seconds and you will see image in firebase
-        selectAnImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                upLoad();
-            }
-        });
-
-        //function does not work DO NOT PRESS OPEN CAMERA BUTTON
-        openCameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-               uploadNewImageWithCamera();
-
-
-
-            }
-        });
+        recipePost = getIntent().getParcelableExtra("recipePost");
 
 
         continueRecipeButton.setOnClickListener(new View.OnClickListener() {
@@ -131,10 +108,15 @@ public class CreatePost extends AppCompatActivity {
 
                 if (enterPostTitleNameDescriptionAndPhoto())
                 {
-                    Intent ingredientsIntent = new Intent(CreatePost.this,AddIngredients.class);
-                    ingredientsIntent.putExtra("recipePost",recipePost);
-                    startActivity(ingredientsIntent);
+                    //uploads information to database
+                    collectsImageURLDescriptionTitleRecipeTitle();
+                    Intent confirmPostIntent = new Intent(CreatePost.this,ConfirmPost.class);
+                    //ingredientsIntent.putExtra("recipePost",recipePost);
+                    startActivity(confirmPostIntent);
                 }
+
+
+
             }
         });
 
@@ -147,7 +129,7 @@ public class CreatePost extends AppCompatActivity {
             }
         });
 
-            //CropImage.activity().start(CreatePost.this);
+
            CropImage.activity().start(CreatePost.this);
     }
 
@@ -185,29 +167,6 @@ public class CreatePost extends AppCompatActivity {
     }
 
 
-    private void uploadImageFromGallery() {
-        Intent galleryIntent = new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, 2);
-    }
-
-
-    private void uploadNewImageWithCamera() {
-
-        //request for camera runtime permission
-        if (ContextCompat.checkSelfPermission(CreatePost.this, Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(CreatePost.this, new String[]{
-                    Manifest.permission.CAMERA
-            }, 100);
-        }
-
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, 100);
-
-
-    }
 
 
     @Override
@@ -243,7 +202,7 @@ public class CreatePost extends AppCompatActivity {
 
 
 
-    private void upLoad() {
+    private void collectsImageURLDescriptionTitleRecipeTitle() {
         if (imageUri != null) {
             final StorageReference filePath = FirebaseStorage.getInstance().getReference("Posts").child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
 
@@ -271,26 +230,33 @@ public class CreatePost extends AppCompatActivity {
                     //the map does not seem to get recipeDescription nor recipeTitle
 
                     recipePost = new Recipe();
-                    //recipePost.setPostID(postID);
+                    /*//recipePost.setPostID(postID);
                     recipePost.setImageURL(imageUrl);
                     recipePost.setRecipeTitle(recipeTitle);
                     recipePost.setRecipeDescription(recipeDescription);
+                    */
 
+                    //String ingredient1 = recipePost.getIngredient1();
+                    //String direction1 = recipePost.getDirection1();
 
-                    /*recipeMap = new HashMap<>();
-                    recipeMap.put("postId", postId);
+                    String tag1 = recipePost.getRecipeTagOne();
+                    String thisIsaTest = "Please work";
+
+                    recipeMap = new HashMap<>();
+                    recipeMap.put("postId", postID);
                     recipeMap.put("imageUrl", imageUrl);
                     recipeMap.put("description", recipeDescription);
-                    recipeMap.put("Title", recipeTitle);*/
+                    recipeMap.put("Title", recipeTitle);
+                    //recipeMap.put("Ingredient 1", ingredient1 );
+                   // recipeMap.put("Direction 1", direction1);
+                    recipeMap.put("Tag 1", tag1);
+                    recipeMap.put("Another test", thisIsaTest);
 
 
-                    //getStoresRecipe.child(postId).setValue(recipeMap);
+                    getStoresRecipe.child(postID).setValue(recipeMap);
 
 
                 }
-
-
-
 
 
             }).addOnFailureListener(new OnFailureListener() {

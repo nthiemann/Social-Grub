@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -28,9 +31,12 @@ public class AddDirections extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_directions);
-
+/*
         Intent intent = getIntent();
          recipePost = (Recipe) intent.getSerializableExtra("recipePost");
+         */
+
+        //recipePost = getIntent().getParcelableExtra("recipePost");
 
          nextButtonToGoToTags = (Button) findViewById(R.id.buttonNextToAddTags);
 
@@ -39,6 +45,9 @@ public class AddDirections extends AppCompatActivity {
         descriptionBox3 = (EditText) findViewById(R.id.descriptionBox3ID);
         descriptionBox4 = (EditText) findViewById(R.id.descriptionBox4ID);
         descriptionBox5 = (EditText) findViewById(R.id.descriptionBox5ID);
+
+
+        recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
 
         nextButtonToGoToTags.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -20,9 +20,11 @@ public class AddTags extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_tags);
 
+/*
+   Intent intent = getIntent();
+        recipePost = (Recipe) intent.getSerializableExtra("recipePost");*/
 
-        Intent intent = getIntent();
-        recipePost = (Recipe) intent.getSerializableExtra("recipePost");
+        recipePost = getIntent().getParcelableExtra("recipePost");
 
         recipeTagInput = (EditText) findViewById(R.id.recipeTagInput);
 
@@ -34,10 +36,10 @@ public class AddTags extends AppCompatActivity {
 
                 if (checksForTag()) {
 
-                    //change to confirmPost
-                    startActivity(new Intent(AddTags.this,AddDirections.class));
 
-                    Intent confirmPageIntent = new Intent(AddTags.this,ConfirmPost.class);
+                    startActivity(new Intent(AddTags.this,CreatePost.class));
+
+                    Intent confirmPageIntent = new Intent(AddTags.this,CreatePost.class);
                     confirmPageIntent.putExtra("recipePost", recipePost);
                     startActivity(confirmPageIntent);
                 }

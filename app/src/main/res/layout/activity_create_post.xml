@@ -92,17 +92,6 @@
         app:layout_constraintVertical_bias="0.296" />
 
 
-    <Button
-        android:id="@+id/selectAnImage"
-        android:layout_width="161dp"
-        android:layout_height="58dp"
-        android:text="Select an Image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.416" />
-
     <ImageView
         android:id="@+id/pictureID"
         android:layout_width="247dp"
@@ -113,22 +102,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.853" />
-
-    <Button
-        android:id="@+id/openCameraButton"
-        android:layout_width="150dp"
-        android:layout_height="42dp"
-        android:text="Open Camera"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
