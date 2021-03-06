@@ -53,6 +53,7 @@ public class AddIngredients extends AppCompatActivity {
                 if(enterIngredients()) {
 
 
+
                     Intent directionsIntent = new Intent(AddIngredients.this, AddDirections.class);
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("recipePost", Parcels.wrap(recipePost));
@@ -85,8 +86,8 @@ public class AddIngredients extends AppCompatActivity {
 
         else {
 
-            recipePost = new Recipe();
-            //recipePost.setIngredient1(recipeIngredient1);
+            recipePost = new Recipe(recipeIngredient1);
+
         }
 
         return true;
