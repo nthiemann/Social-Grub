@@ -62,6 +62,8 @@ import java.util.UUID;
 
 public class CreatePost extends AppCompatActivity {
 
+
+    Recipe recipePost;
     String recipeTitle;
     String recipeDescription;
     String imageUrl;
@@ -79,15 +81,11 @@ public class CreatePost extends AppCompatActivity {
     Uri imageUri;
 
     Bitmap image;
-
     StorageReference reference = FirebaseStorage.getInstance().getReference();
 
 
    FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
    DatabaseReference getStoresRecipe = db.getReference("Image Dish");
-
-
-   Recipe recipePost;
 
 
     @Override
@@ -110,9 +108,17 @@ public class CreatePost extends AppCompatActivity {
         selectAnImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 upLoad();
+            }
+        });
+
+        //function does not work DO NOT PRESS OPEN CAMERA BUTTON
+        openCameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               uploadNewImageWithCamera();
+
 
 
             }
@@ -124,11 +130,11 @@ public class CreatePost extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (enterPostTitleNameDescriptionAndPhoto())
-                    startActivity(new Intent(CreatePost.this,ProfileActivity.class));
-
-                Intent directionsIntent = new Intent(CreatePost.this,AddDirections.class);
-                directionsIntent.putExtra("recipePost", (Parcelable) recipePost);
-                startActivity(directionsIntent);
+                {
+                    Intent ingredientsIntent = new Intent(CreatePost.this,AddIngredients.class);
+                    ingredientsIntent.putExtra("recipePost", (Parcelable) recipePost);
+                    startActivity(ingredientsIntent);
+                }
             }
         });
 
@@ -141,7 +147,7 @@ public class CreatePost extends AppCompatActivity {
             }
         });
 
-
+            //CropImage.activity().start(CreatePost.this);
            CropImage.activity().start(CreatePost.this);
     }
 
@@ -179,7 +185,29 @@ public class CreatePost extends AppCompatActivity {
     }
 
 
+    private void uploadImageFromGallery() {
+        Intent galleryIntent = new Intent();
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        startActivityForResult(galleryIntent, 2);
+    }
 
+
+    private void uploadNewImageWithCamera() {
+
+        //request for camera runtime permission
+        if (ContextCompat.checkSelfPermission(CreatePost.this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(CreatePost.this, new String[]{
+                    Manifest.permission.CAMERA
+            }, 100);
+        }
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 100);
+
+
+    }
 
 
     @Override
@@ -235,32 +263,34 @@ public class CreatePost extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Uri> task) {
                     Uri downloadUri = task.getResult();
                     imageUrl = downloadUri.toString();
-                    String postId = getStoresRecipe.push().getKey();
-/*
-
-                    HashMap<String,Object> recipeMap = new HashMap<>();
-                    recipeMap.put("postId", postId);
-                    recipeMap.put("imageUrl", imageUrl);
-                    recipeMap.put("description", recipeDescription);
-                    recipeMap.put("Title", recipeTitle);
 
 
-                    getStoresRecipe.child(postId).setValue(recipeMap);
-                    */
+                    String postID = getStoresRecipe.push().getKey();
 
+
+                    //the map does not seem to get recipeDescription nor recipeTitle
 
                     recipePost = new Recipe();
-                    recipePost.setPostID(postId);
+                    recipePost.setPostID(postID);
                     recipePost.setImageURL(imageUrl);
                     recipePost.setRecipeTitle(recipeTitle);
                     recipePost.setRecipeDescription(recipeDescription);
 
-                    getStoresRecipe.child(postId).setValue(recipePost);
+
+                    /*recipeMap = new HashMap<>();
+                    recipeMap.put("postId", postId);
+                    recipeMap.put("imageUrl", imageUrl);
+                    recipeMap.put("description", recipeDescription);
+                    recipeMap.put("Title", recipeTitle);*/
 
 
+                    getStoresRecipe.child(postId).setValue(recipeMap);
 
 
                 }
+
+
+
 
 
             }).addOnFailureListener(new OnFailureListener() {
