@@ -25,7 +25,7 @@ public class AddIngredients extends AppCompatActivity {
         Intent intent = getIntent();
         recipePost = (Recipe) intent.getSerializableExtra("recipePost");
 
-        continueRecipeButton = (Button) findViewById(R.id.continueRecipeButton);
+        continueRecipeButton = (Button) findViewById(R.id.continueButton);
         continueRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
