@@ -27,6 +27,10 @@ public class Recipe implements Parcelable
     private ArrayList<String> recipeExtraTags;
     private ArrayList<String> recipeMeasurements;
 
+
+
+
+
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
     DatabaseReference getStoresRecipe = db.getReference("Image Dish");
 
