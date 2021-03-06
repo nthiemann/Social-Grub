@@ -27,6 +27,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 
+import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
@@ -53,7 +54,12 @@ public class ConfirmPost extends AppCompatActivity {
 
 
 
-
+    String ingredient1;
+    String direction1;
+    String tag1;
+    String recipeTitle;
+    String recipeDescription;
+    String recipeUrl;
 
 
 
@@ -88,6 +94,18 @@ public class ConfirmPost extends AppCompatActivity {
         Intent intent = getIntent();
         recipePost = (Recipe) intent.getSerializableExtra("recipePost");
         */
+
+
+
+        recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
+
+
+         ingredient1 = recipePost.getIngredient1();
+        direction1 = recipePost.getDirection1();
+         tag1 = recipePost.getTag1();
+         recipeTitle = recipePost.getRecipeTitle();
+        recipeDescription = recipePost.getRecipeDescription();
+         recipeUrl = recipePost.getRecipeUrl();
 
 
         cancelPostButton.setOnClickListener(new View.OnClickListener() {

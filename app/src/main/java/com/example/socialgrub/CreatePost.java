@@ -50,6 +50,8 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 
+import org.parceler.Parcels;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -82,6 +84,12 @@ public class CreatePost extends AppCompatActivity {
 
 
 
+    String ingredient1;
+    String direction1;
+    String tag1;
+
+
+
    FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
    DatabaseReference getStoresRecipe = db.getReference("Image Dish");
 
@@ -99,7 +107,13 @@ public class CreatePost extends AppCompatActivity {
         pictureToPost = (ImageView) findViewById(R.id.pictureID);
 
 
-        recipePost = getIntent().getParcelableExtra("recipePost");
+        //recipePost = getIntent().getParcelableExtra("recipePost");
+
+
+        recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
+        ingredient1 = recipePost.getIngredient1();
+        direction1 = recipePost.getDirection1();
+        tag1 = recipePost.getTag1();
 
 
         continueRecipeButton.setOnClickListener(new View.OnClickListener() {
@@ -108,10 +122,16 @@ public class CreatePost extends AppCompatActivity {
 
                 if (enterPostTitleNameDescriptionAndPhoto())
                 {
-                    //uploads information to database
+
+
+
+                    //uploads information to database and creates new object
                     collectsImageURLDescriptionTitleRecipeTitle();
                     Intent confirmPostIntent = new Intent(CreatePost.this,ConfirmPost.class);
-                    //ingredientsIntent.putExtra("recipePost",recipePost);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("recipePost", Parcels.wrap(recipePost));
+                    confirmPostIntent.putExtras(bundle);
+
                     startActivity(confirmPostIntent);
                 }
 
@@ -227,30 +247,20 @@ public class CreatePost extends AppCompatActivity {
                     String postID = getStoresRecipe.push().getKey();
 
 
-                    //the map does not seem to get recipeDescription nor recipeTitle
+                    recipePost = new Recipe(ingredient1,direction1,tag1,recipeTitle,recipeDescription,imageUrl);
 
-                    recipePost = new Recipe();
-                    /*//recipePost.setPostID(postID);
-                    recipePost.setImageURL(imageUrl);
-                    recipePost.setRecipeTitle(recipeTitle);
-                    recipePost.setRecipeDescription(recipeDescription);
-                    */
 
-                    //String ingredient1 = recipePost.getIngredient1();
-                    //String direction1 = recipePost.getDirection1();
 
-                    String tag1 = recipePost.getRecipeTagOne();
-                    String thisIsaTest = "Please work";
 
                     recipeMap = new HashMap<>();
                     recipeMap.put("postId", postID);
                     recipeMap.put("imageUrl", imageUrl);
                     recipeMap.put("description", recipeDescription);
                     recipeMap.put("Title", recipeTitle);
-                    //recipeMap.put("Ingredient 1", ingredient1 );
-                   // recipeMap.put("Direction 1", direction1);
+                    recipeMap.put("Ingredients", ingredient1);
+                    recipeMap.put("Directions", direction1);
                     recipeMap.put("Tag 1", tag1);
-                    recipeMap.put("Another test", thisIsaTest);
+
 
 
                     getStoresRecipe.child(postID).setValue(recipeMap);

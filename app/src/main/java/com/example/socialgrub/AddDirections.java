@@ -48,16 +48,19 @@ public class AddDirections extends AppCompatActivity {
 
 
         recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
+        String ingredient1 = recipePost.getIngredient1();
 
         nextButtonToGoToTags.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checksForDirectionsFilledIn()) {
+                if(checksForDirectionsFilledIn(ingredient1)) {
 
-                    startActivity(new Intent(AddDirections.this,AddTags.class));
+                    //startActivity(new Intent(AddDirections.this,AddTags.class));
 
                     Intent tagsPageIntent = new Intent(AddDirections.this,AddTags.class);
-                    tagsPageIntent.putExtra("recipePost", recipePost);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("recipePost", Parcels.wrap(recipePost));
+                    tagsPageIntent.putExtras(bundle);
                     startActivity(tagsPageIntent);
 
                 }
@@ -65,7 +68,7 @@ public class AddDirections extends AppCompatActivity {
         });
     }
 
-    private boolean checksForDirectionsFilledIn() {
+    private boolean checksForDirectionsFilledIn(String ingredient1) {
 
         String descriptionBox1String = descriptionBox1.getText().toString();
         String descriptionBox2String = descriptionBox2.getText().toString();
@@ -85,8 +88,7 @@ public class AddDirections extends AppCompatActivity {
 
         else {
 
-            recipePost = new Recipe();
-            recipePost.setRecipeDirection1(descriptionBox1String);
+           recipePost = new Recipe(ingredient1,descriptionBox1String);
 
         }
 
