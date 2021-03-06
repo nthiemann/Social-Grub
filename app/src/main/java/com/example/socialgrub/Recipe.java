@@ -6,6 +6,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Recipe
 {
@@ -14,43 +15,38 @@ public class Recipe
     public Uri uri;
     public String ImageURL;
 
- /*   public String recipeTagOne;
+    public String recipeTagOne;
     public String recipeTagTwo;
     public String recipeTagThree;
 
     public ArrayList<String> recipeIngredientList;
     public ArrayList<String> recipeExtraTags;
     public ArrayList<String> recipeMeasurements;
-*/
 
+    FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
+    DatabaseReference getStoresRecipe = db.getReference("Image Dish");
 
+    public Recipe() {
 
-    public Recipe(String imageURL) {
-       //  .recipeTitle = recipeTitle;
-       // this.recipeDescription = recipeDescription;
-        /*this.recipeTagOne = recipeTagOne;
-        this.recipeTagTwo = recipeTagTwo;
-        this.recipeTagThree = recipeTagThree;
-        this.recipeIngredientList = recipeIngredientList;
-        this.recipeExtraTags = recipeExtraTags;
-        this.recipeMeasurements = recipeMeasurements;
-*/
-        //for image
-        //this.uri = uri;
-
-        this.ImageURL = imageURL;
-    }
-/*
-    public Uri getUri() {
-        return uri;
     }
 
-    public void setUri(Uri uri) {
-        this.uri = uri;
+    public void uploadRecipe()
+    {
+        HashMap<String,Object> attributeMap = new HashMap();
+        /*
+        attributeMap.put();
+        attributeMap.put();
+        attributeMap.put();
+        attributeMap.put();
+        attributeMap.put();
+        attributeMap.put();
+        */
+        getStoresRecipe.push();
+        String ID = getStoresRecipe.getKey();
+        getStoresRecipe.child(ID).setValue(attributeMap);
+
+
     }
-    */
-
-
 
     public String getImageURL() {
         return ImageURL;
@@ -60,12 +56,14 @@ public class Recipe
         ImageURL = imageURL;
     }
 
-
-
-
     public String getRecipeTitle() {
         return recipeTitle;
     }
+
+    public void setRecipeIngredientList(ArrayList<String> list){
+        this.recipeIngredientList = list;
+    }
+
 
     public void setRecipeTitle(String recipeTitle) {
         this.recipeTitle = recipeTitle;

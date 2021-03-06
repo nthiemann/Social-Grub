@@ -21,6 +21,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -61,6 +62,8 @@ import java.util.UUID;
 
 public class CreatePost extends AppCompatActivity {
 
+
+    Recipe recipePost;
     String recipeTitle;
     String recipeDescription;
     String imageUrl;
@@ -78,7 +81,6 @@ public class CreatePost extends AppCompatActivity {
     Uri imageUri;
 
     Bitmap image;
-
     StorageReference reference = FirebaseStorage.getInstance().getReference();
 
 
@@ -106,11 +108,7 @@ public class CreatePost extends AppCompatActivity {
         selectAnImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 upLoad();
-
-
             }
         });
 
@@ -132,7 +130,11 @@ public class CreatePost extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (enterPostTitleNameDescriptionAndPhoto())
-                    startActivity(new Intent(CreatePost.this,ProfileActivity.class));
+                {
+                    Intent ingredientsIntent = new Intent(CreatePost.this,AddIngredients.class);
+                    ingredientsIntent.putExtra("recipePost", (Parcelable) recipePost);
+                    startActivity(ingredientsIntent);
+                }
             }
         });
 
@@ -146,7 +148,7 @@ public class CreatePost extends AppCompatActivity {
         });
 
             //CropImage.activity().start(CreatePost.this);
-           CropImage.activity().start(CreatePost.this);5
+           CropImage.activity().start(CreatePost.this);
     }
 
 
@@ -263,15 +265,23 @@ public class CreatePost extends AppCompatActivity {
                     imageUrl = downloadUri.toString();
 
 
-                    String postId = getStoresRecipe.push().getKey();
+                    String postID = getStoresRecipe.push().getKey();
 
 
                     //the map does not seem to get recipeDescription nor recipeTitle
-                    HashMap<String,Object> recipeMap = new HashMap<>();
+
+                    recipePost = new Recipe();
+                    recipePost.setPostID(postID);
+                    recipePost.setImageURL(imageUrl);
+                    recipePost.setRecipeTitle(recipeTitle);
+                    recipePost.setRecipeDescription(recipeDescription);
+
+
+                    /*recipeMap = new HashMap<>();
                     recipeMap.put("postId", postId);
                     recipeMap.put("imageUrl", imageUrl);
                     recipeMap.put("description", recipeDescription);
-                    recipeMap.put("Title", recipeTitle);
+                    recipeMap.put("Title", recipeTitle);*/
 
 
                     getStoresRecipe.child(postId).setValue(recipeMap);
