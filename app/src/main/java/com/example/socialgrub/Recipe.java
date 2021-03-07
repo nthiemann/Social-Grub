@@ -15,15 +15,16 @@ import java.util.HashMap;
 public class Recipe {
 
 
+//    ArrayList<Ingredient> ingredientList;
+//    ArrayList<String> directions;
+//    ArrayList<String> tags;
 
     String ingredient1;
-
-
-
     String direction1;
     String tag1;
     String tag2;
     String tag3;
+
     String recipeTitle;
     String recipeDescription;
     String recipeUrl;
@@ -76,8 +77,9 @@ public class Recipe {
 
     }
 
+    public Recipe(String ingredient1, String direction1, String tagTest) {
 
-
+    }
 
 
     public String getIngredient1() {

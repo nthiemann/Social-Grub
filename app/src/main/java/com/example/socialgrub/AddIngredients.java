@@ -29,10 +29,7 @@ public class AddIngredients extends AppCompatActivity {
 
     private Button addBothIngredients;
     private Button addAdditionalIngredient;
-
-    private boolean measurementUnitSelectedForIngredient1 = false;
-    private boolean measurementUnitSelectedForIngredient2 = false;
-    private boolean measurementUnitSelectedForAdditionalIngredient = false;
+    private Button toDirectionsPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +37,7 @@ public class AddIngredients extends AppCompatActivity {
         setContentView(R.layout.activity_add_ingredients);
 
         List<String> measurementUnits = new ArrayList<>();
-        measurementUnits.add(0, "Choose Measurement Unit");
+        measurementUnits.add(0, "");
         measurementUnits.add("Cups");
         measurementUnits.add("Tablespoons");
         measurementUnits.add("Teaspoons");
@@ -60,21 +57,27 @@ public class AddIngredients extends AppCompatActivity {
 
         Spinner ingredient1_unit = (Spinner) findViewById(R.id.measurementUnits1);
         ingredient1_unit.setAdapter(measurementUnitAdapter);
+
+        editIngredientName2 = findViewById(R.id.editNameOfIngredient2);
+        editValueOfIngredient2 = findViewById(R.id.editTextValueOfIngredient2);
+
+        Spinner ingredient2_unit = (Spinner) findViewById(R.id.measurementUnits2);
+        ingredient2_unit.setAdapter(measurementUnitAdapter);
+
+        addBothIngredients = findViewById(R.id.addBothIngredientsButton);
+        addBothIngredients.setEnabled(false);
+
         ingredient1_unit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getItemAtPosition(position).equals("Choose Measurement Unit"))
+                if (parent.getItemAtPosition(position).equals(""))
                 {
-                    // The user can not add an ingredient to the ingredient list if he/she does not
-                    // select a valid measurement unit
-                    measurementUnitSelectedForIngredient1 = false;
+                  // Do nothing
                 }
 
                 else
                 {
-                    measurementUnitSelectedForIngredient1 = true;
                     String measurementUnitInput1 = parent.getItemAtPosition(position).toString();
-
                 }
             }
 
@@ -84,23 +87,19 @@ public class AddIngredients extends AppCompatActivity {
             }
         });
 
-        editIngredientName2 = findViewById(R.id.editNameOfIngredient2);
-        editValueOfIngredient2 = findViewById(R.id.editTextValueOfIngredient2);
+        editIngredientName1.addTextChangedListener(addBothIngredientsTextWatcher);
+        editValueOfIngredient1.addTextChangedListener(addBothIngredientsTextWatcher);
 
-        Spinner ingredient2_unit = (Spinner) findViewById(R.id.measurementUnits2);
-        ingredient2_unit.setAdapter(measurementUnitAdapter);
         ingredient2_unit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getItemAtPosition(position).equals("Choose Measurement Unit")) {
-                    // The user can not add an ingredient to the ingredient list if he/she does not
-                    // select a valid measurement unit
-                    measurementUnitSelectedForIngredient2 = false;
+                if (parent.getItemAtPosition(position).equals(""))
+                {
+                    // do nothing
                 }
 
                 else
                 {
-                    measurementUnitSelectedForIngredient2 = true;
                     String measurementUnitInput2 = parent.getItemAtPosition(position).toString();
                 }
             }
@@ -111,9 +110,6 @@ public class AddIngredients extends AppCompatActivity {
             }
         });
 
-        addBothIngredients = findViewById(R.id.addBothIngredientsButton);
-        editIngredientName1.addTextChangedListener(addBothIngredientsTextWatcher);
-        editValueOfIngredient1.addTextChangedListener(addBothIngredientsTextWatcher);
         editIngredientName2.addTextChangedListener(addBothIngredientsTextWatcher);
         editValueOfIngredient2.addTextChangedListener(addBothIngredientsTextWatcher);
 
@@ -122,19 +118,20 @@ public class AddIngredients extends AppCompatActivity {
 
         Spinner additionalIngredient_unit = (Spinner) findViewById(R.id.measurementUnitsAdditional);
         additionalIngredient_unit.setAdapter(measurementUnitAdapter);
+
+        addAdditionalIngredient = findViewById(R.id.addAdditionalIngredientButton);
+        addAdditionalIngredient.setEnabled(false);
+
         additionalIngredient_unit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getItemAtPosition(position).equals("Choose Measurement Unit"))
+                if (parent.getItemAtPosition(position).equals(""))
                 {
-                    // The user can not add an ingredient to the ingredient list if he/she does not
-                    // select a valid measurement unit
-                    measurementUnitSelectedForAdditionalIngredient = false;
+                  // do nothing
                 }
 
                 else
                 {
-                    measurementUnitSelectedForAdditionalIngredient = true;
                     String measurementUnitInputAdditional = parent.getItemAtPosition(position).toString();
                 }
             }
@@ -145,7 +142,6 @@ public class AddIngredients extends AppCompatActivity {
             }
         });
 
-        addAdditionalIngredient = findViewById(R.id.addAdditionalIngredientButton);
         editAdditionalIngredientName.addTextChangedListener(addAdditionalIngredientTextWatcher);
         editValueOfAdditionalIngredient.addTextChangedListener(addAdditionalIngredientTextWatcher);
     }
@@ -160,15 +156,12 @@ public class AddIngredients extends AppCompatActivity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             String ingredientName1_input = editIngredientName1.getText().toString();
             String ingredientValue1_input = editValueOfIngredient1.getText().toString();
-            double ingredient1_value = Double.parseDouble(ingredientValue1_input);
 
             String ingredientName2_input = editIngredientName2.getText().toString();
             String ingredientValue2_input = editValueOfIngredient2.getText().toString();
-            double ingredient2_value = Double.parseDouble(ingredientValue2_input);
 
             addBothIngredients.setEnabled(!ingredientName1_input.isEmpty() && !ingredientValue1_input.isEmpty()
-            && measurementUnitSelectedForIngredient1 && !ingredientName2_input.isEmpty() && !ingredientValue2_input.isEmpty()
-                    && measurementUnitSelectedForIngredient2);
+            && !ingredientName2_input.isEmpty() && !ingredientValue2_input.isEmpty());
         }
 
         @Override
@@ -187,7 +180,9 @@ public class AddIngredients extends AppCompatActivity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             String additionalIngredientName_input = editAdditionalIngredientName.getText().toString();
             String additionalIngredientValue_input = editValueOfAdditionalIngredient.getText().toString();
-            double additionalIngredient_value = Double.parseDouble(additionalIngredientValue_input);
+
+            addAdditionalIngredient.setEnabled(!additionalIngredientName_input.isEmpty()
+                    && !additionalIngredientValue_input.isEmpty());
         }
 
         @Override
