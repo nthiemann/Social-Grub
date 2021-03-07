@@ -87,6 +87,8 @@ public class CreatePost extends AppCompatActivity {
     String ingredient1;
     String direction1;
     String tag1;
+    String tag2;
+    String tag3;
 
 
 
@@ -113,7 +115,7 @@ public class CreatePost extends AppCompatActivity {
         recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
         ingredient1 = recipePost.getIngredient1();
         direction1 = recipePost.getDirection1();
-        tag1 = recipePost.getTag1();
+        tag1 = recipePost.getRecipeTagOne();
 
 
         continueRecipeButton.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +133,7 @@ public class CreatePost extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("recipePost", Parcels.wrap(recipePost));
                     confirmPostIntent.putExtras(bundle);
+
 
                     startActivity(confirmPostIntent);
                 }
@@ -247,7 +250,7 @@ public class CreatePost extends AppCompatActivity {
                     String postID = getStoresRecipe.push().getKey();
 
 
-                    recipePost = new Recipe(ingredient1,direction1,tag1,recipeTitle,recipeDescription,imageUrl);
+                    recipePost = new Recipe(ingredient1,direction1,tag1,tag2, tag3, recipeTitle,recipeDescription,imageUrl);
 
 
 

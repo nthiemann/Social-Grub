@@ -102,7 +102,7 @@ public class ConfirmPost extends AppCompatActivity {
 
          ingredient1 = recipePost.getIngredient1();
         direction1 = recipePost.getDirection1();
-         tag1 = recipePost.getTag1();
+         tag1 = recipePost.getRecipeTagOne();
          recipeTitle = recipePost.getRecipeTitle();
         recipeDescription = recipePost.getRecipeDescription();
          recipeUrl = recipePost.getRecipeUrl();
