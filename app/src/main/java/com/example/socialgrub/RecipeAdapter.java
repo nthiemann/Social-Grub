@@ -39,7 +39,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
         String tag1 = profilePostList.get(position).getRecipeTagOne();
         String tag2 = profilePostList.get(position).getRecipeTagTwo();
         String tag3 = profilePostList.get(position).getRecipeTagThree();
-        String image = profilePostList.get(position).getImageURL();
+        String image = profilePostList.get(position).getRecipeUrl();
 
         holder.postTitle.setText(title);
         holder.tagOne.setText(tag1);
