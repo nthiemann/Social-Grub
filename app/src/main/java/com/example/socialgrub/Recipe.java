@@ -14,17 +14,11 @@ import java.util.HashMap;
 @Parcel
 public class Recipe {
 
-
-//    ArrayList<Ingredient> ingredientList;
-//    ArrayList<String> directions;
-//    ArrayList<String> tags;
-
-    String ingredient1;
-    String direction1;
+    ArrayList<Ingredient> ingredients;
+    ArrayList<String> directions;
     String tag1;
     String tag2;
     String tag3;
-
     String recipeTitle;
     String recipeDescription;
     String recipeUrl;
@@ -35,37 +29,36 @@ public class Recipe {
 
     }
 
-    public Recipe(String ingredient1) {
 
-        this.ingredient1 = ingredient1;
 
+    public Recipe(ArrayList<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
 
-    public Recipe(String ingredient1, String direction1) {
+    public Recipe(ArrayList<Ingredient> ingredients, ArrayList<String> directions) {
 
-        this.ingredient1 = ingredient1;
-        this.direction1 = direction1;
-
+        this.ingredients = ingredients;
+        this.directions = directions;
     }
 
+    public Recipe(ArrayList<Ingredient> ingredients, ArrayList<String> directions, String tag1, String tag2, String tag3) {
 
-    public Recipe(String ingredient1, String direction1, String tag1, String tag2, String tag3 ) {
-
-
-        this.ingredient1 = ingredient1;
-        this.direction1 = direction1;
+        this.ingredients = ingredients;
+        this.directions = directions;
         this.tag1 = tag1;
-        this.tag2 = tag3;
-        this.tag2 = tag3;
-
+        this.tag2 = tag2;
+        this.tag3 = tag3;
     }
 
-    public Recipe(String ingredient1, String direction1, String tag1, String tag2, String tag3,
+
+
+
+    public Recipe(ArrayList<Ingredient> ingredients, ArrayList<String> directions, String tag1, String tag2, String tag3,
                   String recipeTitle, String recipeDescription, String recipeUrl) {
 
-        this.ingredient1 = ingredient1;
-        this.direction1 = direction1;
+        this.ingredients = ingredients;
+        this.directions = directions;
         this.tag1 = tag1;
         this.tag2 = tag2;
         this.tag3 = tag3;
@@ -77,29 +70,22 @@ public class Recipe {
 
     }
 
-    public Recipe(String ingredient1, String direction1, String tagTest) {
 
+    public ArrayList<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-
-    public String getIngredient1() {
-        return ingredient1;
-    }
-
-    public void setIngredient1(String ingredient1) {
-        this.ingredient1 = ingredient1;
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
 
 
 
-    public String getDirection1() {
-        return direction1;
-    }
 
-    public void setDirection1(String direction1) {
-        this.direction1 = direction1;
-    }
+
+
+
 
     public String getRecipeTagOne() {
         return tag1;
@@ -113,18 +99,16 @@ public class Recipe {
         return tag3;
     }
 
-    public void setTag1(String tag1) {
-        this.tag1 = tag1;
+
+
+
+    public ArrayList<String> getDirections() {
+        return directions;
     }
 
-    public void setTag2(String tag2) {
-        this.tag2 = tag2;
+    public void setDirections(ArrayList<String> directions) {
+        this.directions = directions;
     }
-
-    public void setTag3(String tag3) {
-        this.tag3 = tag3;
-    }
-
 
 
     public String getRecipeTitle() {

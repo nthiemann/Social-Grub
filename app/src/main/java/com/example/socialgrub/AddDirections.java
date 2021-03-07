@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 
@@ -27,6 +29,12 @@ public class AddDirections extends AppCompatActivity {
     private Button addAdditionalDirection;
     private Button toTagsPage;
 
+
+    Recipe recipePost;
+    ArrayList<Ingredient>listOfIngredients = new ArrayList<Ingredient>();
+    ArrayList<String> directions = new ArrayList<String>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +43,16 @@ public class AddDirections extends AppCompatActivity {
         editDirection1 = findViewById(R.id.editTextDirection1);
         editDirection2 = findViewById(R.id.editTextDirection2);
         toTagsPage = findViewById(R.id.toAddTagsButton);
-//        toTagsPage.setEnabled(false);
+        toTagsPage.setEnabled(false);
 //        toTagsPage.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                openTagsPage();
 //            }
 //        });
+
+        recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
+        listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredient"));
 
         addBothDirections = findViewById(R.id.addBothDirectionsButton);
         addBothDirections.setEnabled(false);
@@ -50,6 +61,11 @@ public class AddDirections extends AppCompatActivity {
             public void onClick(View v) {
                 direction1 = editDirection1.getText().toString();
                 direction2 = editDirection2.getText().toString();
+
+                directions.add(direction1);
+                directions.add(direction2);
+
+
 
                 editDirection1.getText().clear();
                 editDirection2.getText().clear();
@@ -66,6 +82,8 @@ public class AddDirections extends AppCompatActivity {
             public void onClick(View v) {
                 additionalDirection = editAdditionalDirection.getText().toString();
 
+                directions.add(additionalDirection);
+
                 editAdditionalDirection.getText().clear();
             }
         });
@@ -73,12 +91,46 @@ public class AddDirections extends AppCompatActivity {
         editDirection1.addTextChangedListener(addBothDirectionsTextWatcher);
         editDirection2.addTextChangedListener(addBothDirectionsTextWatcher);
         editAdditionalDirection.addTextChangedListener(addAdditionalDirectionTextWatcher);
+
+
+
+        toTagsPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent tagsPageIntent = new Intent(AddDirections.this,AddTags.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("recipePost", Parcels.wrap(recipePost));
+                bundle.putParcelable("ingredient", Parcels.wrap(listOfIngredients));
+                bundle.putParcelable("directions", Parcels.wrap(directions));
+                recipePost = new Recipe(listOfIngredients,directions);
+                tagsPageIntent.putExtras(bundle);
+                startActivity(tagsPageIntent);
+
+            }
+        });
+
     }
 
-//    public void openTagsPage() {
+
+
+
+    //    public void openTagsPage() {
 //        Intent goToTagsPage = new Intent(this, AddTags.class);
 //        startActivity(goToTagsPage);
 //    }
+
+
+
+
+
+
+
+
+
+
+
 
     private TextWatcher addBothDirectionsTextWatcher = new TextWatcher() {
         @Override

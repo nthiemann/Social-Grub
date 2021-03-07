@@ -30,6 +30,8 @@ import com.google.firebase.storage.StorageTask;
 import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class ConfirmPost extends AppCompatActivity {
@@ -54,14 +56,19 @@ public class ConfirmPost extends AppCompatActivity {
 
 
 
-    String ingredient1;
-    String direction1;
-    String tag1;
     String recipeTitle;
     String recipeDescription;
     String recipeUrl;
 
+    String tag1;
+    String tag2;
+    String tag3;
 
+
+
+
+    ArrayList<Ingredient> listOfIngredients = new ArrayList<Ingredient>();
+    ArrayList<String> directions = new ArrayList<String>();
 
 
 
@@ -89,23 +96,21 @@ public class ConfirmPost extends AppCompatActivity {
         // How do you do recyclerviews? or chipgroups?
         //ingredientsView = (RecyclerView) findViewById(R.id.direction)
 
-
-/*
-        Intent intent = getIntent();
-        recipePost = (Recipe) intent.getSerializableExtra("recipePost");
-        */
-
-
-
         recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
+        listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredient"));
+        directions = Parcels.unwrap(getIntent().getParcelableExtra("direction"));
 
-
-         ingredient1 = recipePost.getIngredient1();
-        direction1 = recipePost.getDirection1();
-         tag1 = recipePost.getRecipeTagOne();
-         recipeTitle = recipePost.getRecipeTitle();
+        //listOfIngredients.addAll(recipePost.getIngredients());
+       // directions.addAll(recipePost.getDirections());
+        tag1 = recipePost.getRecipeTagOne();
+        tag2 = recipePost.getRecipeTagTwo();
+        tag3 = recipePost.getRecipeTagThree();
+        recipeTitle = recipePost.getRecipeTitle();
         recipeDescription = recipePost.getRecipeDescription();
-         recipeUrl = recipePost.getRecipeUrl();
+        recipeUrl = recipePost.getRecipeUrl();
+
+
+
 
 
         cancelPostButton.setOnClickListener(new View.OnClickListener() {

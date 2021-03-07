@@ -1,4 +1,3 @@
-
 package com.example.socialgrub;
 
 import androidx.annotation.NonNull;
@@ -58,6 +57,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -65,7 +66,7 @@ import java.util.UUID;
 public class CreatePost extends AppCompatActivity {
 
 
-    Recipe recipePost;
+
     String recipeTitle;
     String recipeDescription;
     String imageUrl;
@@ -84,20 +85,26 @@ public class CreatePost extends AppCompatActivity {
 
 
 
-    String ingredient1;
-    String direction1;
+
     String tag1;
     String tag2;
     String tag3;
 
 
 
-   FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
-   DatabaseReference getStoresRecipe = db.getReference("Image Dish");
+    Recipe recipePost;
+    ArrayList<Ingredient> listOfIngredients = new ArrayList<Ingredient>();
+    ArrayList<String> directions = new ArrayList<String>();
+
+
+    FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
+    DatabaseReference getStoresRecipe = db.getReference("Image Dish");
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
@@ -111,9 +118,14 @@ public class CreatePost extends AppCompatActivity {
 
 
         recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
-        ingredient1 = recipePost.getIngredient1();
-        direction1 = recipePost.getDirection1();
+        listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredient"));
+        directions = Parcels.unwrap(getIntent().getParcelableExtra("direction"));
+
+
         tag1 = recipePost.getRecipeTagOne();
+        tag2 = recipePost.getRecipeTagTwo();
+        tag3 = recipePost.getRecipeTagThree();
+
 
 
         continueRecipeButton.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +142,8 @@ public class CreatePost extends AppCompatActivity {
                     Intent confirmPostIntent = new Intent(CreatePost.this,ConfirmPost.class);
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("recipePost", Parcels.wrap(recipePost));
+                    bundle.putParcelable("ingredient", Parcels.wrap(listOfIngredients));
+                    bundle.putParcelable("direction", Parcels.wrap(directions));
                     confirmPostIntent.putExtras(bundle);
 
 
@@ -151,7 +165,7 @@ public class CreatePost extends AppCompatActivity {
         });
 
 
-           CropImage.activity().start(CreatePost.this);
+        CropImage.activity().start(CreatePost.this);
     }
 
 
@@ -198,8 +212,8 @@ public class CreatePost extends AppCompatActivity {
 
         if(resultCode == RESULT_OK && data != null && requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-                imageUri = result.getUri();
-                pictureToPost.setImageURI(imageUri);
+            imageUri = result.getUri();
+            pictureToPost.setImageURI(imageUri);
 
 
         }
@@ -248,7 +262,9 @@ public class CreatePost extends AppCompatActivity {
                     String postID = getStoresRecipe.push().getKey();
 
 
-                    recipePost = new Recipe(ingredient1,direction1,tag1,tag2, tag3, recipeTitle,recipeDescription,imageUrl);
+                    // recipePost = new Recipe(ingredient1,direction1,tag1,tag2, tag3, recipeTitle,recipeDescription,imageUrl);
+
+                    recipePost = new Recipe(listOfIngredients,directions,tag1,tag2,tag3,recipeTitle,recipeDescription,imageUrl);
 
 
 
@@ -258,9 +274,11 @@ public class CreatePost extends AppCompatActivity {
                     recipeMap.put("imageUrl", imageUrl);
                     recipeMap.put("description", recipeDescription);
                     recipeMap.put("Title", recipeTitle);
-                    recipeMap.put("Ingredients", ingredient1);
-                    recipeMap.put("Directions", direction1);
+                    recipeMap.put("Ingredients", listOfIngredients);
+                    recipeMap.put("Directions", directions);
                     recipeMap.put("Tag 1", tag1);
+                    recipeMap.put("Tag 2", tag2);
+                    recipeMap.put("Tag 3", tag3);
 
 
 
@@ -286,19 +304,4 @@ public class CreatePost extends AppCompatActivity {
 
 
 
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

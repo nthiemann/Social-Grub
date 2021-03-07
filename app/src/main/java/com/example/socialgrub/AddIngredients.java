@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
@@ -27,6 +28,7 @@ public class AddIngredients extends AppCompatActivity {
     String ingredient2_name;
     double ingredient2_quantity;
     int measurementUnitIDforIngredient2;
+
     String additionalIngredientName;
     double additionalIngredientQuantity;
     int measurementIDforAdditionalIngredient;
@@ -41,6 +43,9 @@ public class AddIngredients extends AppCompatActivity {
     private Button addBothIngredients;
     private Button addAdditionalIngredient;
     private Button toDirectionsPage;
+
+    ArrayList<Ingredient>listOfIngredients = new ArrayList<Ingredient>();
+    Recipe recipePost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +91,21 @@ public class AddIngredients extends AppCompatActivity {
                 ingredient2_name = editIngredientName2.getText().toString();
                 ingredient2_quantity = Double.parseDouble(editValueOfIngredient2.getText().toString());
 
+
+                listOfIngredients.add(new Ingredient(ingredient1_name,ingredient1_quantity,"Measurement"));
+                listOfIngredients.add(new Ingredient(ingredient2_name,ingredient2_quantity,"Measurement"));
+
+
                 editIngredientName1.getText().clear();
                 editValueOfIngredient1.getText().clear();
                 editIngredientName2.getText().clear();
                 editValueOfIngredient2.getText().clear();
 
                 toDirectionsPage.setEnabled(true);
+
+
+
+
             }
         });
 
@@ -155,6 +169,10 @@ public class AddIngredients extends AppCompatActivity {
                 additionalIngredientName = editAdditionalIngredientName.getText().toString();
                 additionalIngredientQuantity = Double.parseDouble(editValueOfAdditionalIngredient.getText().toString());
 
+
+                listOfIngredients.add(new Ingredient(additionalIngredientName,additionalIngredientQuantity,"Measurement"));
+
+
                 editAdditionalIngredientName.getText().clear();
                 editValueOfAdditionalIngredient.getText().clear();
             }
@@ -187,15 +205,25 @@ public class AddIngredients extends AppCompatActivity {
         toDirectionsPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDirectionsPage();
+
+                Intent directionsIntent = new Intent(AddIngredients.this, AddDirections.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("ingredient", Parcels.wrap(listOfIngredients));
+                bundle.putParcelable("recipePost", Parcels.wrap(recipePost));
+                recipePost = new Recipe(listOfIngredients);
+                directionsIntent.putExtras(bundle);
+                startActivity(directionsIntent);
+
+
             }
         });
     }
-
+/*
     public void openDirectionsPage() {
         Intent goToDirectionsPage = new Intent(this, AddDirections.class);
         startActivity(goToDirectionsPage);
     }
+    */
 
     private TextWatcher addBothIngredientsTextWatcher = new TextWatcher() {
         @Override

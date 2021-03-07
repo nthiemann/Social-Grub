@@ -1,9 +1,18 @@
 package com.example.socialgrub;
 
+
+import org.parceler.Parcel;
+
+@Parcel
 public class Ingredient {
     public String nameOfIngredient;
     public double measurementValue;
     public String measurementUnit;
+
+    public Ingredient() {
+
+
+    }
 
     public Ingredient(String nameOfIngredient, double measurementValue, String measurementUnit) {
         this.nameOfIngredient = nameOfIngredient;
@@ -29,28 +38,26 @@ public class Ingredient {
 
     public void setMeasurementUnit(int measurementUnitCode) {
         switch (measurementUnitCode) {
-            case 0: this.measurementUnit = "";
-            break;
             case 1: this.measurementUnit = "cups";
-            break;
+                break;
             case 2: this.measurementUnit = "tablespoons";
-            break;
+                break;
             case 3: this.measurementUnit = "teaspoons";
-            break;
+                break;
             case 4: this.measurementUnit = "pounds";
-            break;
+                break;
             case 5: this.measurementUnit = "ounces";
-            break;
+                break;
             case 6: this.measurementUnit = "fluid ounces";
-            break;
+                break;
             case 7: this.measurementUnit = "grams";
-            break;
+                break;
             case 8: this.measurementUnit = "milligrams";
-            break;
+                break;
             case 9: this.measurementUnit = "liters";
-            break;
+                break;
             case 10: this.measurementUnit = "milliliters";
-            break;
+                break;
         }
     }
 

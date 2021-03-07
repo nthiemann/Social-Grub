@@ -11,20 +11,23 @@ import android.widget.EditText;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
+
 public class AddTags extends AppCompatActivity {
 
-    Recipe recipePost;
+
     Button goToConfirmPage;
     EditText recipeTagInput;
+
+    Recipe recipePost;
+    ArrayList<Ingredient> listOfIngredients = new ArrayList<Ingredient>();
+    ArrayList<String> directions = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_tags);
 
-/*
-   Intent intent = getIntent();
-        recipePost = (Recipe) intent.getSerializableExtra("recipePost");*/
 
 
 
@@ -34,38 +37,39 @@ public class AddTags extends AppCompatActivity {
 
 
         recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
-        String ingredient1 = recipePost.getIngredient1();
-        String direction1 = recipePost.getDirection1();
+        listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredient"));
+        directions = Parcels.unwrap(getIntent().getParcelableExtra("direction"));
+
+        //directions.addAll(recipePost.getDirections());
+
+
+
 
 
         goToConfirmPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                recipePost = new Recipe(listOfIngredients,directions,"tag 1", "tag 2", "tag 3");
 
-                if (checksForTag(ingredient1,direction1)) {
+                Intent createPost = new Intent(AddTags.this,CreatePost.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("recipePost", Parcels.wrap(recipePost));
 
+                bundle.putParcelable("ingredient", Parcels.wrap(listOfIngredients));
+                bundle.putParcelable("direction", Parcels.wrap(directions));
 
-                    //startActivity(new Intent(AddTags.this,CreatePost.class));
-
-                    Intent confirmPageIntent = new Intent(AddTags.this,CreatePost.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("recipePost", Parcels.wrap(recipePost));
-                    confirmPageIntent.putExtras(bundle);
-                    startActivity(confirmPageIntent);
-
-
+                createPost.putExtras(bundle);
+                startActivity(createPost);
 
 
 
 
-
-                }
             }
         });
 
 
     }
-
+/*
     private boolean checksForTag(String ingredient1, String direction1) {
 
         String tagTest = recipeTagInput.getText().toString();
@@ -86,4 +90,7 @@ public class AddTags extends AppCompatActivity {
 
 
 }
+
+
+ */
 }
