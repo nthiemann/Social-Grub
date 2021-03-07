@@ -29,6 +29,8 @@ public class Ingredient {
 
     public void setMeasurementUnit(int measurementUnitCode) {
         switch (measurementUnitCode) {
+            case 0: this.measurementUnit = "";
+            break;
             case 1: this.measurementUnit = "cups";
             break;
             case 2: this.measurementUnit = "tablespoons";

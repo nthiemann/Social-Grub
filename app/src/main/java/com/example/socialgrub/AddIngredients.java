@@ -2,6 +2,7 @@ package com.example.socialgrub;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,6 +20,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddIngredients extends AppCompatActivity {
+
+    String ingredient1_name;
+    double ingredient1_quantity;
+    int measurementUnitIDforIngredient1;
+    String ingredient2_name;
+    double ingredient2_quantity;
+    int measurementUnitIDforIngredient2;
+    String additionalIngredientName;
+    double additionalIngredientQuantity;
+    int measurementIDforAdditionalIngredient;
 
     private EditText editIngredientName1;
     private EditText editValueOfIngredient1;
@@ -66,6 +77,23 @@ public class AddIngredients extends AppCompatActivity {
 
         addBothIngredients = findViewById(R.id.addBothIngredientsButton);
         addBothIngredients.setEnabled(false);
+        addBothIngredients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ingredient1_name = editIngredientName1.getText().toString();
+                ingredient1_quantity = Double.parseDouble(editValueOfIngredient1.getText().toString());
+
+                ingredient2_name = editIngredientName2.getText().toString();
+                ingredient2_quantity = Double.parseDouble(editValueOfIngredient2.getText().toString());
+
+                editIngredientName1.getText().clear();
+                editValueOfIngredient1.getText().clear();
+                editIngredientName2.getText().clear();
+                editValueOfIngredient2.getText().clear();
+
+                toDirectionsPage.setEnabled(true);
+            }
+        });
 
         ingredient1_unit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -121,6 +149,16 @@ public class AddIngredients extends AppCompatActivity {
 
         addAdditionalIngredient = findViewById(R.id.addAdditionalIngredientButton);
         addAdditionalIngredient.setEnabled(false);
+        addAdditionalIngredient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                additionalIngredientName = editAdditionalIngredientName.getText().toString();
+                additionalIngredientQuantity = Double.parseDouble(editValueOfAdditionalIngredient.getText().toString());
+
+                editAdditionalIngredientName.getText().clear();
+                editValueOfAdditionalIngredient.getText().clear();
+            }
+        });
 
         additionalIngredient_unit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -144,6 +182,19 @@ public class AddIngredients extends AppCompatActivity {
 
         editAdditionalIngredientName.addTextChangedListener(addAdditionalIngredientTextWatcher);
         editValueOfAdditionalIngredient.addTextChangedListener(addAdditionalIngredientTextWatcher);
+        toDirectionsPage = findViewById(R.id.toDirectionPageButtons);
+        toDirectionsPage.setEnabled(false);
+        toDirectionsPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDirectionsPage();
+            }
+        });
+    }
+
+    public void openDirectionsPage() {
+        Intent goToDirectionsPage = new Intent(this, AddDirections.class);
+        startActivity(goToDirectionsPage);
     }
 
     private TextWatcher addBothIngredientsTextWatcher = new TextWatcher() {

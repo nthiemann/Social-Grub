@@ -15,12 +15,17 @@ import java.util.ArrayList;
 
 
 public class AddDirections extends AppCompatActivity {
+    String direction1;
+    String direction2;
+    String additionalDirection;
+
     private EditText editDirection1;
     private EditText editDirection2;
     private EditText editAdditionalDirection;
 
     private Button addBothDirections;
     private Button addAdditionalDirection;
+    private Button toTagsPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +34,51 @@ public class AddDirections extends AppCompatActivity {
 
         editDirection1 = findViewById(R.id.editTextDirection1);
         editDirection2 = findViewById(R.id.editTextDirection2);
+        toTagsPage = findViewById(R.id.toAddTagsButton);
+//        toTagsPage.setEnabled(false);
+//        toTagsPage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openTagsPage();
+//            }
+//        });
+
         addBothDirections = findViewById(R.id.addBothDirectionsButton);
+        addBothDirections.setEnabled(false);
+        addBothDirections.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                direction1 = editDirection1.getText().toString();
+                direction2 = editDirection2.getText().toString();
+
+                editDirection1.getText().clear();
+                editDirection2.getText().clear();
+
+                toTagsPage.setEnabled(true);
+            }
+        });
 
         editAdditionalDirection = findViewById(R.id.editTextAdditionalDirection);
         addAdditionalDirection = findViewById(R.id.additionalDirectionButton);
+        addAdditionalDirection.setEnabled(false);
+        addAdditionalDirection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                additionalDirection = editAdditionalDirection.getText().toString();
+
+                editAdditionalDirection.getText().clear();
+            }
+        });
 
         editDirection1.addTextChangedListener(addBothDirectionsTextWatcher);
         editDirection2.addTextChangedListener(addBothDirectionsTextWatcher);
         editAdditionalDirection.addTextChangedListener(addAdditionalDirectionTextWatcher);
     }
+
+//    public void openTagsPage() {
+//        Intent goToTagsPage = new Intent(this, AddTags.class);
+//        startActivity(goToTagsPage);
+//    }
 
     private TextWatcher addBothDirectionsTextWatcher = new TextWatcher() {
         @Override
