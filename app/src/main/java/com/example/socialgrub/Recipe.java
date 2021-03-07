@@ -1,105 +1,138 @@
 package com.example.socialgrub;
 
 import android.net.Uri;
-import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Recipe implements Parcelable
-{
-    private String recipeTitle;
-    private String recipeDescription;
-    private Uri uri;
-    private String imageURL;
+@Parcel
+public class Recipe {
 
-    private String direction1;
 
-    private String recipeTagOne;
-    private String recipeTagTwo;
-    private String recipeTagThree;
 
-    private ArrayList<String> recipeIngredientList;
-    private ArrayList<String> recipeExtraTags;
-    private ArrayList<String> recipeMeasurements;
+    String ingredient1;
 
-    FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
-    DatabaseReference getStoresRecipe = db.getReference("Image Dish");
 
-    public Recipe() {
 
-    }
+    String direction1;
+    String tag1;
+    String tag2;
+    String tag3;
+    String recipeTitle;
+    String recipeDescription;
+    String recipeUrl;
 
-    protected Recipe(Parcel in) {
-        recipeTitle = in.readString();
-        recipeDescription = in.readString();
-        uri = in.readParcelable(Uri.class.getClassLoader());
-        imageURL = in.readString();
-        direction1 = in.readString();
-        recipeTagOne = in.readString();
-        recipeTagTwo = in.readString();
-        recipeTagThree = in.readString();
-        recipeIngredientList = in.createStringArrayList();
-        recipeExtraTags = in.createStringArrayList();
-        recipeMeasurements = in.createStringArrayList();
-    }
 
-    public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
-        @Override
-        public Recipe createFromParcel(Parcel in) {
-            return new Recipe(in);
-        }
-
-        @Override
-        public Recipe[] newArray(int size) {
-            return new Recipe[size];
-        }
-    };
-
-    public void uploadRecipe()
-    {
-        HashMap<String,Object> attributeMap = new HashMap();
-
-        attributeMap.put("title", recipeTitle);
-        attributeMap.put("imageURL", imageURL);
-        attributeMap.put("description", recipeDescription);
-        //attributeMap.put();
-        //attributeMap.put();
-        //attributeMap.put();
-
-        getStoresRecipe.push();
-        String ID = getStoresRecipe.getKey();
-        getStoresRecipe.child(ID).setValue(attributeMap);
-
-        // store ID under user here
+    public Recipe () {
 
 
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public Recipe(String ingredient1) {
+
+        this.ingredient1 = ingredient1;
+
     }
 
-    public void setImageURL(String imageURL) {
-        imageURL = imageURL;
+
+    public Recipe(String ingredient1, String direction1) {
+
+        this.ingredient1 = ingredient1;
+        this.direction1 = direction1;
+
     }
+
+
+    public Recipe(String ingredient1, String direction1, String tag1, String tag2, String tag3 ) {
+
+
+        this.ingredient1 = ingredient1;
+        this.direction1 = direction1;
+        this.tag1 = tag1;
+        this.tag2 = tag3;
+        this.tag2 = tag3;
+
+    }
+
+    public Recipe(String ingredient1, String direction1, String tag1, String tag2, String tag3,
+                  String recipeTitle, String recipeDescription, String recipeUrl) {
+
+        this.ingredient1 = ingredient1;
+        this.direction1 = direction1;
+        this.tag1 = tag1;
+        this.tag2 = tag2;
+        this.tag3 = tag3;
+        this.recipeTitle = recipeTitle;
+        this.recipeDescription = recipeDescription;
+        this.recipeUrl = recipeUrl;
+
+
+
+    }
+
+
+
+
+
+    public String getIngredient1() {
+        return ingredient1;
+    }
+
+    public void setIngredient1(String ingredient1) {
+        this.ingredient1 = ingredient1;
+    }
+
+
+
+
+    public String getDirection1() {
+        return direction1;
+    }
+
+    public void setDirection1(String direction1) {
+        this.direction1 = direction1;
+    }
+
+    public String getRecipeTagOne() {
+        return tag1;
+    }
+
+    public String getRecipeTagTwo() {
+        return tag2;
+    }
+
+    public String getRecipeTagThree() {
+        return tag3;
+    }
+
+    public void setTag1(String tag1) {
+        this.tag1 = tag1;
+    }
+
+    public void setTag2(String tag2) {
+        this.tag2 = tag2;
+    }
+
+    public void setTag3(String tag3) {
+        this.tag3 = tag3;
+    }
+
+
 
     public String getRecipeTitle() {
         return recipeTitle;
     }
 
-    public void setRecipeIngredientList(ArrayList<String> list){
-        this.recipeIngredientList = list;
-    }
-
-
     public void setRecipeTitle(String recipeTitle) {
         this.recipeTitle = recipeTitle;
     }
+
 
     public String getRecipeDescription() {
         return recipeDescription;
@@ -109,76 +142,11 @@ public class Recipe implements Parcelable
         this.recipeDescription = recipeDescription;
     }
 
-    public String getRecipeTagOne() {
-        return recipeTagOne;
+    public String getRecipeUrl() {
+        return recipeUrl;
     }
 
-    public void setTag1(String recipeTagOne) {
-        this.recipeTagOne = recipeTagOne;
+    public void setRecipeUrl(String recipeUrl) {
+        this.recipeUrl = recipeUrl;
     }
-
-    public String getRecipeTagTwo() {
-        return recipeTagTwo;
-    }
-
-    public void setTag2(String recipeTagTwo) {
-        this.recipeTagTwo = recipeTagTwo;
-    }
-
-    public String getRecipeTagThree() {
-        return recipeTagThree;
-    }
-
-    public void setTag3(String recipeTagThree) {
-        this.recipeTagThree = recipeTagThree;
-    }
-
-    public ArrayList<String> getRecipeIngredientList() {
-        return recipeIngredientList;
-    }
-
-    public ArrayList<String> getRecipeExtraTags() {
-        return recipeExtraTags;
-    }
-
-    public void setRecipeDirection1(String direction)
-    {
-        this.direction1 = direction;
-    }
-    public void setRecipeExtraTags(ArrayList<String> recipeExtraTags) {
-        this.recipeExtraTags = recipeExtraTags;
-    }
-
-    public ArrayList<String> getRecipeMeasurements() {
-        return recipeMeasurements;
-    }
-
-    public void setRecipeMeasurements(ArrayList<String> recipeMeasurements) {
-        this.recipeMeasurements = recipeMeasurements;
-    }
-
-
-    @Override
-    public int describeContents()
-    {
-        return 0;
-    }
-
-    @Override
-    public  void writeToParcel(Parcel parcel, int i)
-    {
-
-        parcel.writeString(recipeTitle);
-        parcel.writeString(recipeDescription);
-        parcel.writeParcelable(uri, i);
-        parcel.writeString(imageURL);
-        parcel.writeString(direction1);
-        parcel.writeString(recipeTagOne);
-        parcel.writeString(recipeTagTwo);
-        parcel.writeString(recipeTagThree);
-        parcel.writeStringList(recipeIngredientList);
-        parcel.writeStringList(recipeExtraTags);
-        parcel.writeStringList(recipeMeasurements);
-    }
-
 }
