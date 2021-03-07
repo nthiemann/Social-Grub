@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,160 +15,67 @@ import java.util.ArrayList;
 
 
 public class AddDirections extends AppCompatActivity {
-    Recipe recipePost;
-    Button nextButtonToGoToTags;
+    private EditText editDirection1;
+    private EditText editDirection2;
+    private EditText editAdditionalDirection;
 
-    EditText descriptionBox1;
-    EditText descriptionBox2;
-    EditText descriptionBox3;
-    EditText descriptionBox4;
-    EditText descriptionBox5;
-
-
+    private Button addBothDirections;
+    private Button addAdditionalDirection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_directions);
 
-        Intent intent = getIntent();
-         recipePost = (Recipe) intent.getSerializableExtra("recipePost");
+        editDirection1 = findViewById(R.id.editTextDirection1);
+        editDirection2 = findViewById(R.id.editTextDirection2);
+        addBothDirections = findViewById(R.id.addBothDirectionsButton);
 
-         nextButtonToGoToTags = (Button) findViewById(R.id.buttonNextToAddTags);
+        editAdditionalDirection = findViewById(R.id.editTextAdditionalDirection);
+        addAdditionalDirection = findViewById(R.id.additionalDirectionButton);
 
-         descriptionBox1 = (EditText) findViewById(R.id.descriptionBox1ID);
-        descriptionBox2 = (EditText) findViewById(R.id.descriptionBox2ID);
-        descriptionBox3 = (EditText) findViewById(R.id.descriptionBox3ID);
-        descriptionBox4 = (EditText) findViewById(R.id.descriptionBox4ID);
-        descriptionBox5 = (EditText) findViewById(R.id.descriptionBox5ID);
-
-        nextButtonToGoToTags.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(checksForDirectionsFilledIn()) {
-
-                    startActivity(new Intent(AddDirections.this,AddTags.class));
-
-                    Intent tagsPageIntent = new Intent(AddDirections.this,AddTags.class);
-                    tagsPageIntent.putExtra("recipePost", recipePost);
-                    startActivity(tagsPageIntent);
-
-                }
-            }
-        });
+        editDirection1.addTextChangedListener(addBothDirectionsTextWatcher);
+        editDirection2.addTextChangedListener(addBothDirectionsTextWatcher);
+        editAdditionalDirection.addTextChangedListener(addAdditionalDirectionTextWatcher);
     }
 
-    private boolean checksForDirectionsFilledIn() {
-
-        String descriptionBox1String = descriptionBox1.getText().toString();
-        String descriptionBox2String = descriptionBox2.getText().toString();
-        String descriptionBox3String = descriptionBox3.getText().toString();
-        String descriptionBox4String = descriptionBox4.getText().toString();
-        String descriptionBox5String = descriptionBox5.getText().toString();
-
-
-        if(descriptionBox1String.isEmpty()) {
-
-            descriptionBox1.setError("Text Box 1 is empty");
-            descriptionBox1.requestFocus();
-            return false;
+    private TextWatcher addBothDirectionsTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
         }
 
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String direction1_input = editDirection1.getText().toString();
+            String direction2_input = editDirection2.getText().toString();
 
-        else {
+            addBothDirections.setEnabled(!direction1_input.isEmpty() && !direction2_input.isEmpty());
+        }
 
-            recipePost = new Recipe();
-            recipePost.setRecipeDirection1(descriptionBox1String);
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    private TextWatcher addAdditionalDirectionTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
         }
 
-
-/*
-        if(descriptionBox2String.isEmpty()) {
-
-            descriptionBox2.setError("Text Box 2 is empty");
-            descriptionBox2.requestFocus();
-            return false;
-
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String additionlDirectionInput = editAdditionalDirection.getText().toString();
+            addAdditionalDirection.setEnabled(!additionlDirectionInput.isEmpty());
         }
 
-
-        else {
-
-            recipePost = new Recipe();
-            recipePost.setRecipeDirection2(descriptionBox2String);
+        @Override
+        public void afterTextChanged(Editable s) {
 
         }
-
-
-
-        if(descriptionBox3String.isEmpty()) {
-
-            descriptionBox3.setError("Text Box 3 is empty");
-            descriptionBox3.requestFocus();
-            return false;
-
-        }
-
-
-        else {
-
-            recipePost = new Recipe();
-            recipePost.setRecipeDirection3(descriptionBox3String);
-
-        }
-
-
-        if(descriptionBox4String.isEmpty()) {
-
-            descriptionBox4.setError("Text Box 4 is empty");
-            descriptionBox4.requestFocus();
-            return false;
-
-        }
-
-
-        else {
-
-            recipePost = new Recipe();
-            recipePost.setRecipeDirection4(descriptionBox4String);
-
-        }
-
-
-
-
-        if(descriptionBox5String.isEmpty()) {
-
-            descriptionBox5.setError("Text Box 5 is empty");
-            descriptionBox5.requestFocus();
-            return false;
-
-        }
-
-
-        else {
-
-            recipePost = new Recipe();
-            recipePost.setRecipeDirection5(descriptionBox5String);
-
-
-        }
-        */
-
-
-
-        return true;
-
-
-
-
-        }
-
-
-
-
-    }
+    };
+}
 
 
