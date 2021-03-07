@@ -1,19 +1,36 @@
 package com.example.socialgrub;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.ChipGroup;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 
+import org.parceler.Parcels;
 import org.w3c.dom.Text;
+
+import java.util.HashMap;
 
 public class ConfirmPost extends AppCompatActivity {
 
@@ -35,6 +52,21 @@ public class ConfirmPost extends AppCompatActivity {
     RecyclerView directionsView;
     ChipGroup  tagsGroupView;
 
+
+
+    String ingredient1;
+    String direction1;
+    String tag1;
+    String recipeTitle;
+    String recipeDescription;
+    String recipeUrl;
+
+
+
+
+
+    FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
+    DatabaseReference getStoresRecipe = db.getReference("Image Dish");
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +90,22 @@ public class ConfirmPost extends AppCompatActivity {
         //ingredientsView = (RecyclerView) findViewById(R.id.direction)
 
 
-
+/*
         Intent intent = getIntent();
         recipePost = (Recipe) intent.getSerializableExtra("recipePost");
+        */
+
+
+
+        recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
+
+
+         ingredient1 = recipePost.getIngredient1();
+        direction1 = recipePost.getDirection1();
+         tag1 = recipePost.getTag1();
+         recipeTitle = recipePost.getRecipeTitle();
+        recipeDescription = recipePost.getRecipeDescription();
+         recipeUrl = recipePost.getRecipeUrl();
 
 
         cancelPostButton.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +161,7 @@ public class ConfirmPost extends AppCompatActivity {
         postRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadPost();
+
                 startActivity(new Intent(ConfirmPost.this, ExploreActivity.class));
             }
         });
@@ -124,10 +169,13 @@ public class ConfirmPost extends AppCompatActivity {
     }
 
 
-    private void uploadPost()
-    {
-        recipePost.uploadRecipe();
-    }
+
+
+
+
+
+
+
 
 
 }

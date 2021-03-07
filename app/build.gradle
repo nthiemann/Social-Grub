@@ -55,6 +55,10 @@ dependencies {
 
     implementation "com.hendraanggrian.appcompat:socialview:0.2"
 
+
+    implementation 'org.parceler:parceler-api:1.1.12'
+    annotationProcessor 'org.parceler:parceler:1.1.12'
+
     // auto-complete hashtag and mention
     implementation "com.hendraanggrian.appcompat:socialview-commons:0.2"
 }
