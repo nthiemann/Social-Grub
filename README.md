@@ -92,7 +92,7 @@ Users will be able to post their recipes and search recipe results. This will al
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
 * [Automated Tests](https://github.com/Jixster07/Social-Grub/tree/master/app/src/androidTest/java/com/example/socialgrub)
-* [Product Demonstration](https://youtu.be/pC4Uvmc5VLQ)
+* [Product Demonstration]
 
 
 ## Task Allocation
