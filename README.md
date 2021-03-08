@@ -88,13 +88,11 @@ Users will be able to post their recipes and search recipe results. This will al
 * ![Burndown Chart Sprint 5](https://user-images.githubusercontent.com/62866287/110268862-67e4d400-7f90-11eb-90f4-cbd8a950fbac.png)
 * Velocity Chart: 
 * ![Velocity Chart (5)](https://user-images.githubusercontent.com/63211233/110268237-5818c000-7f8f-11eb-918c-d765f70e1895.png)
-* 
-*
+* [Manual Test](https://github.com/Jixster07/Social-Grub/blob/master/changeProfileImg.md)
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
 * [Automated Tests](https://github.com/Jixster07/Social-Grub/tree/master/app/src/androidTest/java/com/example/socialgrub)
 * [Product Demonstration](https://www.youtube.com/watch?v=LyJgMHGgg-8)
-* [Manual Test](https://github.com/Jixster07/Social-Grub/blob/master/changeProfileImg.md)
 
 
 ## Task Allocation
