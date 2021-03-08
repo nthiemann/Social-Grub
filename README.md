@@ -85,7 +85,7 @@ Users will be able to post their recipes and search recipe results. This will al
 # Sprint 5
 * [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
 * Burndown Chart: 
-* ![Burndown Chart Sprint 4]
+* ![Burndown Chart Sprint 5](https://user-images.githubusercontent.com/62866287/110268862-67e4d400-7f90-11eb-90f4-cbd8a950fbac.png)
 * Velocity Chart: 
 * ![Velocity Chart (5)](https://user-images.githubusercontent.com/63211233/110268237-5818c000-7f8f-11eb-918c-d765f70e1895.png)
 * 
@@ -99,6 +99,6 @@ Users will be able to post their recipes and search recipe results. This will al
 ## Task Allocation
 * Kyle Karacadag - Updated the UI diagram and worked on displaying recipes on profile page
 * Nicholas Thiemann - 
-* Ricardo Mangandi - 
+* Ricardo Mangandi - Implemented the database feature of our app so all user posts are stored in the firebase database.
 * Allec Pereira - 
 * Rudolph Garcia - Added UI and functionality for the ingredients page and directions page for the create recipe page.
