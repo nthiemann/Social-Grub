@@ -99,5 +99,5 @@ Users will be able to post their recipes and search recipe results. This will al
 * Kyle Karacadag - Updated the UI diagram and worked on displaying recipes on profile page
 * Nicholas Thiemann - Helped build and pass the recipe class between recipe building activities and to the databse
 * Ricardo Mangandi - Implemented the database feature of our app so all user posts are stored in the firebase database.
-* Allec Pereira - 
+* Allec Pereira - Implemented change profile picture feature and worked on trello board
 * Rudolph Garcia - Added UI and functionality for the ingredients page and directions page for the create recipe page.
