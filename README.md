@@ -81,3 +81,23 @@ Users will be able to post their recipes and search recipe results. This will al
 * Ricardo Mangandi - Wrote espresso unit tests for all working functionalities and completed the settings function in the app.
 * Allec Pereira - Worked on feature that allows user to select picture from camera roll, and account verification feature
 * Rudolph Garcia - Created a post recipe page with functionality to add ingredients, create a title for the recipe, cancel the recipe post, and added a button to the explore page to access the post recipe page
+
+# Sprint 5
+* [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
+* Burndown Chart:
+* ![Burndown Chart Sprint 4]
+* Velocity Chart:
+* ![Velocity Chart (4)]
+*
+* [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
+* [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
+* [Automated Tests](https://github.com/Jixster07/Social-Grub/tree/master/app/src/androidTest/java/com/example/socialgrub)
+* [Product Demonstration](https://youtu.be/pC4Uvmc5VLQ)
+
+
+## Task Allocation
+* Kyle Karacadag - Updated the UI diagram and worked on displaying recipes on profile page
+* Nicholas Thiemann - 
+* Ricardo Mangandi - 
+* Allec Pereira - 
+* Rudolph Garcia - 
