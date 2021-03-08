@@ -94,6 +94,7 @@ Users will be able to post their recipes and search recipe results. This will al
 * [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
 * [Automated Tests](https://github.com/Jixster07/Social-Grub/tree/master/app/src/androidTest/java/com/example/socialgrub)
 * [Product Demonstration](https://www.youtube.com/watch?v=LyJgMHGgg-8)
+* [Manual Test] (https://github.com/Jixster07/Social-Grub/blob/master/changeProfileImg.md)
 
 
 ## Task Allocation
