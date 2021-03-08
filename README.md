@@ -84,10 +84,11 @@ Users will be able to post their recipes and search recipe results. This will al
 
 # Sprint 5
 * [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
-* Burndown Chart:
+* Burndown Chart: 
 * ![Burndown Chart Sprint 4]
-* Velocity Chart:
-* ![Velocity Chart (4)]
+* Velocity Chart: 
+* ![Velocity Chart (5)](https://user-images.githubusercontent.com/63211233/110268237-5818c000-7f8f-11eb-918c-d765f70e1895.png)
+* 
 *
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
@@ -100,4 +101,4 @@ Users will be able to post their recipes and search recipe results. This will al
 * Nicholas Thiemann - 
 * Ricardo Mangandi - 
 * Allec Pereira - 
-* Rudolph Garcia - 
+* Rudolph Garcia - Added UI and functionality for the ingredients page and directions page for the create recipe page.
