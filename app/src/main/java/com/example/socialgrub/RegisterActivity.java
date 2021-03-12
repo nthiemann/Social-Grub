@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -27,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView registerUser;
     private EditText editTextFirstName, editTextLastName, editTextEmail, editTextUsername, editTextPassword, editTextPasswordConfirm;
     private FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
-    private DatabaseReference ref = db.getReference().child("Users");
+    private DatabaseReference ref;
     private FirebaseAuth mAuth;
 
     // change password to text password
@@ -147,9 +149,9 @@ public class RegisterActivity extends AppCompatActivity {
                             userMap.put("Last name",lastName);
                             userMap.put("Username",userName);
                             userMap.put("Email",email);
-                            DatabaseReference newRef = ref.push();
-                            newRef.setValue(userMap);
-
+                            userMap.put("Description","");
+                            ref = db.getReference();
+                            ref.child("Users").child(mAuth.getUid()).setValue(userMap);
 
                             mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
