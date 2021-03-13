@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
@@ -36,15 +37,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         String title = profilePostList.get(position).getRecipeTitle();
-        String tag1 = profilePostList.get(position).getRecipeTagOne();
-        String tag2 = profilePostList.get(position).getRecipeTagTwo();
-        String tag3 = profilePostList.get(position).getRecipeTagThree();
+
+        ArrayList<Tag> tags = profilePostList.get(position).getRecipeTags();
+
+        //String tag1 = profilePostList.get(position).getRecipeTagOne();
+        //String tag2 = profilePostList.get(position).getRecipeTagTwo();
+        //String tag3 = profilePostList.get(position).getRecipeTagThree();
         String image = profilePostList.get(position).getRecipeUrl();
 
         holder.postTitle.setText(title);
-        holder.tagOne.setText(tag1);
-        holder.tagTwo.setText(tag2);
-        holder.tagThree.setText(tag3);
+        holder.tagOne.setText(tags.get(0).getTagString());
+        holder.tagTwo.setText(tags.get(1).getTagString());
+        holder.tagThree.setText(tags.get(2).getTagString());
 
         try {
             Picasso.get().load(image).into(holder.postImage);

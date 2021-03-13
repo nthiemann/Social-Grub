@@ -3,7 +3,9 @@ package com.example.socialgrub;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -44,26 +46,21 @@ public class AddIngredients extends AppCompatActivity {
     private Button addAdditionalIngredient;
     private Button toDirectionsPage;
 
+    private List<String> measurementUnits;
+
+    String recipeTitle;
+    String recipeDescription;
+    Uri imageUri;
     ArrayList<Ingredient>listOfIngredients = new ArrayList<Ingredient>();
-    Recipe recipePost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ingredients);
 
-        List<String> measurementUnits = new ArrayList<>();
-        measurementUnits.add(0, "");
-        measurementUnits.add("Cups");
-        measurementUnits.add("Tablespoons");
-        measurementUnits.add("Teaspoons");
-        measurementUnits.add("Pounds(lb)");
-        measurementUnits.add("Ounces(oz)");
-        measurementUnits.add("Fluid Ounces");
-        measurementUnits.add("Grams(g)");
-        measurementUnits.add("Milligrams(mg)");
-        measurementUnits.add("Liters(L)");
-        measurementUnits.add("Milliliters(mL)");
+        addMeasureMentUnits();
+        unwrapBundle();
+
         ArrayAdapter<String> measurementUnitAdapter;
         measurementUnitAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, measurementUnits);
         measurementUnitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -200,6 +197,7 @@ public class AddIngredients extends AppCompatActivity {
 
         editAdditionalIngredientName.addTextChangedListener(addAdditionalIngredientTextWatcher);
         editValueOfAdditionalIngredient.addTextChangedListener(addAdditionalIngredientTextWatcher);
+
         toDirectionsPage = findViewById(R.id.toDirectionPageButtons);
         toDirectionsPage.setEnabled(false);
         toDirectionsPage.setOnClickListener(new View.OnClickListener() {
@@ -207,24 +205,43 @@ public class AddIngredients extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent directionsIntent = new Intent(AddIngredients.this, AddDirections.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("ingredient", Parcels.wrap(listOfIngredients));
-                bundle.putParcelable("recipePost", Parcels.wrap(recipePost));
-                recipePost = new Recipe(listOfIngredients);
-                directionsIntent.putExtras(bundle);
+                directionsIntent.putExtras(buildBundle());
                 startActivity(directionsIntent);
-
-
             }
         });
     }
-/*
-    public void openDirectionsPage() {
-        Intent goToDirectionsPage = new Intent(this, AddDirections.class);
-        startActivity(goToDirectionsPage);
-    }
-    */
+    private Bundle buildBundle()
+    {
+        Bundle bundle = new Bundle();
 
+        bundle.putParcelable("title", Parcels.wrap(recipeTitle));
+        bundle.putParcelable("description", Parcels.wrap(recipeDescription));
+        bundle.putParcelable("imageURI", Parcels.wrap(imageUri));
+        bundle.putParcelable("ingredients", Parcels.wrap(listOfIngredients));
+
+        return bundle;
+    }
+    private void unwrapBundle()
+    {
+        recipeTitle = Parcels.unwrap(getIntent().getParcelableExtra("title"));
+        recipeDescription = Parcels.unwrap(getIntent().getParcelableExtra("description"));
+        imageUri = Parcels.unwrap(getIntent().getParcelableExtra("imageURI"));
+    }
+    private void addMeasureMentUnits()
+    {
+        measurementUnits = new ArrayList<>();
+        measurementUnits.add(0, "");
+        measurementUnits.add("Cups");
+        measurementUnits.add("Tablespoons");
+        measurementUnits.add("Teaspoons");
+        measurementUnits.add("Pounds(lb)");
+        measurementUnits.add("Ounces(oz)");
+        measurementUnits.add("Fluid Ounces");
+        measurementUnits.add("Grams(g)");
+        measurementUnits.add("Milligrams(mg)");
+        measurementUnits.add("Liters(L)");
+        measurementUnits.add("Milliliters(mL)");
+    }
     private TextWatcher addBothIngredientsTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {

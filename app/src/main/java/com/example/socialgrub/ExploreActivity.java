@@ -45,7 +45,7 @@ public class ExploreActivity extends AppCompatActivity {
         createPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToCreatePostActivityPage = new Intent(ExploreActivity.this, AddIngredients.class);
+                Intent goToCreatePostActivityPage = new Intent(ExploreActivity.this, CreatePost.class);
                 startActivity(goToCreatePostActivityPage);
             }
         });

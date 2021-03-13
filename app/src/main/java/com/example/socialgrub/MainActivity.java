@@ -46,6 +46,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
 
+
+        // DEVELOPER QUICK LOGIN
+
+        editTextEmail.setText("nathiemann1@gmail.com");
+        editTextPassword.setText("password");
+
+
+
+
         forgotPass = findViewById(R.id.forgotPassword);
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override

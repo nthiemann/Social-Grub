@@ -3,6 +3,7 @@ package com.example.socialgrub;
 import android.net.Uri;
 import android.os.Parcelable;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -16,13 +17,12 @@ public class Recipe {
 
     ArrayList<Ingredient> ingredients;
     ArrayList<String> directions;
-    String tag1;
-    String tag2;
-    String tag3;
-    String recipeTitle;
-    String recipeDescription;
+    ArrayList<Tag> tags;
+
     String recipeUrl;
 
+    String recipeTitle;
+    String recipeDescription;
 
     public Recipe () {
 
@@ -42,32 +42,22 @@ public class Recipe {
         this.directions = directions;
     }
 
-    public Recipe(ArrayList<Ingredient> ingredients, ArrayList<String> directions, String tag1, String tag2, String tag3) {
+    public Recipe(ArrayList<Ingredient> ingredients, ArrayList<String> directions,ArrayList<Tag> tags) {
 
         this.ingredients = ingredients;
         this.directions = directions;
-        this.tag1 = tag1;
-        this.tag2 = tag2;
-        this.tag3 = tag3;
+        this.tags = tags;
     }
 
 
-
-
-    public Recipe(ArrayList<Ingredient> ingredients, ArrayList<String> directions, String tag1, String tag2, String tag3,
-                  String recipeTitle, String recipeDescription, String recipeUrl) {
+    public Recipe(ArrayList<Ingredient> ingredients, ArrayList<String> directions, ArrayList<Tag> tags, String recipeTitle, String recipeDescription, String recipeUrl) {
 
         this.ingredients = ingredients;
         this.directions = directions;
-        this.tag1 = tag1;
-        this.tag2 = tag2;
-        this.tag3 = tag3;
+        this.tags = tags;
         this.recipeTitle = recipeTitle;
         this.recipeDescription = recipeDescription;
         this.recipeUrl = recipeUrl;
-
-
-
     }
 
 
@@ -78,29 +68,6 @@ public class Recipe {
     public void setIngredients(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
-
-
-
-
-
-
-
-
-
-    public String getRecipeTagOne() {
-        return tag1;
-    }
-
-    public String getRecipeTagTwo() {
-        return tag2;
-    }
-
-    public String getRecipeTagThree() {
-        return tag3;
-    }
-
-
-
 
     public ArrayList<String> getDirections() {
         return directions;
@@ -126,6 +93,11 @@ public class Recipe {
 
     public void setRecipeDescription(String recipeDescription) {
         this.recipeDescription = recipeDescription;
+    }
+
+    public ArrayList<Tag> getRecipeTags()
+    {
+        return this.tags;
     }
 
     public String getRecipeUrl() {
