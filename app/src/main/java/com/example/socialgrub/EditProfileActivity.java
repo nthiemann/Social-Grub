@@ -14,14 +14,26 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.renderscript.Sampler;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -34,28 +46,38 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class EditProfileActivity extends AppCompatActivity {
 
     CircleImageView profileImage;
-    Button changeButton;
-    final int IMG_PICK = 1;
-    final int PERMISSION__CODE = 2;
+    Button changeButton,textBoxChangeButton;
+    final int IMG_PICK = 1, PERMISSION_CODE = 2;
     StorageReference storageReference;
     FirebaseAuth fAuth;
-    private int progr = 0;
-    Button increment;
-
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
+    DatabaseReference ref;
+    String userName,newUsername,firstName,newFirstName,lastName,newLastName;
+    EditText firstNameEditText,lastNameEditText,userNameEditText;
+    TextInputEditText changeLastNameEditText,changeFirstNameEditText,newUserNameEditText,textBoxEditText;
+    TextView descriptionTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-
-
-
         profileImage = findViewById(R.id.profilepic_imageView);
         changeButton = findViewById(R.id.change_button);
         fAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
         StorageReference profileRef = storageReference.child("users/"+fAuth.getCurrentUser().getUid()+"/profile.jpg");
+        firstNameEditText = findViewById(R.id.fname_editText);
+        userNameEditText = findViewById(R.id.username_editText);
+        lastNameEditText = findViewById(R.id.lname_editText);
+        newUserNameEditText = findViewById(R.id.change_username_editText);
+        changeLastNameEditText = findViewById(R.id.change_last_name_editText);
+        changeFirstNameEditText = findViewById(R.id.change_first_name_editText);
+        textBoxEditText = findViewById(R.id.text_box_editText);
+        textBoxChangeButton = findViewById(R.id.change_text_box_button);
 
+
+        // loads profile image
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -63,6 +85,33 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
+        //loads username,name,lastname
+        loadUserName();
+        loadFirstName();
+        loadLastName();
+
+
+
+        Button save = findViewById(R.id.save_button);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (usernameChanged()){
+                    userNameEditText.setText(newUsername);
+                    loadUserName();
+                }
+                if (firstNameChanged()){
+                    firstNameEditText.setText(newFirstName);
+                    loadFirstName();
+                }
+                if (lastnameChanged()){
+                    lastNameEditText.setText(newLastName);
+                    loadLastName();
+                }
+            }
+        });
+
+        // changes profile image if user clicks change button
         changeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +122,148 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
+        loadDescription();
+        changeDescription();
+
+    }
+
+    private void changeDescription(){
+
+        ref = db.getReference().child("Users").child(user.getUid()).child("Description");
+
+        textBoxChangeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String newDescription = textBoxEditText.getText().toString();
+                        String description = dataSnapshot.getValue().toString();
+
+                        if (!newDescription.equals(description)) {
+                            textBoxEditText.setText(newDescription);
+                            ref.setValue(newDescription);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(EditProfileActivity.this, "There was an error changing the description", Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+            }
+        });
+    }
+
+    private void loadDescription(){
+        ref = db.getReference().child("Users").child(user.getUid()).child("Description");
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String description = dataSnapshot.getValue().toString();
+                if (!description.isEmpty())
+                    textBoxEditText.setText(description);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(EditProfileActivity.this, "Error displaying description", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void loadUserName(){
+
+        ref = db.getReference().child("Users").child(user.getUid()).child("Username");
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userName = dataSnapshot.getValue(String.class);
+                userNameEditText.setText(userName);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(EditProfileActivity.this, "Error: Cannot retrieve user name", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void loadFirstName(){
+
+        ref = db.getReference().child("Users").child(user.getUid()).child("First name");
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String fname = dataSnapshot.getValue(String.class);
+                firstNameEditText.setText(fname);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(EditProfileActivity.this, "Error: Cannot retrieve first name", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void loadLastName(){
+        ref = db.getReference().child("Users").child(user.getUid()).child("Last name");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String lname = dataSnapshot.getValue(String.class);
+                lastNameEditText.setText(lname);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(EditProfileActivity.this, "Error: Cannot retrieve last name", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private Boolean usernameChanged(){
+
+        userName = userNameEditText.getText().toString();
+        newUsername = newUserNameEditText.getText().toString();
+
+        // if the newUsername is empty or the same as old, do not update
+        // else update the username onscreen and update the database
+        if (!userName.equals(newUsername) && !newUsername.isEmpty()){
+            db.getReference().child("Users").child(user.getUid()).child("Username").setValue(newUsername);
+            return true;
+        }
+        return false;
+    }
+
+    private Boolean firstNameChanged() {
+
+        firstName = firstNameEditText.getText().toString();
+        newFirstName = changeFirstNameEditText.getText().toString();
+
+        if (!firstName.equals(newFirstName) && !newFirstName.isEmpty()){
+            db.getReference().child("Users").child(user.getUid()).child("First name").setValue(newFirstName);
+            return true;
+        }
+        return false;
+    }
+
+    private Boolean lastnameChanged(){
+        lastName = lastNameEditText.getText().toString();
+        newLastName = changeLastNameEditText.getText().toString();
+
+        if (!lastName.equals(newLastName) && !newLastName.isEmpty()){
+            db.getReference().child("Users").child(user.getUid()).child("Last name").setValue(newLastName);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -109,4 +300,5 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
     }
+
 }
