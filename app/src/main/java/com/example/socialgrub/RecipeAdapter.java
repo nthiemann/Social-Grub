@@ -36,6 +36,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
+
+/*
         String title = profilePostList.get(position).getRecipeTitle();
 
         ArrayList<Tag> tags = profilePostList.get(position).getRecipeTags();
@@ -63,6 +65,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
                 Toast.makeText(context, "View Post", Toast.LENGTH_SHORT).show();
             }
         });
+
+        */
+
+
+        holder.postTitle.setText(profilePostList.get(position).getRecipeTitle());
+        Picasso.get().load(profilePostList.get(position).getRecipeUrl()).into(holder.postImage);
+
     }
 
     @Override
@@ -80,11 +89,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
             super(itemView);
 
             postImage = itemView.findViewById(R.id.profileRecipeImage);
-            tagOne = itemView.findViewById(R.id.profileRecipeTag1);
+            postTitle = itemView.findViewById(R.id.profileRecipeTitle);
+            /*tagOne = itemView.findViewById(R.id.profileRecipeTag1);
             tagTwo = itemView.findViewById(R.id.profileRecipeTag2);
             tagThree = itemView.findViewById(R.id.profileRecipeTag3);
             postTitle = itemView.findViewById(R.id.profileRecipeTitle);
             viewPostButton = itemView.findViewById(R.id.profileRecipeViewPostButton);
+            */
         }
     }
 }

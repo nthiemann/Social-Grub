@@ -29,7 +29,11 @@ public class Recipe {
 
     }
 
+    public Recipe(String recipeUrl, String recipeTitle) {
 
+        this.recipeUrl = recipeUrl;
+        this.recipeTitle = recipeTitle;
+    }
 
     public Recipe(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
