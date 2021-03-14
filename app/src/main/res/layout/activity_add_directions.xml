@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddDirections">
+    tools:context=".AddDirections"
+    android:id="@+id/directionsID">
 
     <TextView
         android:id="@+id/textView4"
@@ -95,6 +96,7 @@
         android:ems="10"
         android:hint="Add Direction"
         android:inputType="textPersonName"
+        android:maxLength="500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.449"
@@ -109,6 +111,7 @@
         android:ems="10"
         android:hint="Add Direction"
         android:inputType="textPersonName"
+        android:maxLength="500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.449"
@@ -123,6 +126,7 @@
         android:ems="10"
         android:hint="Add Direction"
         android:inputType="textPersonName"
+        android:maxLength="500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.449"

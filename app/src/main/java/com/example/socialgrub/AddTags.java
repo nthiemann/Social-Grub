@@ -3,6 +3,7 @@ package com.example.socialgrub;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -19,78 +20,86 @@ public class AddTags extends AppCompatActivity {
     Button goToConfirmPage;
     EditText recipeTagInput;
 
-    Recipe recipePost;
-    ArrayList<Ingredient> listOfIngredients = new ArrayList<Ingredient>();
-    ArrayList<String> directions = new ArrayList<String>();
+    String recipeTitle;
+    String recipeDescription;
+    Uri imageUri;
+    ArrayList<Tag> tags;
+    ArrayList<Ingredient> listOfIngredients;
+    ArrayList<String> directions;
+
+    // temporary string to capture one single tag (until tag page is done)
+    String tagText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_tags);
 
-
-
+        unwrapBundle();
+        tags = new ArrayList<>();
 
         recipeTagInput = (EditText) findViewById(R.id.recipeTagInput);
-
         goToConfirmPage = (Button) findViewById(R.id.goToConfirmPost);
 
 
-        recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
-        listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredient"));
-        directions = Parcels.unwrap(getIntent().getParcelableExtra("direction"));
-
+        //recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
+        listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredients"));
+        directions = Parcels.unwrap(getIntent().getParcelableExtra("directions"));
         //directions.addAll(recipePost.getDirections());
-
-
 
 
 
         goToConfirmPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recipePost = new Recipe(listOfIngredients,directions,"tag 1", "tag 2", "tag 3");
-
-                Intent createPost = new Intent(AddTags.this,CreatePost.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("recipePost", Parcels.wrap(recipePost));
-
-                bundle.putParcelable("ingredient", Parcels.wrap(listOfIngredients));
-                bundle.putParcelable("direction", Parcels.wrap(directions));
-
-                createPost.putExtras(bundle);
-                startActivity(createPost);
 
 
+                if (getTagText())
+                {
+                    tags.add(new Tag(tagText));
 
+                    Intent createPost = new Intent(AddTags.this,ConfirmPost.class);
+
+                    createPost.putExtras(buildBundle());
+                    startActivity(createPost);
+                }
 
             }
         });
 
-
     }
-/*
-    private boolean checksForTag(String ingredient1, String direction1) {
+    private Bundle buildBundle()
+    {
+        Bundle bundle = new Bundle();
 
-        String tagTest = recipeTagInput.getText().toString();
+        bundle.putParcelable("title", Parcels.wrap(recipeTitle));
+        bundle.putParcelable("description", Parcels.wrap(recipeDescription));
+        bundle.putParcelable("imageURI", Parcels.wrap(imageUri));
+        bundle.putParcelable("ingredients", Parcels.wrap(listOfIngredients));
+        bundle.putParcelable("directions", Parcels.wrap(directions));
+        bundle.putParcelable("tags", Parcels.wrap(tags));
 
+        return bundle;
+    }
+    private void unwrapBundle()
+    {
+        recipeTitle = Parcels.unwrap(getIntent().getParcelableExtra("title"));
+        recipeDescription = Parcels.unwrap(getIntent().getParcelableExtra("description"));
+        imageUri = Parcels.unwrap(getIntent().getParcelableExtra("imageURI"));
+        listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredients"));
+        directions = Parcels.unwrap(getIntent().getParcelableExtra("directions"));
+    }
 
-        if (tagTest.isEmpty()) {
+    private boolean getTagText()
+    {
+        tagText = recipeTagInput.getText().toString();
 
-            recipeTagInput.setError("Enter Tag");
+        // Check for bad input
+        if (tagText.isEmpty()) {
+            recipeTagInput.setError("At least one tag required");
             recipeTagInput.requestFocus();
             return false;
-        } else {
-
-            recipePost = new Recipe(ingredient1,direction1,tagTest);
-
         }
-
         return true;
-
-
-}
-
-
- */
+    }
 }

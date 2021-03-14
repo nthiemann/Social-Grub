@@ -33,7 +33,7 @@ We are using Firebase which is a NoSQL cloud database to store user information 
 
 # UI Design
 The user will be able to interact with the UI of the app based on the app layout. The user will have numerous options from creating a post, viewing a post, searching a post, etc. Additionally we will supply UI where making a post is accessible and easy for the user such as providing user text boxes. 
-![updatedUI](https://user-images.githubusercontent.com/62866287/109437706-42862200-79f4-11eb-8231-34724db0213e.png)
+![updatedUI](https://user-images.githubusercontent.com/72484649/110262017-42e86500-7f80-11eb-8b94-e4dd8e82cd90.png)
 
 
 # Business Rules

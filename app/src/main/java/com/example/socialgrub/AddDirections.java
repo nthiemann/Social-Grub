@@ -3,6 +3,7 @@ package com.example.socialgrub;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Editable;
@@ -30,9 +31,11 @@ public class AddDirections extends AppCompatActivity {
     private Button toTagsPage;
 
 
-    Recipe recipePost;
-    ArrayList<Ingredient>listOfIngredients = new ArrayList<Ingredient>();
-    ArrayList<String> directions = new ArrayList<String>();
+    String recipeTitle;
+    String recipeDescription;
+    Uri imageUri;
+    ArrayList<Ingredient>listOfIngredients;
+    ArrayList<String> directions;
 
 
     @Override
@@ -40,19 +43,16 @@ public class AddDirections extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_directions);
 
+        unwrapBundle();
+
         editDirection1 = findViewById(R.id.editTextDirection1);
         editDirection2 = findViewById(R.id.editTextDirection2);
         toTagsPage = findViewById(R.id.toAddTagsButton);
         toTagsPage.setEnabled(false);
-//        toTagsPage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openTagsPage();
-//            }
-//        });
 
-        recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
-        listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredient"));
+        //recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
+        listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredients"));
+        directions = new ArrayList<String>();
 
         addBothDirections = findViewById(R.id.addBothDirectionsButton);
         addBothDirections.setEnabled(false);
@@ -98,14 +98,8 @@ public class AddDirections extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 Intent tagsPageIntent = new Intent(AddDirections.this,AddTags.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("recipePost", Parcels.wrap(recipePost));
-                bundle.putParcelable("ingredient", Parcels.wrap(listOfIngredients));
-                bundle.putParcelable("directions", Parcels.wrap(directions));
-                recipePost = new Recipe(listOfIngredients,directions);
-                tagsPageIntent.putExtras(bundle);
+                tagsPageIntent.putExtras(buildBundle());
                 startActivity(tagsPageIntent);
 
             }
@@ -113,24 +107,25 @@ public class AddDirections extends AppCompatActivity {
 
     }
 
+    private Bundle buildBundle()
+    {
+        Bundle bundle = new Bundle();
 
+        bundle.putParcelable("title", Parcels.wrap(recipeTitle));
+        bundle.putParcelable("description", Parcels.wrap(recipeDescription));
+        bundle.putParcelable("imageURI", Parcels.wrap(imageUri));
+        bundle.putParcelable("ingredients", Parcels.wrap(listOfIngredients));
+        bundle.putParcelable("directions", Parcels.wrap(directions));
 
-
-    //    public void openTagsPage() {
-//        Intent goToTagsPage = new Intent(this, AddTags.class);
-//        startActivity(goToTagsPage);
-//    }
-
-
-
-
-
-
-
-
-
-
-
+        return bundle;
+    }
+    private void unwrapBundle()
+    {
+        recipeTitle = Parcels.unwrap(getIntent().getParcelableExtra("title"));
+        recipeDescription = Parcels.unwrap(getIntent().getParcelableExtra("description"));
+        imageUri = Parcels.unwrap(getIntent().getParcelableExtra("imageURI"));
+        listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredients"));
+    }
 
     private TextWatcher addBothDirectionsTextWatcher = new TextWatcher() {
         @Override

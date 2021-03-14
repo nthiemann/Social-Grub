@@ -3,6 +3,7 @@ package com.example.socialgrub;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,9 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText editTextEmail;
     EditText editTextPassword;
 
+    ProgressDialog verifyDialog;
 
     private FirebaseAuth mAuth;
-    //ProgressBar progressBar;
 
 
 
@@ -46,6 +48,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
 
+
+        // DEVELOPER QUICK LOGIN
+
+        editTextEmail.setText("nathiemann1@gmail.com");
+        editTextPassword.setText("password");
+
+
+
+
         forgotPass = findViewById(R.id.forgotPassword);
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +68,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
         @Override
         public void onClick(View v) {
+            // Initialize loading dialog (verify_dialog)
+            verifyDialog = new ProgressDialog(MainActivity.this);
+            // Show dialog
+            verifyDialog.show();
+            // Set Content View
+            verifyDialog.setContentView(R.layout.verify_dialog);
+            // Set the transparent background
+            verifyDialog.getWindow().setBackgroundDrawableResource(
+                    android.R.color.transparent);
+
             switch (v.getId()) {
                 case R.id.register_button:
 
@@ -71,6 +92,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             }
+        }
+
+        public void onBackPressed() {
+            // Dismiss progress dialog
+            verifyDialog.dismiss();
         }
 
         private void userLogin() {

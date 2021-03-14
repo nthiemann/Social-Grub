@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddIngredients">
+    tools:context=".AddIngredients"
+    android:id="@+id/ingredientsID">
+
 
     <EditText
         android:id="@+id/editTextValueOfAdditionalIngredient"
@@ -79,6 +81,7 @@
         android:hint="Ingredient Name"
         android:inputType="textPersonName"
         android:textSize="12sp"
+        android:maxLength="50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.234"
@@ -145,6 +148,7 @@
         android:hint="Ingredient Name"
         android:inputType="textPersonName"
         android:textSize="12sp"
+        android:maxLength="50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.234"
@@ -184,6 +188,7 @@
         android:hint="Ingredient Name"
         android:inputType="textPersonName"
         android:textSize="12sp"
+        android:maxLength="50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.234"

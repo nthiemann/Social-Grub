@@ -81,3 +81,23 @@ Users will be able to post their recipes and search recipe results. This will al
 * Ricardo Mangandi - Wrote espresso unit tests for all working functionalities and completed the settings function in the app.
 * Allec Pereira - Worked on feature that allows user to select picture from camera roll, and account verification feature
 * Rudolph Garcia - Created a post recipe page with functionality to add ingredients, create a title for the recipe, cancel the recipe post, and added a button to the explore page to access the post recipe page
+
+# Sprint 5
+* [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
+* Burndown Chart: 
+* ![Burndown Chart Sprint 5](https://user-images.githubusercontent.com/62866287/110268862-67e4d400-7f90-11eb-90f4-cbd8a950fbac.png)
+* Velocity Chart: 
+* ![Velocity Chart (5)](https://user-images.githubusercontent.com/63211233/110268237-5818c000-7f8f-11eb-918c-d765f70e1895.png)
+* [Manual Test](https://github.com/Jixster07/Social-Grub/blob/master/changeProfileImg.md)
+* [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
+* [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
+* [Automated Tests](https://github.com/Jixster07/Social-Grub/tree/master/app/src/androidTest/java/com/example/socialgrub)
+* [Product Demonstration](https://www.youtube.com/watch?v=LyJgMHGgg-8)
+
+
+## Task Allocation
+* Kyle Karacadag - Updated the UI diagram and worked on displaying recipes on profile page
+* Nicholas Thiemann - Helped build and pass the recipe class between recipe building activities and to the databse
+* Ricardo Mangandi - Implemented the database feature of our app so all user posts are stored in the firebase database.
+* Allec Pereira - Implemented change profile picture feature and worked on trello board
+* Rudolph Garcia - Added UI and functionality for the ingredients page and directions page for the create recipe page.

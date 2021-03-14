@@ -69,37 +69,14 @@ public class CreatePost extends AppCompatActivity {
 
     String recipeTitle;
     String recipeDescription;
-    String imageUrl;
+    Uri imageUri;
 
     EditText recipeTitleInput;
     EditText recipeDescriptionInput;
-
     Button postCancelButton;
     Button continueRecipeButton;
-
+    Button addImageButton;
     ImageView pictureToPost;
-
-    Uri imageUri;
-
-    HashMap<String,Object> recipeMap;
-
-
-
-
-    String tag1;
-    String tag2;
-    String tag3;
-
-
-
-    Recipe recipePost;
-    ArrayList<Ingredient> listOfIngredients = new ArrayList<Ingredient>();
-    ArrayList<String> directions = new ArrayList<String>();
-
-
-    FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
-    DatabaseReference getStoresRecipe = db.getReference("Image Dish");
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,46 +88,20 @@ public class CreatePost extends AppCompatActivity {
         recipeTitleInput = (EditText) findViewById(R.id.recipeTitleInput);
         recipeDescriptionInput = (EditText) findViewById(R.id.descriptionBox);
         continueRecipeButton = (Button) findViewById(R.id.continueRecipeButton);
+        addImageButton = (Button) findViewById(R.id.addImageButton);
         pictureToPost = (ImageView) findViewById(R.id.pictureID);
-
-
-        //recipePost = getIntent().getParcelableExtra("recipePost");
-
-
-        recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
-        listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredient"));
-        directions = Parcels.unwrap(getIntent().getParcelableExtra("direction"));
-
-
-        tag1 = recipePost.getRecipeTagOne();
-        tag2 = recipePost.getRecipeTagTwo();
-        tag3 = recipePost.getRecipeTagThree();
-
-
 
         continueRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (enterPostTitleNameDescriptionAndPhoto())
+                if (checkInputError())
                 {
+                    Intent confirmPostIntent = new Intent(CreatePost.this,AddIngredients.class);
 
-
-
-                    //uploads information to database and creates new object
-                    collectsImageURLDescriptionTitleRecipeTitle();
-                    Intent confirmPostIntent = new Intent(CreatePost.this,ConfirmPost.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("recipePost", Parcels.wrap(recipePost));
-                    bundle.putParcelable("ingredient", Parcels.wrap(listOfIngredients));
-                    bundle.putParcelable("direction", Parcels.wrap(directions));
-                    confirmPostIntent.putExtras(bundle);
-
-
+                    confirmPostIntent.putExtras(buildBundle());
                     startActivity(confirmPostIntent);
                 }
-
-
 
             }
         });
@@ -164,12 +115,28 @@ public class CreatePost extends AppCompatActivity {
             }
         });
 
+        addImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        CropImage.activity().start(CreatePost.this);
+                CropImage.activity().start(CreatePost.this);
+            }
+        });
+        //CropImage.activity().start(CreatePost.this);
     }
 
+    private Bundle buildBundle()
+    {
+        Bundle bundle = new Bundle();
 
-    private boolean enterPostTitleNameDescriptionAndPhoto() {
+        bundle.putParcelable("title", Parcels.wrap(recipeTitle));
+        bundle.putParcelable("description", Parcels.wrap(recipeDescription));
+        bundle.putParcelable("imageURI", Parcels.wrap(imageUri));
+
+        return bundle;
+    }
+
+    private boolean checkInputError() {
         recipeTitle = recipeTitleInput.getText().toString();
         recipeDescription = recipeDescriptionInput.getText().toString();
 
@@ -184,8 +151,6 @@ public class CreatePost extends AppCompatActivity {
             recipeDescriptionInput.requestFocus();
             return false;
         }
-
-
         if(pictureToPost.getDrawable() == null) {
 
             Toast.makeText(CreatePost.this,
@@ -200,8 +165,6 @@ public class CreatePost extends AppCompatActivity {
         return true;
 
     }
-
-
 
 
     @Override
@@ -222,86 +185,6 @@ public class CreatePost extends AppCompatActivity {
             startActivity(new Intent(CreatePost.this , ExploreActivity.class));
             finish();
         }
-
-
     }
-
-
-
-    private String getFileExtension(Uri mUri) {
-        ContentResolver cr = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton().getSingleton();
-        return mime.getExtensionFromMimeType(cr.getType(mUri));
-    }
-
-
-
-
-    private void collectsImageURLDescriptionTitleRecipeTitle() {
-        if (imageUri != null) {
-            final StorageReference filePath = FirebaseStorage.getInstance().getReference("Posts").child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
-
-            StorageTask uploadtask = filePath.putFile(imageUri);
-            uploadtask.continueWithTask(new Continuation() {
-                @Override
-                public Object then(@NonNull Task task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-
-                    return filePath.getDownloadUrl();
-                }
-
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    Uri downloadUri = task.getResult();
-                    imageUrl = downloadUri.toString();
-
-
-                    String postID = getStoresRecipe.push().getKey();
-
-
-                    // recipePost = new Recipe(ingredient1,direction1,tag1,tag2, tag3, recipeTitle,recipeDescription,imageUrl);
-
-                    recipePost = new Recipe(listOfIngredients,directions,tag1,tag2,tag3,recipeTitle,recipeDescription,imageUrl);
-
-
-
-
-                    recipeMap = new HashMap<>();
-                    recipeMap.put("postId", postID);
-                    recipeMap.put("imageUrl", imageUrl);
-                    recipeMap.put("description", recipeDescription);
-                    recipeMap.put("Title", recipeTitle);
-                    recipeMap.put("Ingredients", listOfIngredients);
-                    recipeMap.put("Directions", directions);
-                    recipeMap.put("Tag 1", tag1);
-                    recipeMap.put("Tag 2", tag2);
-                    recipeMap.put("Tag 3", tag3);
-
-
-
-                    getStoresRecipe.child(postID).setValue(recipeMap);
-
-
-                }
-
-
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(CreatePost.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            Toast.makeText(this, "No image was selected!", Toast.LENGTH_SHORT).show();
-        }
-
-
-    }
-
-
-
 
 }
