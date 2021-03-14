@@ -111,5 +111,14 @@
         app:layout_constraintVertical_bias="0.964"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listOfPostsRecycler"
+        android:layout_width="386dp"
+        android:layout_height="480dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
