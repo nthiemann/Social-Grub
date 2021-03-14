@@ -90,12 +90,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
 
             postImage = itemView.findViewById(R.id.profileRecipeImage);
             postTitle = itemView.findViewById(R.id.profileRecipeTitle);
-            /*tagOne = itemView.findViewById(R.id.profileRecipeTag1);
-            tagTwo = itemView.findViewById(R.id.profileRecipeTag2);
-            tagThree = itemView.findViewById(R.id.profileRecipeTag3);
-            postTitle = itemView.findViewById(R.id.profileRecipeTitle);
-            viewPostButton = itemView.findViewById(R.id.profileRecipeViewPostButton);
-            */
+//            tagOne = itemView.findViewById(R.id.profileRecipeTag1);
+//            tagTwo = itemView.findViewById(R.id.profileRecipeTag2);
+//            tagThree = itemView.findViewById(R.id.profileRecipeTag3);
+//            postTitle = itemView.findViewById(R.id.profileRecipeTitle);
+//            viewPostButton = itemView.findViewById(R.id.profileRecipeViewPostButton);
+
         }
     }
 }
