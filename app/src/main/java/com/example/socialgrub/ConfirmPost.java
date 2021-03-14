@@ -158,10 +158,22 @@ public class ConfirmPost extends AppCompatActivity {
                     imageUrl = downloadUri.toString();
 
                     String postID = getStoresRecipe.push().getKey();
+
+
+
                     Recipe recipePost = new Recipe(listOfIngredients,directions,tags,recipeTitle,recipeDescription,imageUrl);
                     DatabaseReference userRef = db.getReference().child("Users").child(userID);
                     userRef.child("Recipes").child(postID).setValue(recipePost);
 
+                    HashMap<String,Object>recipeMap;
+
+                    recipeMap= new HashMap<>();
+
+                    recipeMap.put("recipeURL", imageUrl);
+                    recipeMap.put("recipeTitle", recipeTitle);
+
+                    //Post post = new Post(imageUrl,recipeTitle);
+                    getStoresRecipe.child(postID).setValue(recipeMap);
                 }
 
 
@@ -207,7 +219,7 @@ public class ConfirmPost extends AppCompatActivity {
         imageUri = Parcels.unwrap(getIntent().getParcelableExtra("imageURI"));
         listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredients"));
         directions = Parcels.unwrap(getIntent().getParcelableExtra("directions"));
-        tags = Parcels.unwrap(getIntent().getParcelableExtra("directions"));
+        tags = Parcels.unwrap(getIntent().getParcelableExtra("tags"));
     }
 
     private String getFileExtension(Uri mUri) {

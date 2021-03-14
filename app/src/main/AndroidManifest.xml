@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.socialgrub">
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -16,7 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialGrub">
-        <activity android:name=".ConfirmPost"></activity>
+        <activity android:name=".PostAdapter"
+            tools:ignore="Instantiatable" />
+        <activity android:name=".ConfirmPost" />
         <activity android:name=".AddIngredients" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".SettingsActivity" />
