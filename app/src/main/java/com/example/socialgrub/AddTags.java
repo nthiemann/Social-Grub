@@ -6,19 +6,27 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.SearchEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
+
+import com.google.android.material.chip.ChipGroup;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AddTags extends AppCompatActivity {
 
 
     Button goToConfirmPage;
     EditText recipeTagInput;
+    SearchView searchBar;
+    ChipGroup tagSearchGroup;
+    ChipGroup tagMainGroup;
 
     String recipeTitle;
     String recipeDescription;
@@ -40,14 +48,13 @@ public class AddTags extends AppCompatActivity {
 
         recipeTagInput = (EditText) findViewById(R.id.recipeTagInput);
         goToConfirmPage = (Button) findViewById(R.id.goToConfirmPost);
+        searchBar = (SearchView) findViewById(R.id.searchView2);
+        tagSearchGroup = (ChipGroup) findViewById(R.id.chipGroup);
+        tagMainGroup = (ChipGroup) findViewById(R.id.chipGroup2);
 
 
-        //recipePost = Parcels.unwrap(getIntent().getParcelableExtra("recipePost"));
         listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredients"));
         directions = Parcels.unwrap(getIntent().getParcelableExtra("directions"));
-        //directions.addAll(recipePost.getDirections());
-
-
 
         goToConfirmPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +70,6 @@ public class AddTags extends AppCompatActivity {
                     createPost.putExtras(buildBundle());
                     startActivity(createPost);
                 }
-
             }
         });
 
@@ -89,6 +95,25 @@ public class AddTags extends AppCompatActivity {
         listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredients"));
         directions = Parcels.unwrap(getIntent().getParcelableExtra("directions"));
     }
+
+    // populates the main tags chip group with pre selected tags
+    private void populateDefaultTags()
+    {
+        // create list of tag ID's
+        ArrayList<Integer> defaultMainGroup = new ArrayList<>(Arrays.asList(7,11,17,24,32,81,84,98,143,172));
+
+        /*for (Integer i : defaultMainGroup)
+        {
+            tagMainGroup.addView();
+        }*/
+    }
+
+    // Allows user to search tags in database, which then updates tagSearchGroup to display most like the search
+    private void searchTags()
+    {
+
+    }
+
 
     private boolean getTagText()
     {

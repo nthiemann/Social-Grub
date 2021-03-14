@@ -2,38 +2,129 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addTagsID"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddTags"
-    android:id="@+id/addTagsID">
+    android:orientation="vertical"
+    tools:context=".AddTags">
 
 
     <EditText
         android:id="@+id/recipeTagInput"
-        android:layout_width="299dp"
-        android:layout_height="168dp"
+        android:layout_width="304dp"
+        android:layout_height="52dp"
         android:ems="10"
         android:hint="Enter Tag"
         android:inputType="textShortMessage"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.21" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <Button
         android:id="@+id/goToConfirmPost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="107dp"
+        android:layout_height="57dp"
         android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.861"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888" />
+        app:layout_constraintVertical_bias="0.94" />
+
+    <SearchView
+        android:id="@+id/searchView2"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.308"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="110dp"
+        android:layout_height="41dp"
+        android:text="Add Tags"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.102" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="224dp"
+        android:layout_height="29dp"
+        android:text="Add at least one. More is better!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.17000002" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search Tags"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.269" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.379">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup2"
+        android:layout_width="329dp"
+        android:layout_height="252dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.716" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
