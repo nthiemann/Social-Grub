@@ -1,32 +1,45 @@
 package com.example.socialgrub;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class ProfileActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
+
+
+
     RecyclerView recyclerView;
     RecipeAdapter recipeAdapter;
+    FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
+    DatabaseReference retrievesPostFromDatabaseForUser = db.getReference("Users");
 
+    ArrayList<Recipe> userRecipeList;
 
 //    DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("-MVDXb5bcZhkXKVr7R-1");
 
@@ -84,5 +97,50 @@ public class ProfileActivity extends AppCompatActivity {
 //        RecipeAdapter recipeAdapter = new RecipeAdapter(this, s1, s2, s3, s4, images);
 //        recyclerView.setAdapter(recipeAdapter);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+
+       recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        retrievesPostFromDatabaseForUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userRecipeList = new ArrayList<>();
+
+                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
+
+
+                    String recipeTitle = dataSnapshot1.child("recipeTitle").getValue().toString();
+                    String recipeURL = dataSnapshot1.child("recipeURL").getValue().toString();
+
+
+
+                    Recipe recipe = new Recipe(recipeURL,recipeTitle);
+
+                    userRecipeList.add(recipe);
+
+                }
+
+                recipeAdapter = new RecipeAdapter(ProfileActivity.this,userRecipeList);
+                recyclerView.setAdapter(recipeAdapter);
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(ProfileActivity.this, "Something is wrong", Toast.LENGTH_SHORT).show();
+            }
+
+
+
+
+        });
+
+
+
     }
 }
