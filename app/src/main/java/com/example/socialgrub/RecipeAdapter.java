@@ -30,7 +30,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.activity_profile, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.profile_posts, parent, false);
         return new Holder(view);
     }
 
