@@ -20,9 +20,9 @@ import java.util.List;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
 
     Context context;
-    List<Recipe> profilePostList;
+    ArrayList<Recipe> profilePostList;
 
-    public RecipeAdapter(Context context, List<Recipe> profilePostList) {
+    public RecipeAdapter(Context context, ArrayList<Recipe> profilePostList) {
         this.context = context;
         this.profilePostList = profilePostList;
     }

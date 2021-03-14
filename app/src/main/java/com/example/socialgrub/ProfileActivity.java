@@ -25,14 +25,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     RecyclerView recyclerView;
+    RecipeAdapter recipeAdapter;
 
-    String title[] = {"Test1", "Test2", "Test3", "Test4", "Test5"};
 
 //    DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("-MVDXb5bcZhkXKVr7R-1");
 
-//    RecyclerView recyclerView;
 //    List<Recipe> recipeList;
-//    RecipeAdapter recipeAdapter;
+
 //
 //    String s1[] = {"Title1"}, s2[] = {"Tag1"}, s3[] = {"Tag2"}, s4[] = {"Tag3"};
 //    int images[] = {R.drawable.profile_image};
@@ -73,9 +72,9 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        RecipeAdapter recipeAdapter = new RecipeAdapter(this, title);
-        recyclerView.setAdapter(recipeAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        RecipeAdapter recipeAdapter = new RecipeAdapter(this, title);
+//        recyclerView.setAdapter(recipeAdapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 //        recyclerView = findViewById(R.id.profilePostView);
 ////        s1 = ;
