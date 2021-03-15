@@ -19,7 +19,7 @@ import org.parceler.Parcel;
 public class Tag {
     public String tagName;
     private int tagID;
-    private DatabaseReference dbRef;
+    //private DatabaseReference dbRef;
 
     public Tag()
     {
@@ -58,12 +58,12 @@ public class Tag {
         dbRef = getDBRef();
 
     }*/
-    private DatabaseReference getDBRef()
+    /*private DatabaseReference getDBRef()
     {
         FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
         DatabaseReference storePoint = db.getReference("1jtXaB0m7-Hd5RcigSl1XRFoJCt5DNDMfgagA8tMOWxo/Sheet1");
         return storePoint;
-    }
+    }*/
 
 
 }

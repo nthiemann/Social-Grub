@@ -1,5 +1,6 @@
 package com.example.socialgrub;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,6 +14,12 @@ import android.widget.EditText;
 import android.widget.SearchView;
 
 import com.google.android.material.chip.ChipGroup;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
@@ -21,6 +28,8 @@ import java.util.Arrays;
 
 public class AddTags extends AppCompatActivity {
 
+
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("1jtXaB0m7-Hd5RcigSl1XRFoJCt5DNDMfgagA8tMOWxo").child("Sheet1");
 
     Button goToConfirmPage;
     EditText recipeTagInput;
@@ -49,6 +58,21 @@ public class AddTags extends AppCompatActivity {
         recipeTagInput = (EditText) findViewById(R.id.recipeTagInput);
         goToConfirmPage = (Button) findViewById(R.id.goToConfirmPost);
         searchBar = (SearchView) findViewById(R.id.searchView2);
+        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //hTags(newText);
+                return false;
+            }
+        });
+
+
+
         tagSearchGroup = (ChipGroup) findViewById(R.id.chipGroup);
         tagMainGroup = (ChipGroup) findViewById(R.id.chipGroup2);
 
@@ -109,12 +133,43 @@ public class AddTags extends AppCompatActivity {
     }
 
     // Allows user to search tags in database, which then updates tagSearchGroup to display most like the search
-    private void searchTags()
+    /*private void searchTags(String searchText)
     {
+        String searchInputToLower = searchText.toLowerCase();
+        String searchInputTOUpper = searchText.toUpperCase();
 
+
+        if(searchText != null && searchText.length()>0){
+            char[] letters=searchText.toCharArray();
+            String firstLetter = String.valueOf(letters[0]).toUpperCase();
+            String remainingLetters = searchText.substring(1);
+            searchText=firstLetter+remainingLetters;
+        }
+        Query firebaseSearchQuery = reference.child("id").orderByChild("TagString").startAt(searchText)
+                .endAt(searchText + "uf8ff");
+
+        firebaseSearchQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //DataCache.clear();
+                tagSearchGroup.de();
+                if (dataSnapshot.exists() && dataSnapshot.getChildrenCount() > 0) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        //Now get Scientist Objects and populate our arraylist.
+                        Scientist scientist = ds.getValue(Scientist.class);
+                        scientist.setKey(ds.getKey());
+                        //DataCache.add(scientist);
+                    }
+                    adapter.notifyDataSetChanged();
+                } else {
+                    Utils.show(a, "No item found");
+                }
+            }}
     }
-
-
+    private void clearChipGroup(ChipGroup G)
+    {
+        for (int i = 0; i < G.)
+    }*/
     private boolean getTagText()
     {
         tagText = recipeTagInput.getText().toString();
