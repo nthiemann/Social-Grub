@@ -47,8 +47,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/profilePostView"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_width="344dp"
+        android:layout_height="346dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

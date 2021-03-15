@@ -20,9 +20,9 @@ import java.util.List;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
 
     Context context;
-    List<Recipe> profilePostList;
+    ArrayList<Recipe> profilePostList;
 
-    public RecipeAdapter(Context context, List<Recipe> profilePostList) {
+    public RecipeAdapter(Context context, ArrayList<Recipe> profilePostList) {
         this.context = context;
         this.profilePostList = profilePostList;
     }
@@ -30,12 +30,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.activity_profile, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.profile_posts, parent, false);
         return new Holder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
+
+/*
         String title = profilePostList.get(position).getRecipeTitle();
 
         ArrayList<Tag> tags = profilePostList.get(position).getRecipeTags();
@@ -63,6 +65,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
                 Toast.makeText(context, "View Post", Toast.LENGTH_SHORT).show();
             }
         });
+
+        */
+
+
+        holder.postTitle.setText(profilePostList.get(position).getRecipeTitle());
+        Picasso.get().load(profilePostList.get(position).getRecipeUrl()).into(holder.postImage);
+
     }
 
     @Override
@@ -80,11 +89,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
             super(itemView);
 
             postImage = itemView.findViewById(R.id.profileRecipeImage);
-            tagOne = itemView.findViewById(R.id.profileRecipeTag1);
-            tagTwo = itemView.findViewById(R.id.profileRecipeTag2);
-            tagThree = itemView.findViewById(R.id.profileRecipeTag3);
             postTitle = itemView.findViewById(R.id.profileRecipeTitle);
-            viewPostButton = itemView.findViewById(R.id.profileRecipeViewPostButton);
+//            tagOne = itemView.findViewById(R.id.profileRecipeTag1);
+//            tagTwo = itemView.findViewById(R.id.profileRecipeTag2);
+//            tagThree = itemView.findViewById(R.id.profileRecipeTag3);
+//            postTitle = itemView.findViewById(R.id.profileRecipeTitle);
+//            viewPostButton = itemView.findViewById(R.id.profileRecipeViewPostButton);
+
         }
     }
 }
