@@ -108,7 +108,7 @@ Users will be able to post their recipes and search recipe results. This will al
 * ![image](https://user-images.githubusercontent.com/62866287/111094410-9d01a100-8511-11eb-8a4b-ae65e0a90ef7.png)
 * Velocity Chart: 
 * ![Velocity Chart (6)](https://user-images.githubusercontent.com/63211233/111090203-5ad26280-8505-11eb-831e-0722e384b5e2.png)
-* [Manual Test](https://github.com/Jixster07/Social-Grub/blob/master/changeProfileImg.md)
+* [Manual Test](https://github.com/Jixster07/Social-Grub/blob/master/week6ManualTest.md)
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
 * [Automated Tests](https://github.com/Jixster07/Social-Grub/tree/master/app/src/androidTest/java/com/example/socialgrub)
