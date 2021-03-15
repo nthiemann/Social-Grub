@@ -29,6 +29,7 @@ public class ExploreActivity extends AppCompatActivity {
     ImageButton settingButton;
     ImageButton createPostButton;
     ImageButton goToProfileButton;
+    ImageButton searchButton;
 
 
     //String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -77,6 +78,14 @@ public class ExploreActivity extends AppCompatActivity {
             }
         });
 
+        searchButton = (ImageButton) findViewById(R.id.search_icon_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToSearch = new Intent(ExploreActivity.this, Search.class);
+                startActivity(goToSearch);
+            }
+        });
 
         recyclerViewListOfPosts = findViewById(R.id.listOfPostsRecycler);
         recyclerViewListOfPosts.setLayoutManager(new LinearLayoutManager(this));
