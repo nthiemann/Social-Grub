@@ -117,7 +117,7 @@ Users will be able to post their recipes and search recipe results. This will al
 
 ## Task Allocation
 * Kyle Karacadag - Worked on displaying user posts on the user's profile page
-* Nicholas Thiemann - 
+* Nicholas Thiemann - Refactored Create Recipe Activities, added 170+ tags to database. Worked on tags page.
 * Ricardo Mangandi - 
 * Allec Pereira - Worked on changing account information and project demonstration
 * Rudolph Garcia - Worked on the UI of the Add Ingredients, Add Directions, and the Log In page
