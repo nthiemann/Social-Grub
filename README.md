@@ -119,5 +119,5 @@ Users will be able to post their recipes and search recipe results. This will al
 * Kyle Karacadag - Worked on displaying user posts on the user's profile page
 * Nicholas Thiemann - 
 * Ricardo Mangandi - 
-* Allec Pereira - 
+* Allec Pereira - Worked on changing account information and project demonstration
 * Rudolph Garcia - 
