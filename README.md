@@ -101,3 +101,23 @@ Users will be able to post their recipes and search recipe results. This will al
 * Ricardo Mangandi - Implemented the database feature of our app so all user posts are stored in the firebase database.
 * Allec Pereira - Implemented change profile picture feature and worked on trello board
 * Rudolph Garcia - Added UI and functionality for the ingredients page and directions page for the create recipe page.
+
+# Sprint 6
+* [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
+* Burndown Chart: 
+* ![Burndown Chart Sprint 5]
+* Velocity Chart: 
+* ![Velocity Chart (5)]
+* [Manual Test](https://github.com/Jixster07/Social-Grub/blob/master/changeProfileImg.md)
+* [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
+* [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
+* [Automated Tests](https://github.com/Jixster07/Social-Grub/tree/master/app/src/androidTest/java/com/example/socialgrub)
+* [Product Demonstration]
+
+
+## Task Allocation
+* Kyle Karacadag - Worked on displaying user posts on the user's profile page
+* Nicholas Thiemann - 
+* Ricardo Mangandi - 
+* Allec Pereira - 
+* Rudolph Garcia - 
