@@ -21,18 +21,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.964" />
 
-    <ImageButton
-        android:id="@+id/profileButton"
-        android:layout_width="109dp"
-        android:layout_height="79dp"
-        android:tint="#9C27B0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.964"
-        app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/containsSearchFilterSettings"
         android:layout_width="393dp"
@@ -52,7 +40,7 @@
         android:layout_width="176dp"
         android:layout_height="61dp"
         android:fontFamily="cursive"
-        android:text="Exlore Page"
+        android:text="Explore Page"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:backgroundTint="@color/white"
@@ -84,7 +72,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.001"
-        app:srcCompat="@drawable/socialgrublogo" />
+        app:srcCompat="@drawable/socialgrubcameraverthree" />
 
     <ImageButton
         android:id="@+id/settings_button"
@@ -119,5 +107,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/profileButton"
+        android:layout_width="109dp"
+        android:layout_height="79dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.964"
+        app:srcCompat="@drawable/sgprofilevertwo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
