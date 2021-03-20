@@ -26,16 +26,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button forgotPass;
     EditText editTextEmail;
     EditText editTextPassword;
+    private ProgressBar spinner;
 
     ProgressDialog verifyDialog;
 
     private FirebaseAuth mAuth;
 
 
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         Button registerBtn = (Button) findViewById(R.id.register_button);
         registerBtn.setOnClickListener(this);
@@ -45,16 +46,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         editTextEmail = (EditText) findViewById(R.id.enter_email);
         editTextPassword = (EditText) findViewById(R.id.enter_password);
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
 
         mAuth = FirebaseAuth.getInstance();
 
 
         // DEVELOPER QUICK LOGIN
 
-        editTextEmail.setText("ricardo.mangandi@gmail.com");
-        editTextPassword.setText("Ricardo");
+        //editTextEmail.setText("ricardo.mangandi@gmail.com");
+        //editTextPassword.setText("Ricardo");
 
-
+        editTextEmail.setText("nathiemann1@gmail.com");
+        editTextPassword.setText("password");
 
 
         forgotPass = findViewById(R.id.forgotPassword);
@@ -139,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if(task.isSuccessful()) {
                             // User has entered the correct credentials and email has been verified by the user
                             if (mAuth.getCurrentUser().isEmailVerified()){
+
                                 startActivity(new Intent(MainActivity.this, ExploreActivity.class));
 
                             }

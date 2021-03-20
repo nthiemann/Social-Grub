@@ -9,8 +9,8 @@
 
     <EditText
         android:id="@+id/enter_email"
-        android:layout_width="266dp"
-        android:layout_height="46dp"
+        android:layout_width="280dp"
+        android:layout_height="55dp"
         android:hint="Enter email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,8 +21,8 @@
 
     <EditText
         android:id="@+id/enter_password"
-        android:layout_width="266dp"
-        android:layout_height="46dp"
+        android:layout_width="278dp"
+        android:layout_height="54dp"
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,26 +34,27 @@
 
     <Button
         android:id="@+id/sign_in"
-        android:layout_width="115dp"
-        android:layout_height="65dp"
+        android:layout_width="157dp"
+        android:layout_height="71dp"
         android:text="SIGN IN"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.554" />
+        app:layout_constraintVertical_bias="0.694" />
 
     <Button
         android:id="@+id/register_button"
-        android:layout_width="118dp"
-        android:layout_height="61dp"
+        android:layout_width="156dp"
+        android:layout_height="76dp"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.726" />
+        app:layout_constraintVertical_bias="0.91" />
 
     <Button
         android:id="@+id/forgotPassword"
@@ -73,8 +74,10 @@
         app:iconTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/sign_in"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter_password"
+        app:layout_constraintVertical_bias="0.33"
         app:rippleColor="#FFFFFF" />
 
     <ImageView
@@ -87,5 +90,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/sgtitlelogo" />
 
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

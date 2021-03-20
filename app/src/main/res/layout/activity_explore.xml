@@ -37,8 +37,8 @@
 
     <Button
         android:id="@+id/title_Explore_Page"
-        android:layout_width="176dp"
-        android:layout_height="61dp"
+        android:layout_width="184dp"
+        android:layout_height="50dp"
         android:fontFamily="cursive"
         android:text="Explore Page"
         android:textColor="@color/black"
@@ -46,9 +46,11 @@
         app:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.082" />
+        app:layout_constraintVertical_bias="0.102" />
+
 
     <ImageButton
         android:id="@+id/search_icon_button"
@@ -56,12 +58,11 @@
         android:layout_height="43dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintHorizontal_bias="0.046"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.021"
+        app:layout_constraintVertical_bias="0.082"
         app:srcCompat="@drawable/search_icon" />
-
 
     <ImageButton
         android:id="@+id/social_grub_logo"
@@ -83,7 +84,7 @@
         app:layout_constraintHorizontal_bias="0.956"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.02"
+        app:layout_constraintVertical_bias="0.081"
         app:srcCompat="@drawable/settings_icon" />
 
     <ImageButton
