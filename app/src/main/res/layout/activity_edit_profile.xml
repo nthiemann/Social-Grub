@@ -55,7 +55,7 @@
         android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.761"
         app:layout_constraintStart_toEndOf="@+id/static_username_editText"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -112,8 +112,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/gg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.234"
+        app:layout_constraintStart_toEndOf="@+id/change_button"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <Button
@@ -154,8 +154,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/gg"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="248dp"
-        android:layout_height="70dp"
+        android:layout_width="241dp"
+        android:layout_height="73dp"
         app:layout_constraintBottom_toTopOf="@+id/save_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.969"
@@ -164,16 +164,16 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/change_last_name_editText"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
+            android:layout_width="229dp"
+            android:layout_height="55dp"
             android:hint="Change last name" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="244dp"
-        android:layout_height="69dp"
+        android:layout_width="241dp"
+        android:layout_height="73dp"
         app:layout_constraintBottom_toTopOf="@+id/static_lastname_editText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.97"
@@ -183,27 +183,27 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/change_first_name_editText"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_width="229dp"
+            android:layout_height="55dp"
             android:hint="Change name" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="253dp"
-        android:layout_height="63dp"
+        android:layout_width="241dp"
+        android:layout_height="73dp"
         app:layout_constraintBottom_toTopOf="@+id/fname_editText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.964"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/static_username_editText"
         app:layout_constraintVertical_bias="0.076">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/change_username_editText"
-            android:layout_width="250dp"
-            android:layout_height="54dp"
+            android:layout_width="229dp"
+            android:layout_height="55dp"
             android:hint="Change username" />
     </com.google.android.material.textfield.TextInputLayout>
 
