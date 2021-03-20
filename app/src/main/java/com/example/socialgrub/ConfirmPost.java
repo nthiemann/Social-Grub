@@ -2,6 +2,7 @@ package com.example.socialgrub;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentResolver;
@@ -49,12 +50,16 @@ public class ConfirmPost extends AppCompatActivity {
     Button changeDirectionsButton;
     Button changeTagsButton;
     Button postRecipeButton;
+    Button backButtonToTags;
 
     ImageView image;
     TextView postTitle;
     TextView description;
     RecyclerView ingredientsView;
     RecyclerView directionsView;
+
+
+
     ChipGroup  tagsGroupView;
 
 
@@ -88,55 +93,23 @@ public class ConfirmPost extends AppCompatActivity {
 
         Toast.makeText(ConfirmPost.this, "Tag array size is: " + tags.size(), Toast.LENGTH_SHORT).show();
 
-        cancelPostButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ConfirmPost.this, ExploreActivity.class));
 
-            }
-        });
+        ingredientsView = findViewById(R.id.recyclerViewIngredientId);
+        ingredientsView.setLayoutManager(new LinearLayoutManager(this));
+        IngredientsAdapter ingredientsAdapter;
+        ingredientsAdapter = new IngredientsAdapter(ConfirmPost.this, listOfIngredients);
+        ingredientsView.setAdapter(ingredientsAdapter);
 
-        changeTitleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
-        changeImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+        directionsView = findViewById(R.id.recyclerViewDirectionsId);
+        directionsView.setLayoutManager(new LinearLayoutManager(this));
+        DirectionsAdapter directionsAdapter;
+        directionsAdapter = new DirectionsAdapter(ConfirmPost.this,directions);
+        directionsView.setAdapter(directionsAdapter);
 
-        changeDescriptionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-
-        changeIngredientsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        changeDirectionsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        changeTagsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         postRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,19 +192,20 @@ public class ConfirmPost extends AppCompatActivity {
 
     private void setView()
     {
-        cancelPostButton = (Button) findViewById(R.id.cancelPostButton);
-        changeTitleButton = (Button) findViewById(R.id.changeTitleButton);
-        changeImageButton = (Button) findViewById(R.id.changeImageButton);
-        changeDescriptionButton = (Button) findViewById(R.id.changeDescriptionButton);
-        changeIngredientsButton = (Button) findViewById(R.id.changeIngredientsButton);
-        changeDirectionsButton = (Button) findViewById(R.id.changeDirectionsButton);
-        changeTagsButton = (Button) findViewById(R.id.changeTagsButton);
-        postRecipeButton = (Button) findViewById(R.id.uploadPostButton);
+        cancelPostButton = (Button) findViewById(R.id.cancelPostButtonId);
+        //changeTitleButton = (Button) findViewById(R.id.changeTitleButton);
+        //changeImageButton = (Button) findViewById(R.id.changeImageButton);
+        //changeDescriptionButton = (Button) findViewById(R.id.changeDescriptionButton);
+        //changeIngredientsButton = (Button) findViewById(R.id.changeIngredientsButton);
+        //changeDirectionsButton = (Button) findViewById(R.id.changeDirectionsButton);
+        //changeTagsButton = (Button) findViewById(R.id.changeTagsButton);
+        postRecipeButton = (Button) findViewById(R.id.uploadPostId);
+        backButtonToTags = (Button) findViewById(R.id.backButtonId);
 
-        image = (ImageView) findViewById(R.id.image);
+        image = (ImageView) findViewById(R.id.imageInConfirmPostId);
 
-        postTitle = (TextView) findViewById(R.id.postTitle);
-        description = (TextView) findViewById(R.id.description);
+        postTitle = (TextView) findViewById(R.id.postTitleId);
+        description = (TextView) findViewById(R.id.descriptionConfirmPageId);
 
         postTitle.setText(recipeTitle);
         description.setText(recipeDescription);

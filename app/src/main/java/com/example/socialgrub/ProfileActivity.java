@@ -35,12 +35,13 @@ public class ProfileActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RecipeAdapter recipeAdapter;
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
-    DatabaseReference retrievesPostFromDatabaseForUser = db.getReference("Image Dish");
+    DatabaseReference retrievesPostFromDatabaseForUser = db.getReference("Users");
 
     ArrayList<Recipe> userRecipeList;
 
     Button editProfileBtn;
     ImageButton settingsProfileBtn;
+    String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,25 +69,38 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-       recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        retrievesPostFromDatabaseForUser.addValueEventListener(new ValueEventListener() {
+        retrievesPostFromDatabaseForUser.child(userID).child("Recipes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userRecipeList = new ArrayList<>();
-
+                ArrayList<String> directions = null;
+                // ArrayList<Ingredient> ingredients;
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
 
 
                     String recipeTitle = dataSnapshot1.child("recipeTitle").getValue().toString();
-                    String recipeURL = dataSnapshot1.child("recipeURL").getValue().toString();
+                    String description = dataSnapshot1.child("recipeDescription").getValue().toString();
+                    String recipeURL = dataSnapshot1.child("recipeUrl").getValue().toString();
+
+                    if(dataSnapshot1.getKey().equals("directions")) {
+                        for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
+
+
+                            directions.add(dataSnapshot2.getValue().toString());
+
+
+                        }
+                    }
 
 
 
-                    Recipe recipe = new Recipe(recipeURL,recipeTitle);
 
+
+                    Recipe recipe = new Recipe(recipeURL, recipeTitle,description);
                     userRecipeList.add(recipe);
 
                 }
@@ -99,10 +113,11 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ProfileActivity.this, "Something is wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this, "There are no posts under your name", Toast.LENGTH_SHORT).show();
             }
 
         });
+
 
 
 

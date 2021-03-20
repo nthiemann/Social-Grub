@@ -1,6 +1,7 @@
 package com.example.socialgrub;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,7 +95,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
 //            tagTwo = itemView.findViewById(R.id.profileRecipeTag2);
 //            tagThree = itemView.findViewById(R.id.profileRecipeTag3);
 //            postTitle = itemView.findViewById(R.id.profileRecipeTitle);
-//            viewPostButton = itemView.findViewById(R.id.profileRecipeViewPostButton);
+  //            viewPostButton = itemView.findViewById(R.id.profileRecipeViewPostButton);
+
+
 
         }
     }

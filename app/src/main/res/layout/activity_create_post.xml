@@ -12,14 +12,15 @@
         android:layout_width="133dp"
         android:layout_height="49dp"
         android:fontFamily="cursive"
+        android:maxLength="50"
         android:text="Recipe Post"
         android:textSize="30sp"
-        android:maxLength="50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.092" />
+        app:layout_constraintVertical_bias="0.045" />
 
     <EditText
         android:id="@+id/recipeTitleInput"
@@ -45,7 +46,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.179" />
+        app:layout_constraintVertical_bias="0.162" />
 
     <Button
         android:id="@+id/continueRecipeButton"
@@ -62,8 +63,8 @@
 
     <Button
         android:id="@+id/postCancelButton"
-        android:layout_width="88dp"
-        android:layout_height="34dp"
+        android:layout_width="77dp"
+        android:layout_height="37dp"
         android:text="Cancel"
         android:textSize="10sp"
         app:backgroundTint="@android:color/holo_red_light"
@@ -74,10 +75,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
 
+
     <EditText
         android:id="@+id/descriptionBox"
-        android:layout_width="334dp"
-        android:layout_height="70dp"
+        android:layout_width="342dp"
+        android:layout_height="116dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Description"
@@ -85,11 +87,10 @@
         android:maxLength="300"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.296" />
-
+        app:layout_constraintVertical_bias="0.319" />
 
     <ImageView
         android:id="@+id/pictureID"
@@ -107,11 +108,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Image"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/pictureID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.518" />
+        app:layout_constraintVertical_bias="0.929" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

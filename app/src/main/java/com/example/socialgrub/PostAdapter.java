@@ -51,7 +51,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
         holder.recipeTitle.setText(listOfPosts.get(position).getRecipeTitle());
-        //holder.recipeDescription.setText(post.getDescription());
+       // holder.recipeDescription.setText(post.getDescription());
         Picasso.get().load(listOfPosts.get(position).getRecipeURL()).into(holder.imageToPost);
 
     }

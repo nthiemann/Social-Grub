@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // DEVELOPER QUICK LOGIN
 
-        editTextEmail.setText("nathiemann1@gmail.com");
-        editTextPassword.setText("password");
+        editTextEmail.setText("ricardo.mangandi@gmail.com");
+        editTextPassword.setText("Ricardo");
 
 
 

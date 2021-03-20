@@ -29,6 +29,13 @@ public class Recipe {
 
     }
 
+    public Recipe(String recipeUrl, String recipeTitle, String recipeDescription) {
+
+        this.recipeUrl = recipeUrl;
+        this.recipeTitle = recipeTitle;
+        this.recipeDescription = recipeDescription;
+    }
+
     public Recipe(String recipeUrl, String recipeTitle) {
 
         this.recipeUrl = recipeUrl;
