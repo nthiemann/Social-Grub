@@ -72,7 +72,7 @@ public class EditProfileActivityTest {
     public void test_username_change(){
         ActivityScenario<EditProfileActivity> activityScenario = ActivityScenario.launch(EditProfileActivity.class);
 
-        onView(withHint("Change username")).perform(typeText("allecp0215"));
+        onView(withId(R.id.username_editText)).perform(typeText("allecp0215"));
         onView(withId(R.id.save_button)).perform(click());
         onView(withId(R.id.username_editText)).check(matches(withText("allecp215")));
 
