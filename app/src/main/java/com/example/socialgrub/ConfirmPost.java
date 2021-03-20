@@ -42,32 +42,32 @@ import java.util.HashMap;
 
 public class ConfirmPost extends AppCompatActivity {
 
-    Button cancelPostButton;
-    Button changeTitleButton;
-    Button changeImageButton;
-    Button changeDescriptionButton;
-    Button changeIngredientsButton;
-    Button changeDirectionsButton;
-    Button changeTagsButton;
-    Button postRecipeButton;
-    Button backButtonToTags;
 
-    ImageView image;
-    TextView postTitle;
-    TextView description;
+
+
+
+
+
+    TextView ingredientListId;
+    TextView directionsListId;
+
     RecyclerView ingredientsView;
     RecyclerView directionsView;
+    Button buttonAddMoreIngredients;
+    Button buttonAddMoreDirections;
+    Button continuePostId;
 
 
 
-    ChipGroup  tagsGroupView;
+
+
+
+
 
 
     String recipeTitle;
     String recipeDescription;
     Uri imageUri;
-    String imageUrl;
-    String userID;
     ArrayList<Ingredient> listOfIngredients;
     ArrayList<String> directions;
     ArrayList<Tag> tags;
@@ -76,10 +76,7 @@ public class ConfirmPost extends AppCompatActivity {
 
 
 
-    String username = "default";
 
-    FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
-    private DatabaseReference getStoresRecipe = db.getReference("Image Dish");
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,12 +85,13 @@ public class ConfirmPost extends AppCompatActivity {
         unwrapBundle();
         setView();
 
-        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
 
         Toast.makeText(ConfirmPost.this, "Tag array size is: " + tags.size(), Toast.LENGTH_SHORT).show();
 
 
+        //ingredients recycler view and adapter functions
         ingredientsView = findViewById(R.id.recyclerViewIngredientId);
         ingredientsView.setLayoutManager(new LinearLayoutManager(this));
         IngredientsAdapter ingredientsAdapter;
@@ -101,8 +99,7 @@ public class ConfirmPost extends AppCompatActivity {
         ingredientsView.setAdapter(ingredientsAdapter);
 
 
-
-
+        //directions recycler View and adapter functions
         directionsView = findViewById(R.id.recyclerViewDirectionsId);
         directionsView.setLayoutManager(new LinearLayoutManager(this));
         DirectionsAdapter directionsAdapter;
@@ -111,107 +108,78 @@ public class ConfirmPost extends AppCompatActivity {
 
 
 
-        postRecipeButton.setOnClickListener(new View.OnClickListener() {
+
+
+        buttonAddMoreIngredients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadPost();
-                startActivity(new Intent(ConfirmPost.this, ExploreActivity.class));
+                Intent addMoreIngredients = new Intent(ConfirmPost.this, AdditionalIngredients.class);
+                addMoreIngredients.putExtras(buildBundle());
+                startActivity(addMoreIngredients);
             }
         });
 
-    }
 
-    private void uploadPost() {
-        if (imageUri != null) {
-            final StorageReference filePath = FirebaseStorage.getInstance().getReference("Posts").child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
-
-            StorageTask uploadtask = filePath.putFile(imageUri);
-            uploadtask.continueWithTask(new Continuation() {
-                @Override
-                public Object then(@NonNull Task task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-
-                    return filePath.getDownloadUrl();
-                }
-
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    Uri downloadUri = task.getResult();
-                    imageUrl = downloadUri.toString();
-
-                    String postID = getStoresRecipe.push().getKey();
-                    Recipe recipePost = new Recipe(listOfIngredients,directions,tags,recipeTitle,recipeDescription,imageUrl);
-                    DatabaseReference userRef = db.getReference().child("Users").child(userID);
-                    userRef.child("Recipes").child(postID).setValue(recipePost);
+        buttonAddMoreDirections.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addMoreDirections = new Intent(ConfirmPost.this, AdditionalDirections.class);
+                addMoreDirections.putExtras(buildBundle());
+                startActivity(addMoreDirections);
+            }
+        });
 
 
-                    DatabaseReference getusername = db.getReference("Users").child(userID).child("Username");
-
-                    getusername.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            username = snapshot.getValue().toString();
-
-                            HashMap<String,Object>postMap;
-
-                            postMap= new HashMap<>();
-
-                            postMap.put("recipeUrl", imageUrl);
-                            postMap.put("recipeTitle", recipeTitle);
-                            postMap.put("recipeDescription", recipeDescription);
-                            postMap.put("Username", username);
-
-                            getStoresRecipe.child(postID).setValue(postMap);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Toast.makeText(ConfirmPost.this, "Something is wrong", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                }
 
 
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(ConfirmPost.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            Toast.makeText(this, "No image was selected!", Toast.LENGTH_SHORT).show();
-        }
 
+
+        continuePostId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent finalConfirmPost = new Intent(ConfirmPost.this, FinalConfirmPost.class);
+                finalConfirmPost.putExtras(buildBundle());
+                startActivity(finalConfirmPost);
+            }
+        });
 
     }
 
 
     private void setView()
     {
-        cancelPostButton = (Button) findViewById(R.id.cancelPostButtonId);
-        //changeTitleButton = (Button) findViewById(R.id.changeTitleButton);
-        //changeImageButton = (Button) findViewById(R.id.changeImageButton);
-        //changeDescriptionButton = (Button) findViewById(R.id.changeDescriptionButton);
-        //changeIngredientsButton = (Button) findViewById(R.id.changeIngredientsButton);
-        //changeDirectionsButton = (Button) findViewById(R.id.changeDirectionsButton);
-        //changeTagsButton = (Button) findViewById(R.id.changeTagsButton);
-        postRecipeButton = (Button) findViewById(R.id.uploadPostId);
-        backButtonToTags = (Button) findViewById(R.id.backButtonId);
 
-        image = (ImageView) findViewById(R.id.imageInConfirmPostId);
 
-        postTitle = (TextView) findViewById(R.id.postTitleId);
-        description = (TextView) findViewById(R.id.descriptionConfirmPageId);
+        ingredientListId = findViewById(R.id.ingredientListId);
+        directionsListId = findViewById(R.id.directionsListId);
 
-        postTitle.setText(recipeTitle);
-        description.setText(recipeDescription);
+        buttonAddMoreIngredients = findViewById(R.id.buttonAddMoreIngredients);
+        buttonAddMoreDirections = findViewById(R.id.buttonAddMoreDirections);
+        continuePostId = findViewById(R.id.continuePostId);
 
-        image.setImageURI(imageUri);
+
+
     }
+
+
+    private Bundle buildBundle()
+    {
+        Bundle bundle = new Bundle();
+
+        bundle.putParcelable("title", Parcels.wrap(recipeTitle));
+        bundle.putParcelable("description", Parcels.wrap(recipeDescription));
+        bundle.putParcelable("imageURI", Parcels.wrap(imageUri));
+        bundle.putParcelable("ingredients", Parcels.wrap(listOfIngredients));
+        bundle.putParcelable("directions", Parcels.wrap(directions));
+        bundle.putParcelable("tags", Parcels.wrap(tags));
+
+        return bundle;
+    }
+
+
+
+
 
     private void unwrapBundle()
     {
