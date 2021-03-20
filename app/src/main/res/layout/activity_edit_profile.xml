@@ -10,28 +10,31 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilepic_imageView"
-        android:layout_width="140dp"
-        android:layout_height="176dp"
+        android:layout_width="104dp"
+        android:layout_height="159dp"
         android:src="@drawable/profile_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.007"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.003" />
+        app:layout_constraintVertical_bias="0.027" />
 
     <Button
         android:id="@+id/change_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
         android:text="change"
         android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26" />
+        app:layout_constraintTop_toBottomOf="@+id/profilepic_imageView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/static_username_editText"
@@ -57,8 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/static_username_editText"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.578" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
 
@@ -78,12 +80,15 @@
         android:id="@+id/lname_editText"
         android:layout_width="136dp"
         android:layout_height="23dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginLeft="105dp"
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
         android:background="@null"
         android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/gg"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/static_lastname_editText"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <EditText
@@ -104,13 +109,13 @@
         android:id="@+id/static_lastname_editText"
         android:layout_width="wrap_content"
         android:layout_height="23dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
         android:background="@null"
         android:text="Last name:"
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/gg"
+        app:layout_constraintEnd_toStartOf="@+id/lname_editText"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/change_button"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
@@ -170,19 +175,19 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="253dp"
-        android:layout_height="66dp"
+        android:layout_width="238dp"
+        android:layout_height="68dp"
         app:layout_constraintBottom_toTopOf="@+id/static_lastname_editText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.907"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fname_editText"
         app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/change_first_name_editText"
-            android:layout_width="250dp"
-            android:layout_height="54dp"
+            android:layout_width="214dp"
+            android:layout_height="59dp"
             android:hint="Change name" />
     </com.google.android.material.textfield.TextInputLayout>
 
