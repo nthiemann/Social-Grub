@@ -5,126 +5,84 @@
     android:id="@+id/addTagsID"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:gravity="center"
     tools:context=".AddTags">
-
-
-    <EditText
-        android:id="@+id/recipeTagInput"
-        android:layout_width="304dp"
-        android:layout_height="52dp"
-        android:ems="10"
-        android:hint="Enter Tag"
-        android:inputType="textShortMessage"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
-    <Button
-        android:id="@+id/goToConfirmPost"
-        android:layout_width="107dp"
-        android:layout_height="57dp"
-        android:text="Next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
-
-    <SearchView
-        android:id="@+id/searchView2"
-        android:layout_width="match_parent"
-
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.308"
-        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="110dp"
-        android:layout_height="41dp"
+        android:layout_width="138dp"
+        android:layout_height="50dp"
         android:text="Add Tags"
+        android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.102" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="224dp"
-        android:layout_height="29dp"
-        android:text="Add at least one. More is better!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.17000002" />
+        app:layout_constraintVertical_bias="0.042" />
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search Tags"
+        android:layout_width="64dp"
+        android:layout_height="25dp"
+        android:text="Search"
+        android:textSize="20dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.269" />
+        app:layout_constraintVertical_bias="0.118" />
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <SearchView
+        android:id="@+id/searchView2"
+        android:layout_width="381dp"
+
+        android:layout_height="46dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.379">
+        app:layout_constraintVertical_bias="0.169">
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.chip.ChipGroup>
+    </SearchView>
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup2"
-        android:layout_width="329dp"
-        android:layout_height="252dp"
+        android:layout_width="364dp"
+        android:layout_height="243dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.716" />
+        app:layout_constraintVertical_bias="0.829">
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <Button
+        android:id="@+id/goToConfirmPost"
+        android:layout_width="146dp"
+        android:layout_height="67dp"
+        android:text="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="346dp"
+        android:layout_height="216dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.348" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

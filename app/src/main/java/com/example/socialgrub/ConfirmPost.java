@@ -8,6 +8,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -22,8 +23,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -63,6 +67,12 @@ public class ConfirmPost extends AppCompatActivity {
     ArrayList<String> directions;
     ArrayList<Tag> tags;
 
+
+
+
+
+    String username = "default";
+
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
     private DatabaseReference getStoresRecipe = db.getReference("Image Dish");
 
@@ -75,6 +85,8 @@ public class ConfirmPost extends AppCompatActivity {
 
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+
+        Toast.makeText(ConfirmPost.this, "Tag array size is: " + tags.size(), Toast.LENGTH_SHORT).show();
 
         cancelPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,22 +170,36 @@ public class ConfirmPost extends AppCompatActivity {
                     imageUrl = downloadUri.toString();
 
                     String postID = getStoresRecipe.push().getKey();
-
-
-
                     Recipe recipePost = new Recipe(listOfIngredients,directions,tags,recipeTitle,recipeDescription,imageUrl);
                     DatabaseReference userRef = db.getReference().child("Users").child(userID);
                     userRef.child("Recipes").child(postID).setValue(recipePost);
 
-                    HashMap<String,Object>recipeMap;
 
-                    recipeMap= new HashMap<>();
+                    DatabaseReference getusername = db.getReference("Users").child(userID).child("Username");
 
-                    recipeMap.put("recipeURL", imageUrl);
-                    recipeMap.put("recipeTitle", recipeTitle);
+                    getusername.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            username = snapshot.getValue().toString();
 
-                    //Post post = new Post(imageUrl,recipeTitle);
-                    getStoresRecipe.child(postID).setValue(recipeMap);
+                            HashMap<String,Object>postMap;
+
+                            postMap= new HashMap<>();
+
+                            postMap.put("recipeUrl", imageUrl);
+                            postMap.put("recipeTitle", recipeTitle);
+                            postMap.put("recipeDescription", recipeDescription);
+                            postMap.put("Username", username);
+
+                            getStoresRecipe.child(postID).setValue(postMap);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(ConfirmPost.this, "Something is wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 }
 
 
@@ -189,6 +215,7 @@ public class ConfirmPost extends AppCompatActivity {
 
 
     }
+
 
     private void setView()
     {
@@ -227,9 +254,6 @@ public class ConfirmPost extends AppCompatActivity {
         MimeTypeMap mime = MimeTypeMap.getSingleton().getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(mUri));
     }
-
-
-
 
 
 

@@ -16,9 +16,9 @@ import com.google.firebase.database.ValueEventListener;
 import org.parceler.Parcel;
 
 @Parcel
-public class Tag {
+public class Tag implements Comparable<Tag>{
     public String tagName;
-    private int tagID;
+    public int tagID;
     //private DatabaseReference dbRef;
 
     public Tag()
@@ -39,31 +39,24 @@ public class Tag {
         this.tagID = tagID;
         //this.tagName = getTagNameGivenID(tagID);
     }
-    public String getTagString()
+    public String getTagName()
     {
         return tagName;
     }
 
-    /*public String getTagNameGivenID(int ID)
-    {
-        dbRef = getDBRef();
+    public int getTagID() {
+        return tagID;
+    }
 
-        Query query = dbRef.orderByChild("id").equalTo(ID);
-        query.addListenerForSingleValueEvent(valueEventListener);
-        String tagString = query.get();
-        return tagString;
-    }*/
-    /*public int getTagIDGivenName(String tagString)
-    {
-        dbRef = getDBRef();
+    @Override
+    public int compareTo(Tag otherTag){
 
-    }*/
-    /*private DatabaseReference getDBRef()
-    {
-        FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
-        DatabaseReference storePoint = db.getReference("1jtXaB0m7-Hd5RcigSl1XRFoJCt5DNDMfgagA8tMOWxo/Sheet1");
-        return storePoint;
-    }*/
-
+        if (this.tagID < otherTag.getTagID())
+            return -1;
+        else if (this.tagID > otherTag.getTagID())
+            return 1;
+        else
+            return 0;
+    }
 
 }

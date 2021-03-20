@@ -7,13 +7,28 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.AttributeSet;
+import android.view.Menu;
+import android.view.MenuInflater;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.MenuItemCompat;
+
+import android.view.MenuItem;
 import android.view.SearchEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
+import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,29 +38,37 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 public class AddTags extends AppCompatActivity {
 
-
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("1jtXaB0m7-Hd5RcigSl1XRFoJCt5DNDMfgagA8tMOWxo").child("Sheet1");
+    FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
+    DatabaseReference reference = db.getReference().child("1jtXaB0m7-Hd5RcigSl1XRFoJCt5DNDMfgagA8tMOWxo").child("Sheet1");
 
     Button goToConfirmPage;
-    EditText recipeTagInput;
     SearchView searchBar;
-    ChipGroup tagSearchGroup;
     ChipGroup tagMainGroup;
 
     String recipeTitle;
     String recipeDescription;
     Uri imageUri;
-    ArrayList<Tag> tags;
+    ArrayList<Tag> tags = new ArrayList<>();
     ArrayList<Ingredient> listOfIngredients;
     ArrayList<String> directions;
 
-    // temporary string to capture one single tag (until tag page is done)
-    String tagText;
+    HashSet<String> selectedTags = new HashSet<>();
+
+    ArrayList<String> stringArrayList = new ArrayList<>();
+    ArrayAdapter<String> adapter;
+    ListView listView;
+
+    HashMap<String,Integer> tagIDMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +76,47 @@ public class AddTags extends AppCompatActivity {
         setContentView(R.layout.activity_add_tags);
 
         unwrapBundle();
-        tags = new ArrayList<>();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-        recipeTagInput = (EditText) findViewById(R.id.recipeTagInput);
+        populateTagsSearchList();
+        listView = (ListView) findViewById(R.id.listView);
         goToConfirmPage = (Button) findViewById(R.id.goToConfirmPost);
+
+
+        //adapter = new ArrayAdapter<>(AddTags.this, android.R.layout.simple_list_item_1, stringArrayList);
+        adapter = new ArrayAdapter<>(AddTags.this, android.R.layout.simple_list_item_1, stringArrayList);
+
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String tagSelected = adapter.getItem(position);
+                if (!selectedTags.contains(tagSelected))
+                {
+                    Toast.makeText(getApplicationContext(), tagSelected + " added", Toast.LENGTH_SHORT).show();
+                    Chip chip = new Chip(AddTags.this);
+                    chip.setText(tagSelected);
+                    chip.setCloseIconVisible(true);
+
+                    chip.setOnCloseIconClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            selectedTags.remove(tagSelected);
+                            tagMainGroup.removeView(chip);
+                        }
+                    });
+
+                    tagMainGroup.addView(chip);
+                    selectedTags.add(tagSelected);
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Tag already selected", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
         searchBar = (SearchView) findViewById(R.id.searchView2);
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -66,16 +126,13 @@ public class AddTags extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //hTags(newText);
+                adapter.getFilter().filter(newText);
                 return false;
             }
         });
 
 
-
-        tagSearchGroup = (ChipGroup) findViewById(R.id.chipGroup);
         tagMainGroup = (ChipGroup) findViewById(R.id.chipGroup2);
-
 
         listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredients"));
         directions = Parcels.unwrap(getIntent().getParcelableExtra("directions"));
@@ -84,20 +141,37 @@ public class AddTags extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-                if (getTagText())
+                if(selectedTags.size() < 1)
                 {
-                    tags.add(new Tag(tagText));
+                    Snackbar mySnackbar = Snackbar.make(findViewById(android.R.id.content), "Please provide at least one tag", Snackbar.LENGTH_LONG);
+                    mySnackbar.show();
+                    return;
 
-                    Intent createPost = new Intent(AddTags.this,ConfirmPost.class);
-
-                    createPost.putExtras(buildBundle());
-                    startActivity(createPost);
                 }
+                if(selectedTags.size() > 10)
+                {
+                    Snackbar mySnackbar = Snackbar.make(findViewById(android.R.id.content), "Maximum 10 tags permitted", Snackbar.LENGTH_LONG);
+                    mySnackbar.show();
+                    return;
+                }
+
+                for (String tagString : selectedTags)
+                    tags.add(new Tag(tagString,tagIDMap.get(tagString)));
+
+                Collections.sort(tags);
+
+
+
+                Intent createPost = new Intent(AddTags.this,ConfirmPost.class);
+
+                createPost.putExtras(buildBundle());
+                startActivity(createPost);
             }
         });
 
+
     }
+
     private Bundle buildBundle()
     {
         Bundle bundle = new Bundle();
@@ -120,66 +194,27 @@ public class AddTags extends AppCompatActivity {
         directions = Parcels.unwrap(getIntent().getParcelableExtra("directions"));
     }
 
-    // populates the main tags chip group with pre selected tags
-    private void populateDefaultTags()
+    void populateTagsSearchList()
     {
-        // create list of tag ID's
-        ArrayList<Integer> defaultMainGroup = new ArrayList<>(Arrays.asList(7,11,17,24,32,81,84,98,143,172));
-
-        /*for (Integer i : defaultMainGroup)
-        {
-            tagMainGroup.addView();
-        }*/
-    }
-
-    // Allows user to search tags in database, which then updates tagSearchGroup to display most like the search
-    /*private void searchTags(String searchText)
-    {
-        String searchInputToLower = searchText.toLowerCase();
-        String searchInputTOUpper = searchText.toUpperCase();
-
-
-        if(searchText != null && searchText.length()>0){
-            char[] letters=searchText.toCharArray();
-            String firstLetter = String.valueOf(letters[0]).toUpperCase();
-            String remainingLetters = searchText.substring(1);
-            searchText=firstLetter+remainingLetters;
-        }
-        Query firebaseSearchQuery = reference.child("id").orderByChild("TagString").startAt(searchText)
-                .endAt(searchText + "uf8ff");
-
-        firebaseSearchQuery.addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //DataCache.clear();
-                tagSearchGroup.de();
-                if (dataSnapshot.exists() && dataSnapshot.getChildrenCount() > 0) {
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        //Now get Scientist Objects and populate our arraylist.
-                        Scientist scientist = ds.getValue(Scientist.class);
-                        scientist.setKey(ds.getKey());
-                        //DataCache.add(scientist);
-                    }
-                    adapter.notifyDataSetChanged();
-                } else {
-                    Utils.show(a, "No item found");
-                }
-            }}
-    }
-    private void clearChipGroup(ChipGroup G)
-    {
-        for (int i = 0; i < G.)
-    }*/
-    private boolean getTagText()
-    {
-        tagText = recipeTagInput.getText().toString();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-        // Check for bad input
-        if (tagText.isEmpty()) {
-            recipeTagInput.setError("At least one tag required");
-            recipeTagInput.requestFocus();
-            return false;
-        }
-        return true;
+                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    String tagName = dataSnapshot1.child("TagString").getValue().toString();
+                    int tagID = ((Long) dataSnapshot1.child("id").getValue()).intValue();
+
+                    tagIDMap.put(tagName,tagID);
+                    stringArrayList.add(tagName);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(AddTags.this, "Something is wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
+
 }

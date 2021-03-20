@@ -93,7 +93,6 @@ public class ExploreActivity extends AppCompatActivity {
 
 
 
-
         retrievesPostFromDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -102,14 +101,13 @@ public class ExploreActivity extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
                     String recipeTitle = dataSnapshot1.child("recipeTitle").getValue().toString();
-                    String recipeUrl = dataSnapshot1.child("recipeURL").getValue().toString();
+                    String recipeUrl = dataSnapshot1.child("recipeUrl").getValue().toString();
 
                     Post post = new Post(recipeUrl,recipeTitle);
 
                     listOfPosts.add(post);
 
                 }
-
 
                 postAdapter = new PostAdapter(ExploreActivity.this,listOfPosts);
                 recyclerViewListOfPosts.setAdapter(postAdapter);

@@ -48,6 +48,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import org.parceler.Parcels;
 
@@ -119,7 +120,7 @@ public class CreatePost extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                CropImage.activity().start(CreatePost.this);
+                CropImage.activity().setAspectRatio(1,1).start(CreatePost.this);
             }
         });
         //CropImage.activity().start(CreatePost.this);
