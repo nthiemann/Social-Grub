@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
@@ -14,14 +16,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -36,12 +43,20 @@ public class ProfileActivity extends AppCompatActivity {
     RecipeAdapter recipeAdapter;
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
     DatabaseReference retrievesPostFromDatabaseForUser = db.getReference("Users");
+    DatabaseReference dbUsername = db.getReference("Users");
+    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("users/");
 
     ArrayList<Recipe> userRecipeList;
 
     Button editProfileBtn;
     ImageButton settingsProfileBtn;
     String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    TextView pUsername;
+    TextView pName;
+    TextView pLastName;
+    TextView pDescription;
+    ImageView pPicture;
+    StorageReference photoReference= storageReference.child(userID).child("profile.jpg");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +86,78 @@ public class ProfileActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        pUsername = (TextView) findViewById(R.id.profileUsername);
+        pName = (TextView) findViewById(R.id.profileName);
+        pLastName = (TextView) findViewById(R.id.profileLastName);
+        pDescription = (TextView) findViewById(R.id.profileDescription);
+        pPicture = (ImageView) findViewById(R.id.profilePicture);
+
+        final long ONE_MEGABYTE = 1024 * 1024;
+        photoReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                pPicture.setImageBitmap(bmp);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(getApplicationContext(), "No Such file or Path found!!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        dbUsername.child(userID).child("Username").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String n = dataSnapshot.getValue().toString();
+                pUsername.setText(n);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        dbUsername.child(userID).child("First name").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String n = dataSnapshot.getValue().toString();
+                pName.setText(n);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        dbUsername.child(userID).child("Last name").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String n = dataSnapshot.getValue().toString();
+                pLastName.setText(n);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        dbUsername.child(userID).child("Description").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String n = dataSnapshot.getValue().toString();
+                pDescription.setText(n);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         retrievesPostFromDatabaseForUser.child(userID).child("Recipes").addValueEventListener(new ValueEventListener() {
             @Override
@@ -79,8 +166,6 @@ public class ProfileActivity extends AppCompatActivity {
                 ArrayList<String> directions = null;
                 // ArrayList<Ingredient> ingredients;
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-
-
 
                     String recipeTitle = dataSnapshot1.child("recipeTitle").getValue().toString();
                     String description = dataSnapshot1.child("recipeDescription").getValue().toString();
@@ -96,10 +181,6 @@ public class ProfileActivity extends AppCompatActivity {
                         }
                     }
 
-
-
-
-
                     Recipe recipe = new Recipe(recipeURL, recipeTitle,description);
                     userRecipeList.add(recipe);
 
@@ -110,16 +191,11 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
 
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(ProfileActivity.this, "There are no posts under your name", Toast.LENGTH_SHORT).show();
             }
 
         });
-
-
-
-
     }
 }

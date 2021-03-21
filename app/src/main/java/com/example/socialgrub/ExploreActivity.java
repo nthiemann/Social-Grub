@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,7 +32,7 @@ public class ExploreActivity extends AppCompatActivity {
     ImageButton createPostButton;
     ImageButton goToProfileButton;
     ImageButton searchButton;
-
+    ProgressBar spinner;
 
     //String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -39,8 +41,10 @@ public class ExploreActivity extends AppCompatActivity {
     PostAdapter postAdapter;
 
 
-    ArrayList<Post> listOfPosts;
+    ArrayList<Post> listOfPosts = new ArrayList<>();
+    ArrayList<Post> displayedPosts = new ArrayList<>();;
 
+    final int SEARCH_REQUEST_CODE = 42;
 
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
     DatabaseReference retrievesPostFromDatabase = db.getReference("Image Dish");
@@ -50,7 +54,7 @@ public class ExploreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
 
-
+        spinner = (ProgressBar)findViewById(R.id.progressBar2);
 
         settingButton = (ImageButton) findViewById(R.id.settings_button);
         settingButton.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +87,9 @@ public class ExploreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToSearch = new Intent(ExploreActivity.this, Search.class);
-                startActivity(goToSearch);
+                //startActivity(goToSearch);
+                startActivityForResult(goToSearch, SEARCH_REQUEST_CODE);
+
             }
         });
 
@@ -91,26 +97,33 @@ public class ExploreActivity extends AppCompatActivity {
         recyclerViewListOfPosts.setLayoutManager(new LinearLayoutManager(this));
 
 
-
-
         retrievesPostFromDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listOfPosts = new ArrayList<Post>();
 
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
+
+                    String recipeID = dataSnapshot1.getKey();
                     String recipeTitle = dataSnapshot1.child("recipeTitle").getValue().toString();
                     String recipeUrl = dataSnapshot1.child("recipeUrl").getValue().toString();
-
-                    Post post = new Post(recipeUrl,recipeTitle);
+                    String username = dataSnapshot1.child("Username").getValue().toString();
+                    ArrayList<String> recipeTags = new ArrayList<>();
+                    for (DataSnapshot thisId : dataSnapshot1.child("recipeTags").getChildren())
+                    {
+                        recipeTags.add((String) thisId.child("tagName").getValue());
+                    }
+                    Post post = new Post(recipeID, recipeTitle, recipeUrl, recipeTags, username);
 
                     listOfPosts.add(post);
+                    displayedPosts = listOfPosts;
 
                 }
 
-                postAdapter = new PostAdapter(ExploreActivity.this,listOfPosts);
+                postAdapter = new PostAdapter(ExploreActivity.this,displayedPosts);
                 recyclerViewListOfPosts.setAdapter(postAdapter);
+                spinner.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -121,6 +134,36 @@ public class ExploreActivity extends AppCompatActivity {
 
     }
 
+    // This receives the filtered list from search activity
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (requestCode == SEARCH_REQUEST_CODE &&
+                resultCode == RESULT_OK) {
 
+            ArrayList<Post> filteredPosts = intent.getParcelableArrayListExtra("filteredPosts");
+
+            //Toast.makeText(ExploreActivity.this, "filtered post size " + filteredPosts.size(), Toast.LENGTH_SHORT).show();
+            setDisplayedPosts(filteredPosts);
+        }
+    }
+
+    private void setDisplayedPosts(ArrayList<Post> postList)
+    {
+
+        if (postList.size() > 1)
+        {
+            displayedPosts = postList;
+
+            postAdapter = new PostAdapter(ExploreActivity.this,displayedPosts);
+            recyclerViewListOfPosts.setAdapter(postAdapter);
+        }
+        else
+        {
+            Snackbar mySnackbar = Snackbar.make(findViewById(android.R.id.content), "Search returned no results", Snackbar.LENGTH_LONG);
+            mySnackbar.show();
+        }
+
+    }
 
 }

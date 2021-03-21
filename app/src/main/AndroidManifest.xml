@@ -16,7 +16,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialGrub">
-        <activity android:name=".Search"></activity>
+        <activity android:name=".FinalConfirmPost"></activity>
+        <activity android:name=".AdditionalIngredients" />
+        <activity android:name=".AdditionalDirections" />
+        <activity android:name=".Search"
+            />
+
         <activity android:name=".ConfirmPost" />
         <activity android:name=".AddIngredients" />
         <activity android:name=".EditProfileActivity" />
@@ -25,7 +30,12 @@
         <activity android:name=".CreatePost" />
         <activity android:name=".AddDirections" />
         <activity android:name=".AddTags" />
-        <activity android:name=".ExploreActivity" />
+        <activity android:name=".ExploreActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".RegisterActivity" />

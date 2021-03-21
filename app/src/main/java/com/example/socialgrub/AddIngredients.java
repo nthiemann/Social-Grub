@@ -152,9 +152,13 @@ public class AddIngredients extends AppCompatActivity {
         editIngredientName2.addTextChangedListener(addBothIngredientsTextWatcher);
         editValueOfIngredient2.addTextChangedListener(addBothIngredientsTextWatcher);
 
+
+
+
+
+
         editAdditionalIngredientName = findViewById(R.id.editNameOfAdditionalIngredient);
         editValueOfAdditionalIngredient = findViewById(R.id.editTextValueOfAdditionalIngredient);
-
         Spinner additionalIngredient_unit = (Spinner) findViewById(R.id.measurementUnitsAdditional);
         additionalIngredient_unit.setAdapter(measurementUnitAdapter);
 
@@ -210,6 +214,10 @@ public class AddIngredients extends AppCompatActivity {
             }
         });
     }
+
+
+
+
     private Bundle buildBundle()
     {
         Bundle bundle = new Bundle();
@@ -227,6 +235,12 @@ public class AddIngredients extends AppCompatActivity {
         recipeDescription = Parcels.unwrap(getIntent().getParcelableExtra("description"));
         imageUri = Parcels.unwrap(getIntent().getParcelableExtra("imageURI"));
     }
+
+
+
+
+
+
     private void addMeasureMentUnits()
     {
         measurementUnits = new ArrayList<>();

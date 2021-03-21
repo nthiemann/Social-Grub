@@ -127,6 +127,11 @@ public class AddDirections extends AppCompatActivity {
         listOfIngredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredients"));
     }
 
+
+
+
+
+
     private TextWatcher addBothDirectionsTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -146,6 +151,11 @@ public class AddDirections extends AppCompatActivity {
 
         }
     };
+
+
+
+
+
 
     private TextWatcher addAdditionalDirectionTextWatcher = new TextWatcher() {
         @Override

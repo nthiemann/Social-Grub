@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,9 +38,10 @@ public class DirectionsAdapter extends RecyclerView.Adapter<DirectionsAdapter.Di
     @Override
     public void onBindViewHolder(@NonNull DirectionsAdapter.DirectionsViewHolder holder, int position) {
 
-
+        int indexOfDirection = position + 1;
+        String convertNumberToString = indexOfDirection + "";
         holder.directionNth.setText(listOfDirectionsFromConfirmPage.get(position));
-//        holder.directionNthIndex.setText(position + 1);
+        holder.directionNthIndex.setText(convertNumberToString);
 
 
 
@@ -54,7 +56,7 @@ public class DirectionsAdapter extends RecyclerView.Adapter<DirectionsAdapter.Di
 
     class DirectionsViewHolder extends RecyclerView.ViewHolder {
 
-        TextView directionNth;
+        EditText directionNth;
         TextView directionNthIndex;
 
 
