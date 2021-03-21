@@ -192,9 +192,10 @@ public class Search extends AppCompatActivity {
     private void search()
     {
 
-        String recipeNameToSearch = recipeNameField.getText().toString().trim();
+        String recipeNameToSearch = recipeNameField.getText().toString().toLowerCase().trim();
         String userNameToSearch = userField.getText().toString().trim();
 
+        //Toast.makeText(Search.this, "recipeNameToSearch " + recipeNameToSearch + " userField " + userNameToSearchw, Toast.LENGTH_LONG).show();
         // Loop through all recipes in the Image Dish. If they meet all criteria, add them to the list
         recipeRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -202,8 +203,8 @@ public class Search extends AppCompatActivity {
 
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
-                    String recipeName = dataSnapshot1.child("recipeTitle").getValue().toString();
-                    String userName = dataSnapshot1.child("Username").getValue().toString();
+                    String recipeName = dataSnapshot1.child("recipeTitle").getValue().toString().toLowerCase().toLowerCase().trim();
+                    String userName = dataSnapshot1.child("Username").getValue().toString().toLowerCase().toLowerCase().trim();
 
 
                     ArrayList<String> recipeTagsList = new ArrayList<>();

@@ -151,7 +151,7 @@ public class ExploreActivity extends AppCompatActivity {
     private void setDisplayedPosts(ArrayList<Post> postList)
     {
 
-        if (postList.size() > 1)
+        if (postList.size() > 0)
         {
             displayedPosts = postList;
 
