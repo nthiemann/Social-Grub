@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
@@ -17,12 +19,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -38,6 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
     DatabaseReference retrievesPostFromDatabaseForUser = db.getReference("Users");
     DatabaseReference dbUsername = db.getReference("Users");
+    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("users/");
 
     ArrayList<Recipe> userRecipeList;
 
@@ -49,6 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView pLastName;
     TextView pDescription;
     ImageView pPicture;
+    StorageReference photoReference= storageReference.child(userID).child("profile.jpg");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +90,22 @@ public class ProfileActivity extends AppCompatActivity {
         pName = (TextView) findViewById(R.id.profileName);
         pLastName = (TextView) findViewById(R.id.profileLastName);
         pDescription = (TextView) findViewById(R.id.profileDescription);
+        pPicture = (ImageView) findViewById(R.id.profilePicture);
+
+        final long ONE_MEGABYTE = 1024 * 1024;
+        photoReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                pPicture.setImageBitmap(bmp);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(getApplicationContext(), "No Such file or Path found!!", Toast.LENGTH_LONG).show();
+            }
+        });
 
         dbUsername.child(userID).child("Username").addValueEventListener(new ValueEventListener() {
             @Override
