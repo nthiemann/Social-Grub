@@ -6,6 +6,9 @@
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
     app:cardBackgroundColor="@color/cardview_light_background">
 
     <LinearLayout
@@ -65,18 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center" >
-
-            <Button
-                android:id="@+id/profileRecipeViewPostButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:insetLeft="0dp"
-                android:text=" View Post" />
-
-        </LinearLayout>
+            android:gravity="center" />
 
     </LinearLayout>
 

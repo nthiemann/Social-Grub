@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,12 +37,18 @@ public class ProfileActivity extends AppCompatActivity {
     RecipeAdapter recipeAdapter;
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
     DatabaseReference retrievesPostFromDatabaseForUser = db.getReference("Users");
+    DatabaseReference dbUsername = db.getReference("Users");
 
     ArrayList<Recipe> userRecipeList;
 
     Button editProfileBtn;
     ImageButton settingsProfileBtn;
     String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    TextView pUsername;
+    TextView pName;
+    TextView pLastName;
+    TextView pDescription;
+    ImageView pPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +78,62 @@ public class ProfileActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        pUsername = (TextView) findViewById(R.id.profileUsername);
+        pName = (TextView) findViewById(R.id.profileName);
+        pLastName = (TextView) findViewById(R.id.profileLastName);
+        pDescription = (TextView) findViewById(R.id.profileDescription);
+
+        dbUsername.child(userID).child("Username").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String n = dataSnapshot.getValue().toString();
+                pUsername.setText(n);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        dbUsername.child(userID).child("First name").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String n = dataSnapshot.getValue().toString();
+                pName.setText(n);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        dbUsername.child(userID).child("Last name").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String n = dataSnapshot.getValue().toString();
+                pLastName.setText(n);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        dbUsername.child(userID).child("Description").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String n = dataSnapshot.getValue().toString();
+                pDescription.setText(n);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         retrievesPostFromDatabaseForUser.child(userID).child("Recipes").addValueEventListener(new ValueEventListener() {
             @Override
@@ -79,8 +142,6 @@ public class ProfileActivity extends AppCompatActivity {
                 ArrayList<String> directions = null;
                 // ArrayList<Ingredient> ingredients;
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-
-
 
                     String recipeTitle = dataSnapshot1.child("recipeTitle").getValue().toString();
                     String description = dataSnapshot1.child("recipeDescription").getValue().toString();
@@ -96,10 +157,6 @@ public class ProfileActivity extends AppCompatActivity {
                         }
                     }
 
-
-
-
-
                     Recipe recipe = new Recipe(recipeURL, recipeTitle,description);
                     userRecipeList.add(recipe);
 
@@ -110,16 +167,11 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
 
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(ProfileActivity.this, "There are no posts under your name", Toast.LENGTH_SHORT).show();
             }
 
         });
-
-
-
-
     }
 }

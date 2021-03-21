@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,6 +24,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
 
     Context context;
     ArrayList<Recipe> profilePostList;
+
+    PostAdapter postAdapter;
+    ArrayList<Post> postList;
+
+    int tempPos;
 
     public RecipeAdapter(Context context, ArrayList<Recipe> profilePostList) {
         this.context = context;
@@ -73,6 +80,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
         holder.postTitle.setText(profilePostList.get(position).getRecipeTitle());
         Picasso.get().load(profilePostList.get(position).getRecipeUrl()).into(holder.postImage);
 
+//        holder.imageName.setText(mImageNames.get(position));
+
+//        holder.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, ViewPostActivity.class);
+//                intent.putExtra("image_url", profilePostList.get(position).getRecipeUrl());
+//                intent.putExtra("title", profilePostList.get(position).getRecipeTitle());
+//                context.startActivity(intent);
+//            }
+//        });
+        tempPos = position;
     }
 
     @Override
@@ -80,11 +99,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
         return profilePostList.size();
     }
 
-    class Holder extends RecyclerView.ViewHolder{
+    class Holder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView postImage;
         TextView tagOne, tagTwo, tagThree, postTitle;
-        Button viewPostButton;
 
         public Holder(@NonNull View itemView){
             super(itemView);
@@ -95,10 +113,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
 //            tagTwo = itemView.findViewById(R.id.profileRecipeTag2);
 //            tagThree = itemView.findViewById(R.id.profileRecipeTag3);
 //            postTitle = itemView.findViewById(R.id.profileRecipeTitle);
-  //            viewPostButton = itemView.findViewById(R.id.profileRecipeViewPostButton);
+        }
 
-
-
+        @Override
+        public void onClick(View v) {
+            final Intent intent;
+            intent =  new Intent(context, SettingsActivity.class);
+            context.startActivity(intent);
+//            Intent intent = new Intent(context, ViewPostActivity.class);
+//            intent.putExtra("image_url", profilePostList.get(tempPos).getRecipeUrl());
+//            intent.putExtra("title", profilePostList.get(tempPos).getRecipeTitle());
+//            context.startActivity(intent);
         }
     }
 }
