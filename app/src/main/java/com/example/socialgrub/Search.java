@@ -6,6 +6,7 @@ import androidx.core.view.MenuItemCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -44,18 +46,15 @@ public class Search extends AppCompatActivity {
     EditText userField;
     SearchView tagSearch;
     ListView listView;
-
-    // Searchable lists
-    ArrayList<String> recipeNameList = new ArrayList<>();
-    ArrayList<String> userList = new ArrayList<>();
+    ProgressBar progressSpinner;
 
     // Tag Search
-    ArrayList<String> tagList = new ArrayList<>();
-    HashSet<String> tagsSelected = new HashSet<>();
+    ArrayList<String> tagList;
+    HashSet<String> tagsSelected;
 
 
     // A list of posts that meet criteria (by post ID)
-    ArrayList<String> listOfPosts;
+    ArrayList<Post> listOfPosts;
 
 
     @Override
@@ -70,31 +69,39 @@ public class Search extends AppCompatActivity {
         recipeNameField = findViewById(R.id.editTextRecipeName);
         userField = findViewById(R.id.editTextPersonName);
         tagSearch = findViewById(R.id.searchView2);
+        progressSpinner = findViewById(R.id.progressBar);
+
+        tagList = new ArrayList<>();
+        tagsSelected = new HashSet<>();
+        listOfPosts = new ArrayList<>();
 
         populateTagsSearchList();
-
-        /*stringArrayList.add("Vegan");
-        stringArrayList.add("Vegitarian");
-        stringArrayList.add("Gluten-free");
-        stringArrayList.add("Kosher");
-        stringArrayList.add("Entrees");
-        stringArrayList.add("Appetizers");
-        stringArrayList.add("Full-course Dish");
-        stringArrayList.add("Soups");
-        stringArrayList.add("Salads");
-        stringArrayList.add("Desserts");*/
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                progressSpinner.setVisibility(View.VISIBLE);
                 search();
-                Intent returnToExplore = new Intent(Search.this,ExploreActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("filteredPosts", Parcels.wrap(listOfPosts));
-                returnToExplore.putExtras(bundle);
+                new CountDownTimer(2000, 1000) {
 
-                startActivity(returnToExplore);
+                    public void onTick(long millisUntilFinished) {
+                    }
+
+                    public void onFinish() {
+                        //Toast.makeText(Search.this, "filtered post size " + listOfPosts.size(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent();
+
+
+                        intent.putExtra("filteredPosts", listOfPosts);
+                        setResult(RESULT_OK, intent);
+                        progressSpinner.setVisibility(View.GONE);
+
+                        finish();
+
+                    }
+                }.start();
+
             }
         });
 
@@ -113,15 +120,23 @@ public class Search extends AppCompatActivity {
         });
 
 
-        adapter = new ArrayAdapter<>(Search.this, android.R.layout.simple_list_item_1,
-                tagList);
+        adapter = new ArrayAdapter<>(Search.this, android.R.layout.simple_list_item_1, tagList);
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), adapter.getItem(position), Toast.LENGTH_SHORT).show();
-                tagsSelected.add(adapter.getItem(position));
+                String selected = adapter.getItem(position);
+                if (tagsSelected.contains(selected))
+                {
+                    tagsSelected.remove(selected);
+                    Toast.makeText(getApplicationContext(), selected + " removed", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    tagsSelected.add(selected);
+                    Toast.makeText(getApplicationContext(), selected + " selected", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -189,18 +204,27 @@ public class Search extends AppCompatActivity {
 
                     String recipeName = dataSnapshot1.child("recipeTitle").getValue().toString();
                     String userName = dataSnapshot1.child("Username").getValue().toString();
+
+
                     ArrayList<String> recipeTagsList = new ArrayList<>();
                     for (DataSnapshot thisId : dataSnapshot1.child("recipeTags").getChildren())
                     {
-                        recipeTagsList.add((String) thisId.child("tagName").getValue());
+                        recipeTagsList.add(thisId.child("tagName").getValue().toString());
                     }
 
+                    boolean recipeNameMatch =  ((recipeNameToSearch.length() < 1) || (recipeName.contains(recipeNameToSearch)));
+                    boolean userNameMatch = ((userNameToSearch.length() < 1) || (userName.contains(userNameToSearch)));
+                    boolean tagsMatch = ((tagsSelected.size() < 1) || recipeTagsList.containsAll(tagsSelected));
+                    //Toast.makeText(Search.this, "recipeNameMatch " + recipeNameMatch + " userName match " + userNameMatch + " tagsMatch " + tagsMatch, Toast.LENGTH_LONG).show();
 
-                    boolean recipeNameMatch =  (!(recipeNameToSearch.length() > 0) || (recipeNameToSearch.equals(recipeName)));
-                    boolean userNameMatch = (!(userNameToSearch.length() > 0) || (userNameToSearch.equals(userName)));
-                    boolean tagsMatch = (!(tagsSelected.size() > 0) || recipeTagsList.containsAll(tagsSelected));
                     if (recipeNameMatch && userNameMatch && tagsMatch)
-                        listOfPosts.add(dataSnapshot1.getKey());
+                    {
+                        String recipeUrl = dataSnapshot1.child("recipeUrl").getValue().toString();
+
+                        Post post = new Post(dataSnapshot1.getKey(), recipeName, recipeUrl, recipeTagsList, userName);
+
+                        listOfPosts.add(post);
+                    }
                 }
             }
 
@@ -211,5 +235,6 @@ public class Search extends AppCompatActivity {
         });
 
     }
+
 
 }
