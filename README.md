@@ -125,7 +125,7 @@ Users will be able to post their recipes and search recipe results. This will al
 # Sprint 7
 * [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
 * Burndown Chart: 
-* ![image]
+* ![Sprint7](https://user-images.githubusercontent.com/62866287/111926033-8d3e0b80-8a81-11eb-9e81-95bd19054105.png)
 * Velocity Chart: 
 * ![Velocity Chart (7)]
 * [Manual Test](https://github.com/Jixster07/Social-Grub/blob/master/week6ManualTest.md)
