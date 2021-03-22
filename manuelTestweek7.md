@@ -31,3 +31,36 @@
 | 9. | The user will tap the "Next" button | The Ingrdient/Directions Confirmation Page will appear with the chosen strings for steps 4 and 5|
 | 10. | The user will tap the "Continue" button | The Confirm Post page will appear with the title and description and image provided in step 4.|
 | 11. | The user will tap the "Upload" button | The user will be directed to the Explore page. The Toast will display: "Post Uploaded successfully." at the bottom. Scrolling down to the bottom, the post with the same title and description should appear|
+
+
+## [U017] As a user I would like the ability to update my ingredients and directions before I upload them to my feed.
+
+|No|Steps to Reproduce| Expected Behavior |
+| --- | --- | --- |
+| 1. | The login of the app will ask for the user login and password to have to the account. | "Username" and "Password" text should be displayed before the related textbox.
+Login in button should have the caption "Login". "Forgot password and registration link should be available as links.| 
+| 2. | The user will enter their credentials. | If the credentials are correct, then the application will have a loading screen. |
+| 3. | The user will then see the explore page, the user should click on the middle icon button. | The button will take them to a new screen called Profile page.|
+| 4. | The user will then click on the plus button to the bottom right of the screen | The user will be taken to create a post, which will expect the user to enter recipe title, recipe description, and recipe image before proceeding.|
+| 5. | The user will then enter a title| The user entered items will appear inside the textbox. |
+| 6. | The user will then enter the description | The user entered items will appear inside the textboxs. |
+| 7. | The user will click on the pick an image button | The option of taking a picture or image appears. |
+| 8. | The user clicks the continue button | The user will then be taken to add ingredients page. |
+| 9. | The user will enter ingredient 1| The user entered items will appear inside the textbox. |
+| 10. | The user will enter ingredient 2| The user entered items will appear inside the textbox. |
+| 11. | The user will click add both items | A button will light up indicating to click it to continue |
+| 12. | The user will click the button and proceed. | The button will take them to add directions page. |
+| 13. | The user will enter directions 1| The user entered items will appear inside the textbox. |
+| 14. | The user will enter directions 2| The user entered items will appear inside the textbox. |
+| 15. | The user will click add both items | A button will light up indicating to click it to continue |
+| 16. | The user will click the continue button | The user will be taken to the add tags page |
+| 17. | The user will enter "Asian" inside the textbox search and select that item | The user selection will appear at the bottom.|
+| 18. | The user will click the continue button | The user will be taken to confirm post and it will display the list of ingredients and directions selected, if the user would like to add additional items then the user clicks on those buttons.|
+| 19. | The user forgot to add a direction, so they click the add more button under directions | The user will be directed to a page to add more directions a textbox will be provided. 
+| 20. | The user enters their additional direction | A button lights up and a toast lets the user know an item has been added.|
+| 21. | Once the user is happy with all entries they select the continue | A new list with the updated information appears. 
+
+
+
+
+
