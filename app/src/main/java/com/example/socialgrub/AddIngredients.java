@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.parceler.Parcels;
 import org.w3c.dom.Text;
@@ -88,9 +89,35 @@ public class AddIngredients extends AppCompatActivity {
                 ingredient2_name = editIngredientName2.getText().toString();
                 ingredient2_quantity = Double.parseDouble(editValueOfIngredient2.getText().toString());
 
+                String measurementValue1 = "Measurement";
+                String measurementValue2 = "Measurement";
 
-                listOfIngredients.add(new Ingredient(ingredient1_name,ingredient1_quantity,"Measurement"));
-                listOfIngredients.add(new Ingredient(ingredient2_name,ingredient2_quantity,"Measurement"));
+                if(ingredient1_unit.getSelectedItem() == null) {
+
+                    measurementValue1 = "Measurement Not Provided";
+                }
+
+                else {
+
+                    measurementValue1 = ingredient1_unit.getSelectedItem().toString();
+                }
+
+               if(ingredient2_unit.getSelectedItem() == null) {
+
+                   measurementValue2 = "Measurement Not Provided";
+               }
+
+               else {
+
+                   measurementValue2 = ingredient2_unit.getSelectedItem().toString();
+               }
+
+
+
+                listOfIngredients.add(new Ingredient(ingredient1_name,ingredient1_quantity,measurementValue1));
+                listOfIngredients.add(new Ingredient(ingredient2_name,ingredient2_quantity,measurementValue2));
+
+                Toast.makeText(AddIngredients.this, "Ingredients added to list!", Toast.LENGTH_SHORT).show();
 
 
                 editIngredientName1.getText().clear();
@@ -170,9 +197,26 @@ public class AddIngredients extends AppCompatActivity {
                 additionalIngredientName = editAdditionalIngredientName.getText().toString();
                 additionalIngredientQuantity = Double.parseDouble(editValueOfAdditionalIngredient.getText().toString());
 
+                String measurementValueAdditional;
 
-                listOfIngredients.add(new Ingredient(additionalIngredientName,additionalIngredientQuantity,"Measurement"));
+                if(additionalIngredient_unit.getSelectedItem() == null) {
 
+                    measurementValueAdditional = "Measurement Not Provided";
+
+                }
+
+                else {
+
+                    measurementValueAdditional = additionalIngredient_unit.getSelectedItem().toString();
+                }
+
+
+
+                listOfIngredients.add(new Ingredient(additionalIngredientName,additionalIngredientQuantity,measurementValueAdditional));
+
+
+
+                Toast.makeText(AddIngredients.this, "Ingredient added to list!", Toast.LENGTH_SHORT).show();
 
                 editAdditionalIngredientName.getText().clear();
                 editValueOfAdditionalIngredient.getText().clear();
@@ -279,6 +323,10 @@ public class AddIngredients extends AppCompatActivity {
 
         }
     };
+
+
+
+
 
     private TextWatcher addAdditionalIngredientTextWatcher = new TextWatcher() {
         @Override

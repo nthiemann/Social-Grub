@@ -123,7 +123,7 @@ public class CreatePost extends AppCompatActivity {
                 CropImage.activity().setAspectRatio(1,1).start(CreatePost.this);
             }
         });
-        //CropImage.activity().start(CreatePost.this);
+
     }
 
     private Bundle buildBundle()
@@ -182,8 +182,8 @@ public class CreatePost extends AppCompatActivity {
 
         }
         else {
-            Toast.makeText(this, "Try again!", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(CreatePost.this , ExploreActivity.class));
+            Toast.makeText(this, "No image was selected", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(CreatePost.this , CreatePost.class));
             finish();
         }
     }

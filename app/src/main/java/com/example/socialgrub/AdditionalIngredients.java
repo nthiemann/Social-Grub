@@ -69,6 +69,7 @@ public class AdditionalIngredients extends AppCompatActivity {
         continueToConfirmPost.setEnabled(false);
 
         additionalIngredientUnit = (Spinner) findViewById(R.id.measurementUnitsAdditionalId);
+        additionalIngredientUnit.setAdapter(measurementUnitAdapter);
 
         addAdditionalIngredientButton = findViewById(R.id.addAdditionalIngredientButtonId);
         addAdditionalIngredientButton.setEnabled(false);
@@ -80,9 +81,24 @@ public class AdditionalIngredients extends AppCompatActivity {
                additionalIngredientString = editAdditionalIngredient.getText().toString();
                additionalIngredientQuantity = Double.parseDouble(editTextValueIngredient.getText().toString());
 
-               listOfIngredients.add(new Ingredient(additionalIngredientString,additionalIngredientQuantity,"Measurement"));
 
-                Toast.makeText(AdditionalIngredients.this, "Additional ingredients added to list!", Toast.LENGTH_SHORT).show();
+                String measurementValue1;
+
+
+                if(additionalIngredientUnit.getSelectedItem() == null) {
+
+                    measurementValue1 = "Measurement Not Provided";
+                }
+
+                else {
+
+                    measurementValue1 = additionalIngredientUnit.getSelectedItem().toString();
+                }
+
+
+
+               listOfIngredients.add(new Ingredient(additionalIngredientString,additionalIngredientQuantity,measurementValue1));
+                Toast.makeText(AdditionalIngredients.this, "Additional ingredient added to list!", Toast.LENGTH_SHORT).show();
                editAdditionalIngredient.getText().clear();
                editTextValueIngredient.getText().clear();
 
@@ -213,10 +229,5 @@ public class AdditionalIngredients extends AppCompatActivity {
 
         }
     };
-
-
-
-
-
 
 }
