@@ -132,12 +132,12 @@ Users will be able to post their recipes and search recipe results. This will al
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
 * [Automated Tests](https://github.com/Jixster07/Social-Grub/tree/master/app/src/androidTest/java/com/example/socialgrub)
-* [Product Demonstration]
+* [Product Demonstration](https://youtu.be/fstJTme7R34)
 
 
 ## Task Allocation
 * Kyle Karacadag - Added user information on the profile page and worked on making the posts clickable. 
 * Nicholas Thiemann - Completed Tags page. Completed Explore page Search. Wrote manual tests for both.
 * Ricardo Mangandi - Completed the page where the user can modify their directions and ingredients before they post. Collaborated on the tags page. 
-* Allec Pereira - 
+* Allec Pereira - Worked on the edit profile page activity, wrote automated tests for the profile activity, and recorded the demonstration video
 * Rudolph Garcia - Worked the post's U.I for the explore page, modified the design of the Log In Page, and contributed to the Search page
