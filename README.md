@@ -127,7 +127,7 @@ Users will be able to post their recipes and search recipe results. This will al
 * Burndown Chart: 
 * ![Sprint7](https://user-images.githubusercontent.com/62866287/111926033-8d3e0b80-8a81-11eb-9e81-95bd19054105.png)
 * Velocity Chart: 
-* ![Velocity Chart (7)]
+* ![Velocity Chart (7)](https://user-images.githubusercontent.com/63211233/111926224-59afb100-8a82-11eb-8c9b-8b74ea08d023.png)
 * [Manual Test](https://github.com/Jixster07/Social-Grub/blob/master/week6ManualTest.md)
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
