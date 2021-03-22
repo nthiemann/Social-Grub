@@ -140,4 +140,4 @@ Users will be able to post their recipes and search recipe results. This will al
 * Nicholas Thiemann - Completed Tags page. Completed Explore page Search. Wrote manual tests for both.
 * Ricardo Mangandi - Completed the page where the user can modify their directions and ingredients before they post. Collaborated on the tags page. 
 * Allec Pereira - 
-* Rudolph Garcia - 
+* Rudolph Garcia - Worked the post's U.I for the explore page, modified the design of the Log In Page, and contributed to the Search page
