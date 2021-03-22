@@ -138,6 +138,6 @@ Users will be able to post their recipes and search recipe results. This will al
 ## Task Allocation
 * Kyle Karacadag - Added user information on the profile page and worked on making the posts clickable. 
 * Nicholas Thiemann - Completed Tags page. Completed Explore page Search. Wrote manual tests for both.
-* Ricardo Mangandi - 
+* Ricardo Mangandi - Completed the page where the user can modify their directions and ingredients before they post. Collaborated on the tags page. 
 * Allec Pereira - 
 * Rudolph Garcia - 
