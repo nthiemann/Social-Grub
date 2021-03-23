@@ -40,12 +40,25 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     ArrayList<Post> listOfPosts;
     String postID;
 
+   // OnPostListener mOnPostListener;
 
 
-    public PostAdapter(Context context, ArrayList<Post> listOfPosts) {
+/*
+    public PostAdapter( Context context, ArrayList<Post> listOfPosts, OnPostListener onPostListener) {
 
         this.context = context;
         this.listOfPosts = listOfPosts;
+        this.mOnPostListener = onPostListener;
+        //this.postID = postID;
+    }
+    */
+
+    public PostAdapter( Context context, ArrayList<Post> listOfPosts) {
+
+        this.context = context;
+        this.listOfPosts = listOfPosts;
+       // this.mOnPostListener = onPostListener;
+        //this.postID = postID;
     }
 
 
@@ -56,72 +69,92 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
+      //  View view = LayoutInflater.from(context).inflate(R.layout.post_adapter,parent,false);
+
+        // return new PostViewHolder(view,mOnPostListener);
         return new PostViewHolder(LayoutInflater.from(context).inflate(R.layout.post_adapter,parent,false));
+
     }
+
+
+
+
+
+
 
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
 
 
 
+        // holder.recipeDescription.setText(post.getDescription());
+
 
         holder.recipeTitle.setText(listOfPosts.get(position).getRecipeTitle());
-       // holder.recipeDescription.setText(post.getDescription());
         Picasso.get().load(listOfPosts.get(position).getRecipeURL()).into(holder.imageToPost);
 
-        postID = listOfPosts.get(position).getPostID();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-    }
+                int indexOfClicked = holder.getAdapterPosition();
+
+                postID =  listOfPosts.get(indexOfClicked).getPostID();
+                Bundle bundle = new Bundle();
+
+                bundle.putParcelable("postID", Parcels.wrap(postID));
+
+                Intent goToViewIngredientDirections = new Intent(context.getApplicationContext(),DisplayIngredientAndDirections.class);
+                goToViewIngredientDirections.putExtras(bundle);
+                goToViewIngredientDirections.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.getApplicationContext().startActivity(goToViewIngredientDirections);
+
+
+
+            }
+        });
+
+        }
+
+
 
     @Override
     public int getItemCount() {
         return listOfPosts.size();
     }
 
+
+
+
     class PostViewHolder extends RecyclerView.ViewHolder {
 
 
         ImageView imageToPost;
         TextView recipeTitle;
-       // TextView recipeDescription;
-        //TextView username;
         Button toViewList;
+        // TextView recipeDescription;
+        //TextView username;
+
+
+
 
         public PostViewHolder(@NonNull View itemView) {
-            super(itemView);
 
+            super(itemView);
             imageToPost = itemView.findViewById(R.id.imagePostId);
             recipeTitle = itemView.findViewById(R.id.postTitleInList);
             //recipeDescription = itemView.findViewById(R.id.postDescriptionInList);
             //username = itemView.findViewById(R.id.usernameIdInList);
 
 
-            toViewList = itemView.findViewById(R.id.buttonToViewList);
-            toViewList.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-
-
-                    Bundle bundle = new Bundle();
-
-                    bundle.putParcelable("postID", Parcels.wrap(postID));
-
-                    Intent goToViewIngredientDirections = new Intent(context.getApplicationContext(),DisplayIngredientAndDirections.class);
-                    goToViewIngredientDirections.putExtras(bundle);
-                    goToViewIngredientDirections.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.getApplicationContext().startActivity(goToViewIngredientDirections);
-
-                }
-            });
-
         }
 
 
 
 
-    }
 
+
+        }
 
 
 
