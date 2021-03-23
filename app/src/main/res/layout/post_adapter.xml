@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="380dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,47 +12,53 @@
     android:foreground="?selectableItemBackground"
     app:cardBackgroundColor="@color/cardview_light_background">
 
+    <FrameLayout
+        android:background="#FF0000"
+        android:layout_width="4dp"
+        android:layout_height="match_parent"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="272dp"
+        android:layout_height="494dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/postTitleInList"
-            android:layout_width="171dp"
-            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:gravity="center"
             android:text="TextView"
             android:textSize="18sp" />
 
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.chip.ChipGroup>
+
         <ImageView
             android:id="@+id/imagePostId"
             android:layout_width="match_parent"
-            android:layout_height="167dp"
+            android:layout_height="287dp"
+            android:layout_weight="1"
             android:background="@color/white" />
 
-        <LinearLayout
+        <RatingBar
+            android:id="@+id/ratingBar2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Recipe Ingredients and Directions" />
+            android:numStars="5" />
 
     </LinearLayout>
 
