@@ -19,7 +19,7 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-public class DisplayIngredientAndDirections extends AppCompatActivity {
+public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
     Button buttonToGoToExplore;
 
@@ -44,6 +44,8 @@ public class DisplayIngredientAndDirections extends AppCompatActivity {
 
         String postID = Parcels.unwrap(getIntent().getParcelableExtra("postID"));
 
+        Toast.makeText(DisplayIngredientAndDirections.this, "Post ID: " + postID, Toast.LENGTH_SHORT).show();
+    /*
         getsDirectionsFromDatabase(postID);
         recyclerViewDirections = findViewById(R.id.recyclerViewDirections);
         recyclerViewDirections.setLayoutManager(new LinearLayoutManager(this));
@@ -64,7 +66,7 @@ public class DisplayIngredientAndDirections extends AppCompatActivity {
     }
 
 
-
+/*
 
     private void getsDirectionsFromDatabase(String postID) {
 
@@ -103,9 +105,9 @@ public class DisplayIngredientAndDirections extends AppCompatActivity {
 
 
     }
+*/
 
-
-
+/*
     private void getsIngredientsDatabase(String postID) {
 
         retrievesPostFromDatabase.child(postID).child("ingredients").addValueEventListener(new ValueEventListener() {
@@ -152,6 +154,7 @@ public class DisplayIngredientAndDirections extends AppCompatActivity {
 
 
     }
+    */
 
 
     /*
@@ -162,7 +165,6 @@ public class DisplayIngredientAndDirections extends AppCompatActivity {
 
     }
     */
-
 
 
 }
