@@ -23,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 //import android.widget.Spinner;
 
@@ -42,7 +44,9 @@ public class ExploreActivity extends AppCompatActivity {
 
 
     ArrayList<Post> listOfPosts = new ArrayList<>();
-    ArrayList<Post> displayedPosts = new ArrayList<>();;
+    ArrayList<Post> displayedPosts = new ArrayList<>();
+
+    ArrayList<String> listOfPostIDs = new ArrayList<>();
 
     final int SEARCH_REQUEST_CODE = 42;
 
@@ -53,6 +57,9 @@ public class ExploreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
+
+
+
 
         spinner = (ProgressBar)findViewById(R.id.progressBar2);
 
@@ -114,6 +121,7 @@ public class ExploreActivity extends AppCompatActivity {
                         recipeTags.add((String) thisId.child("tagName").getValue());
                     }
                     Post post = new Post(recipeID, recipeTitle, recipeUrl, recipeTags, username);
+
 
                     listOfPosts.add(post);
                     displayedPosts = listOfPosts;

@@ -53,11 +53,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // DEVELOPER QUICK LOGIN
 
-        //editTextEmail.setText("ricardo.mangandi@gmail.com");
-        //editTextPassword.setText("Ricardo");
+        editTextEmail.setText("ricardo.mangandi@gmail.com");
+        editTextPassword.setText("Ricardo");
 
-        editTextEmail.setText("nathiemann1@gmail.com");
-        editTextPassword.setText("password");
+        //editTextEmail.setText("nathiemann1@gmail.com");
+        //editTextPassword.setText("password");
 
 
         forgotPass = findViewById(R.id.forgotPassword);
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Initialize loading dialog (verify_dialog)
         verifyDialog = new ProgressDialog(MainActivity.this);
         // Show dialog
-        verifyDialog.show();
+        //verifyDialog.show();
         // Set Content View
         verifyDialog.setContentView(R.layout.verify_dialog);
         // Set the transparent background
@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (mAuth.getCurrentUser().isEmailVerified()){
 
                             startActivity(new Intent(MainActivity.this, ExploreActivity.class));
+                            finish();
 
                         }
                         // user entered the correct credentials, however user has not verified email

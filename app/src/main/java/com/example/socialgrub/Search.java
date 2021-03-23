@@ -184,8 +184,6 @@ public class Search extends AppCompatActivity {
                 Toast.makeText(Search.this, "Something is wrong", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 
     // Create the list of posts given criteria
