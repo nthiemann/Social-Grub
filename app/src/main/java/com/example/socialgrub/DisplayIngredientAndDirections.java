@@ -42,6 +42,7 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
     ImageView picture;
     TextView postTitleView;
+    TextView descriptionView;
     RecyclerView recyclerViewIngredient;
     RecyclerView recyclerViewDirections;
     RatingBar ratingBarTop;
@@ -73,6 +74,7 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
         ratingBarBottom = findViewById(R.id.ratingBar);
         tagChipGroup = findViewById(R.id.chipGroup);
         userView = findViewById(R.id.userView);
+        descriptionView = findViewById(R.id.descriptionText);
         recyclerViewDirections = findViewById(R.id.recyclerViewDirections);
         recyclerViewIngredient = findViewById(R.id.recyclerViewIngredient);
 
@@ -181,6 +183,9 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
                 String imageURL = dataSnapshot.child("recipeUrl").getValue().toString();
                 Picasso.get().load(imageURL).into(picture);
+
+                String description = dataSnapshot.child("recipeDescription").getValue().toString();
+                descriptionView.setText(description);
 
                 DataSnapshot idListSnapshot = dataSnapshot.child("recipeTags");
                 for (DataSnapshot thisID : idListSnapshot.getChildren())

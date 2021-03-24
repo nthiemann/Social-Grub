@@ -21,6 +21,7 @@ import com.example.socialgrub.R;
 import com.example.socialgrub.Recipe;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -87,6 +88,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
         holder.recipeTitle.setText(listOfPosts.get(position).getRecipeTitle());
+        //holder.recipeRatingView.setText(listOfPosts.get(position).get)
         Picasso.get().load(listOfPosts.get(position).getRecipeURL()).into(holder.imageToPost);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +129,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         ImageView imageToPost;
         TextView recipeTitle;
-        Button toViewList;
+        TextView recipeRatingView;
+        ChipGroup tagGroup;
+
         // TextView recipeDescription;
         //TextView username;
 
@@ -139,6 +143,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             super(itemView);
             imageToPost = itemView.findViewById(R.id.imagePostId);
             recipeTitle = itemView.findViewById(R.id.postTitleInList);
+            recipeRatingView = itemView.findViewById(R.id.textView5);
+            tagGroup = itemView.findViewById(R.id.tagGroup);
             //recipeDescription = itemView.findViewById(R.id.postDescriptionInList);
             //username = itemView.findViewById(R.id.usernameIdInList);
 

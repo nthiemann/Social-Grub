@@ -15,6 +15,7 @@ class Post implements Parcelable {
     String postID;
 
     String username;
+    float rating;
 
     //ArrayList<String> description;
 

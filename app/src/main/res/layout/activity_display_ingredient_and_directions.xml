@@ -52,6 +52,12 @@
                 android:src="@android:drawable/ic_menu_camera" />
 
             <TextView
+                android:id="@+id/descriptionText"
+                android:layout_width="match_parent"
+                android:layout_height="121dp"
+                android:text="TextView" />
+
+            <TextView
                 android:id="@+id/textView17"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
