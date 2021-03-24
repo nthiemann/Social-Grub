@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 //import android.widget.Spinner;
 
 public class ExploreActivity extends AppCompatActivity {
@@ -58,6 +59,7 @@ public class ExploreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
 
+        Toast.makeText(ExploreActivity.this, "Oncreate just start", Toast.LENGTH_LONG).show();
 
 
 
@@ -108,6 +110,7 @@ public class ExploreActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                listOfPosts.clear();
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
 
@@ -124,9 +127,8 @@ public class ExploreActivity extends AppCompatActivity {
 
 
                     listOfPosts.add(post);
-                    displayedPosts = listOfPosts;
-
                 }
+                displayedPosts = listOfPosts;
 
                 postAdapter = new PostAdapter(ExploreActivity.this,displayedPosts);
                 recyclerViewListOfPosts.setAdapter(postAdapter);

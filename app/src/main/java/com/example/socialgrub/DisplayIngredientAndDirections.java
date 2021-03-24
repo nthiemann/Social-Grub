@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,7 @@ import com.squareup.picasso.Picasso;
 import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class DisplayIngredientAndDirections extends AppCompatActivity  {
@@ -44,12 +46,18 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
     RecyclerView recyclerViewDirections;
     RatingBar ratingBarTop;
     TextView ratingText;
+    TextView userView;
     RatingBar ratingBarBottom;
     ChipGroup tagChipGroup;
 
+    String postID;
+
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
     DatabaseReference retrievesPostFromDatabase = db.getReference("Image Dish");
+    DatabaseReference userRef = db.getReference("Users");
+    String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+    boolean userHasRated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,17 +72,24 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
         ratingText = findViewById(R.id.ratingText);
         ratingBarBottom = findViewById(R.id.ratingBar);
         tagChipGroup = findViewById(R.id.chipGroup);
-
+        userView = findViewById(R.id.userView);
         recyclerViewDirections = findViewById(R.id.recyclerViewDirections);
         recyclerViewIngredient = findViewById(R.id.recyclerViewIngredient);
 
 
-        String postID = Parcels.unwrap(getIntent().getParcelableExtra("postID"));
+        postID = Parcels.unwrap(getIntent().getParcelableExtra("postID"));
+
+
+        ratingBarTop.setMax(5);
+        ratingBarTop.setStepSize(0.1f);
+        ratingBarTop.setFocusable(false);
+        ratingBarTop.setIsIndicator(true);
+
 
         getPostInfo(postID);
         recyclerViewIngredient.setLayoutManager(new LinearLayoutManager(this));
-
         recyclerViewDirections.setLayoutManager(new LinearLayoutManager(this));
+
 
         buttonToGoToExplore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,17 +98,86 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
             }
         });
 
+        ratingBarBottom.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener(){
+
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+
+                updateRating((float)rating);
+            }
+        });
+
     }
+    private void updateRating(float rating){
+
+        retrievesPostFromDatabase.child(postID).child("ratings").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                boolean hasRated = false;
+                for (DataSnapshot s : dataSnapshot.getChildren())
+                {
+                    if (s.child("userID").getValue().toString().equals(userID))
+                    {
+                        s.child("rating").getRef().setValue(rating);
+                        hasRated = true;
+                    }
+                }
+                if (!hasRated)
+                    retrievesPostFromDatabase.child(postID).child("ratings").getRef().push().setValue(new PostRating(userID, (float)rating));
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(DisplayIngredientAndDirections.this, "Cannot load data", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
 
     private void getPostInfo(String postID) {
 
         retrievesPostFromDatabase.child(postID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int ratingCount = 0;
+                double avgRating = 0;
+                if (dataSnapshot.hasChild("ratings"))
+                {
 
+                    for (DataSnapshot s : dataSnapshot.child("ratings").getChildren()) {
+                        avgRating += Double.parseDouble(s.child("rating").getValue().toString());
+                        ratingCount++;
+                    }
+                }
+                avgRating /= (double)ratingCount;
+
+                ratingBarTop.setRating((float)avgRating);
+                DecimalFormat df = new DecimalFormat("###.###");
+                ratingText.setText("Rating: " + df.format(avgRating) + " / 5");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+                retrievesPostFromDatabase.child(postID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 String recipeName = dataSnapshot.child("recipeTitle").getValue().toString();
                 postTitleView.setText(recipeName);
+
+                String creatorName = dataSnapshot.child("Username").getValue().toString();
+                userView.setText("By " +creatorName);
+
 
                 String imageURL = dataSnapshot.child("recipeUrl").getValue().toString();
                 Picasso.get().load(imageURL).into(picture);
@@ -107,16 +191,12 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
                     tagChipGroup.addView(chip);
                 }
 
-
                 DataSnapshot directionListSnapshot = dataSnapshot.child("directions");
-
-
                 int numberOfDirections = (int) directionListSnapshot.getChildrenCount();
                 for(int i = 0; i < numberOfDirections; i++) {
 
                     String thisDirection = directionListSnapshot.child(String.valueOf(i)).getValue().toString();;
                     directions.add(thisDirection);
-
                 }
 
                 DataSnapshot ingredientListSnapshot = dataSnapshot.child("ingredients");
@@ -143,6 +223,8 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
             }
 
         });
+
+
 
 
     }
