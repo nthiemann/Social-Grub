@@ -25,15 +25,15 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
     Button buttonToGoToExplore;
-    String recipeName;
-    String imageURL;
-    float recipeRating;
+
+
     ArrayList<Ingredient> listOfIngredients = new ArrayList<>();
     ArrayList<String> directions = new ArrayList<>();
     ArrayList<String> tags = new ArrayList<>();
@@ -59,7 +59,7 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
         buttonToGoToExplore = findViewById(R.id.buttonGoBackToPost);
         picture = findViewById(R.id.imageView);
-        postTitleView = findViewById(R.id.titleView);
+        postTitleView = (TextView) findViewById(R.id.titleView);
         ratingBarTop = findViewById(R.id.ratingBar2);
         ratingText = findViewById(R.id.ratingText);
         ratingBarBottom = findViewById(R.id.ratingBar);
@@ -74,8 +74,10 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
         Toast.makeText(DisplayIngredientAndDirections.this, "Post ID: " + postID, Toast.LENGTH_SHORT).show();
 
         getPostInfo(postID);
+        recyclerViewIngredient.setLayoutManager(new LinearLayoutManager(this));
 
-        loadViews();
+        recyclerViewDirections.setLayoutManager(new LinearLayoutManager(this));
+
         buttonToGoToExplore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,33 +87,6 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
     }
 
-
-    // load all captured data to views
-
-    private void loadViews()
-    {
-        postTitleView.setText(recipeName);
-        //ratingText.setText(String.valueOf(recipeRating));
-        // ratingBarTop.set ....
-
-        Picasso.get().load(imageURL).into(picture);
-
-        for (String tagString : tags)
-        {
-            Chip chip = new Chip(DisplayIngredientAndDirections.this);
-            chip.setText(tagString);
-            tagChipGroup.addView(chip);
-
-        }
-
-        recyclerViewIngredient.setLayoutManager(new LinearLayoutManager(this));
-        IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(DisplayIngredientAndDirections.this, listOfIngredients);
-        recyclerViewIngredient.setAdapter(ingredientsAdapter);
-
-        recyclerViewDirections.setLayoutManager(new LinearLayoutManager(this));
-        DirectionsAdapter directionsAdapter = new DirectionsAdapter(DisplayIngredientAndDirections.this, directions);
-        recyclerViewDirections.setAdapter(directionsAdapter);
-    }
     private void getPostInfo(String postID) {
 
         retrievesPostFromDatabase.child(postID).addValueEventListener(new ValueEventListener() {
@@ -119,15 +94,22 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
-                recipeName = dataSnapshot.child("recipeTitle").getValue().toString();
-                imageURL = dataSnapshot.child("recipeUrl").getValue().toString();
+                String recipeName = dataSnapshot.child("recipeTitle").getValue().toString();
+                postTitleView.setText(recipeName);
+
+                String imageURL = dataSnapshot.child("recipeUrl").getValue().toString();
+                Picasso.get().load(imageURL).into(picture);
 
                 DataSnapshot idListSnapshot = dataSnapshot.child("recipeTags");
                 for (DataSnapshot thisID : idListSnapshot.getChildren())
                 {
                     String tagName = thisID.child("tagName").getValue().toString();
-                    tags.add(tagName);
+                    Chip chip = new Chip(DisplayIngredientAndDirections.this);
+                    chip.setText(tagName);
+                    tagChipGroup.addView(chip);
                 }
+
+
                 DataSnapshot directionListSnapshot = dataSnapshot.child("directions");
 
 
@@ -135,9 +117,8 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
                 for(int i = 0; i < numberOfDirections; i++) {
 
                     String thisDirection = directionListSnapshot.child(String.valueOf(i)).getValue().toString();;
-                    directions.add((i+1) + ".) "+ thisDirection);
+                    directions.add(thisDirection);
 
-                    //removed code I cant remember what I had here.
                 }
 
                 DataSnapshot ingredientListSnapshot = dataSnapshot.child("ingredients");
@@ -150,7 +131,11 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
                     listOfIngredients.add(new Ingredient(ingredientName, measurementValue,  measurementUnit));
                 }
+                IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(DisplayIngredientAndDirections.this, listOfIngredients);
+                recyclerViewIngredient.setAdapter(ingredientsAdapter);
 
+                DirectionsAdapter directionsAdapter = new DirectionsAdapter(DisplayIngredientAndDirections.this, directions);
+                recyclerViewDirections.setAdapter(directionsAdapter);
             }
 
             @Override
@@ -164,65 +149,6 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
     }
 
-
-/*
-    private void getsIngredientsDatabase(String postID) {
-
-        retrievesPostFromDatabase.child(postID).child("ingredients").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                int numberOfIngredients = (int) dataSnapshot.getChildrenCount();
-
-                for(int indexOfListIngredients = 0 ; indexOfListIngredients < numberOfIngredients; indexOfListIngredients++) {
-
-                        String tempString = indexOfListIngredients + "";
-
-                        String measurementValueTemp = dataSnapshot.child(tempString).child("measurementValue").getValue().toString();
-                        String measurementUnit = dataSnapshot.child(tempString).child("measurementUnit").getValue().toString();
-                        String nameOfIngredient = dataSnapshot.child(tempString).child("nameOfIngredient").getValue().toString();
-
-                        double measurementValue = Double.parseDouble(measurementValueTemp);
-
-
-
-
-                        Ingredient ingredient = new Ingredient(nameOfIngredient,measurementValue,measurementUnit);
-                        listOfIngredients.add(ingredient);
-
-
-
-                }
-
-
-                    //adapter stuff
-
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                Toast.makeText(DisplayIngredientAndDirections.this, "No Ingredients found", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
-
-    }
-    */
-
-
-    /*
-    private void getsTagsDatabase() {
-
-
-
-
-    }
-    */
 
 
 }

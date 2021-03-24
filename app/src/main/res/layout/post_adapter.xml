@@ -14,7 +14,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="272dp"
+        android:layout_height="392dp"
         android:orientation="vertical">
 
         <TextView
@@ -28,7 +28,7 @@
         <ImageView
             android:id="@+id/imagePostId"
             android:layout_width="match_parent"
-            android:layout_height="167dp"
+            android:layout_height="344dp"
             android:background="@color/white" />
 
         <LinearLayout
@@ -46,13 +46,6 @@
             android:orientation="horizontal">
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/buttonToViewList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Recipe Ingredients and Directions" />
 
     </LinearLayout>
 
