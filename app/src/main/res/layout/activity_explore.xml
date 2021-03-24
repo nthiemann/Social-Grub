@@ -7,19 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ExploreActivity">
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="109dp"
-        android:layout_height="79dp"
-        android:contentDescription="TODO"
-        android:src="@android:drawable/ic_menu_mapmode"
-        android:tint="#9C27B0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.964" />
+
 
 
     <Button
@@ -51,14 +39,15 @@
         app:srcCompat="@drawable/search_icon" />
 
     <ImageButton
-        android:id="@+id/social_grub_logo"
+        android:id="@+id/createRecipePage"
         android:layout_width="81dp"
         android:layout_height="69dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.001"
+        app:layout_constraintVertical_bias="0.965"
         app:srcCompat="@drawable/socialgrubcameraverthree" />
 
     <ImageButton
@@ -73,38 +62,27 @@
         app:layout_constraintVertical_bias="0.081"
         app:srcCompat="@drawable/settings_icon" />
 
-    <ImageButton
-        android:id="@+id/createRecipePage"
-        android:layout_width="109dp"
-        android:layout_height="79dp"
-        android:tint="#9C27B0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.964"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listOfPostsRecycler"
         android:layout_width="391dp"
         android:layout_height="455dp"
-        app:layout_constraintBottom_toTopOf="@+id/profileButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_Explore_Page"
-        app:layout_constraintVertical_bias="0.727" />
-
-    <ImageButton
-        android:id="@+id/profileButton"
-        android:layout_width="109dp"
-        android:layout_height="79dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.964"
+        app:layout_constraintVertical_bias="0.539" />
+
+    <ImageButton
+        android:id="@+id/profileButton"
+        android:layout_width="103dp"
+        android:layout_height="69dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024"
         app:srcCompat="@drawable/sgprofilevertwo" />
 
     <ProgressBar

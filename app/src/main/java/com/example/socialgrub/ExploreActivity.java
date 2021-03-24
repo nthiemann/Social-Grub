@@ -37,7 +37,7 @@ public class ExploreActivity extends AppCompatActivity {
     ImageButton searchButton;
     ProgressBar spinner;
 
-    //String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
 
     RecyclerView recyclerViewListOfPosts;
@@ -47,7 +47,7 @@ public class ExploreActivity extends AppCompatActivity {
     ArrayList<Post> listOfPosts = new ArrayList<>();
     ArrayList<Post> displayedPosts = new ArrayList<>();
 
-    ArrayList<String> listOfPostIDs = new ArrayList<>();
+
 
     final int SEARCH_REQUEST_CODE = 42;
 
