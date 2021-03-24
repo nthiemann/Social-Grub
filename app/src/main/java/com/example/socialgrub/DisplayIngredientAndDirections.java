@@ -71,8 +71,6 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
         String postID = Parcels.unwrap(getIntent().getParcelableExtra("postID"));
 
-        Toast.makeText(DisplayIngredientAndDirections.this, "Post ID: " + postID, Toast.LENGTH_SHORT).show();
-
         getPostInfo(postID);
         recyclerViewIngredient.setLayoutManager(new LinearLayoutManager(this));
 
@@ -81,7 +79,7 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
         buttonToGoToExplore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
             }
         });
 
