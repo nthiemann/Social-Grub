@@ -23,6 +23,7 @@ public class Recipe {
 
     String recipeTitle;
     String recipeDescription;
+    String tagOne;
 
     public Recipe () {
 
@@ -58,6 +59,14 @@ public class Recipe {
         this.ingredients = ingredients;
         this.directions = directions;
         this.tags = tags;
+    }
+
+    public Recipe(String recipeUrl, String recipeTitle, String recipeDescription, String tagOne) {
+
+        this.recipeUrl = recipeUrl;
+        this.recipeTitle = recipeTitle;
+        this.recipeDescription = recipeDescription;
+        this.tagOne = tagOne;
     }
 
 
@@ -110,6 +119,8 @@ public class Recipe {
     {
         return this.tags;
     }
+
+    public String getOneTag(){ return this.tagOne; }
 
     public String getRecipeUrl() {
         return recipeUrl;
