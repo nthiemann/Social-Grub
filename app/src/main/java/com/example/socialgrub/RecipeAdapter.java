@@ -35,11 +35,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
         this.profilePostList = profilePostList;
     }
 
-
-
-
-
-
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,52 +45,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
 
-/*
-        String title = profilePostList.get(position).getRecipeTitle();
-
-        ArrayList<Tag> tags = profilePostList.get(position).getRecipeTags();
-
-        //String tag1 = profilePostList.get(position).getRecipeTagOne();
-        //String tag2 = profilePostList.get(position).getRecipeTagTwo();
-        //String tag3 = profilePostList.get(position).getRecipeTagThree();
-        String image = profilePostList.get(position).getRecipeUrl();
-
-        holder.postTitle.setText(title);
-        holder.tagOne.setText(tags.get(0).getTagString());
-        holder.tagTwo.setText(tags.get(1).getTagString());
-        holder.tagThree.setText(tags.get(2).getTagString());
-
-        try {
-            Picasso.get().load(image).into(holder.postImage);
-        }
-        catch(Exception e) {
-
-        }
-
-        holder.viewPostButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "View Post", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        */
-
-
         holder.postTitle.setText(profilePostList.get(position).getRecipeTitle());
+        holder.tagOne.setText(profilePostList.get(position).getOneTag());
         Picasso.get().load(profilePostList.get(position).getRecipeUrl()).into(holder.postImage);
-
-//        holder.imageName.setText(mImageNames.get(position));
-
-//        holder.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, ViewPostActivity.class);
-//                intent.putExtra("image_url", profilePostList.get(position).getRecipeUrl());
-//                intent.putExtra("title", profilePostList.get(position).getRecipeTitle());
-//                context.startActivity(intent);
-//            }
-//        });
         tempPos = position;
     }
 
@@ -107,17 +59,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
     class Holder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView postImage;
-        TextView tagOne, tagTwo, tagThree, postTitle;
+        TextView tagOne, postTitle;
 
         public Holder(@NonNull View itemView){
             super(itemView);
 
             postImage = itemView.findViewById(R.id.profileRecipeImage);
             postTitle = itemView.findViewById(R.id.profileRecipeTitle);
-//            tagOne = itemView.findViewById(R.id.profileRecipeTag1);
-//            tagTwo = itemView.findViewById(R.id.profileRecipeTag2);
-//            tagThree = itemView.findViewById(R.id.profileRecipeTag3);
-//            postTitle = itemView.findViewById(R.id.profileRecipeTitle);
+            tagOne = itemView.findViewById(R.id.profileRecipeTag1);
         }
 
         @Override
@@ -125,10 +74,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
             final Intent intent;
             intent =  new Intent(context, SettingsActivity.class);
             context.startActivity(intent);
-//            Intent intent = new Intent(context, ViewPostActivity.class);
-//            intent.putExtra("image_url", profilePostList.get(tempPos).getRecipeUrl());
-//            intent.putExtra("title", profilePostList.get(tempPos).getRecipeTitle());
-//            context.startActivity(intent);
         }
     }
 }
