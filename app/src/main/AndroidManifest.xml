@@ -25,7 +25,6 @@
         <activity android:name=".AddIngredients" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".ViewPost" />
         <activity android:name=".CreatePost" />
         <activity android:name=".AddDirections" />
         <activity android:name=".AddTags" />

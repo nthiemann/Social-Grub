@@ -78,10 +78,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
 
-
-
-
-
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
 
