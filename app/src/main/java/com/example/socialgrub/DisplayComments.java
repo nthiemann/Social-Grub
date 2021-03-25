@@ -26,12 +26,10 @@ public class DisplayComments extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
     DatabaseReference retrieveCommentsFromDatabase = db.getReference("Image Dish");
 
-    ArrayList<String> commentList = new ArrayList<>();
-
     RecyclerView recyclerListOfComments;
 
     Button backButton;
-    String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,24 +41,26 @@ public class DisplayComments extends AppCompatActivity {
         String postID = Parcels.unwrap(getIntent().getParcelableExtra("postID"));
 
 
-
         recyclerListOfComments.setLayoutManager(new LinearLayoutManager(this));
 
-        retrieveCommentsFromDatabase.child(postID).child("Comments").addValueEventListener(new ValueEventListener() {
+        retrieveCommentsFromDatabase.child(postID).child("Comments").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
+                ArrayList<String> commentList = new ArrayList<>();
+                ArrayList<String> userList = new ArrayList<>();
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
                     String commentContent = dataSnapshot1.child("Comment String").getValue().toString();
-                    username = dataSnapshot1.child("Username").getValue().toString();
+                    String username = dataSnapshot1.child("Username").getValue().toString();
                     commentList.add(commentContent);
+                    userList.add(username);
+
 
                 }
 
 
-                CommentAdapter commentAdapter = new CommentAdapter(DisplayComments.this, commentList,username);
+                CommentAdapter commentAdapter = new CommentAdapter(DisplayComments.this, commentList,userList);
                 recyclerListOfComments.setAdapter(commentAdapter);
 
             }

@@ -19,13 +19,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     Context context;
     ArrayList<String> commentList;
-    String username;
+    ArrayList<String> userList;
 
-    public CommentAdapter(Context context, ArrayList<String> commentList, String username) {
+    public CommentAdapter(Context context, ArrayList<String> commentList, ArrayList<String> userList) {
 
         this.context = context;
         this.commentList = commentList;
-        this.username = username;
+        this.userList = userList;
 
 
     }
@@ -39,7 +39,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.CommentViewHolder holder, int position) {
 
-        String by = "User: " + username;
+        String by = "User: " + userList.get(position);
 
         holder.commentTextBox.setText(commentList.get(position));
         holder.commentUsername.setText(by);

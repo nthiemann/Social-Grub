@@ -59,7 +59,7 @@ public class ExploreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
 
-        Toast.makeText(ExploreActivity.this, "Oncreate just start", Toast.LENGTH_LONG).show();
+        //Toast.makeText(ExploreActivity.this, "Oncreate just start", Toast.LENGTH_LONG).show();
 
 
 

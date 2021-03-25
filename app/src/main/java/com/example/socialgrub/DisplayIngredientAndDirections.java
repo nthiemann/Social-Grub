@@ -59,6 +59,7 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
     ChipGroup tagChipGroup;
     EditText textBoxForComments;
 
+    String username;
     String postID;
     String aComment;
     //String username;
@@ -108,6 +109,19 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
 
 
+        userRef.child(userID).child("Username").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                username = dataSnapshot.getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+
+
+            }});
 
         leaveComment.setEnabled(false);
         leaveComment.setOnClickListener(new View.OnClickListener() {
@@ -118,38 +132,16 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
                 //places the comment inside the database under that post
                 //will generate a random key for that comment
                 uniqueCommentId = retrievesPostFromDatabase.push().getKey();
-                retrievesPostFromDatabase.child(postID).child("Comments").child(uniqueCommentId).child("Comment String").setValue(aComment);
+                retrievesPostFromDatabase.child(postID).child("Comments").child(uniqueCommentId).child("Username").getRef().setValue(username);
+
+                retrievesPostFromDatabase.child(postID).child("Comments").child(uniqueCommentId).child("Comment String").getRef().setValue(aComment);
+
                 Toast.makeText(DisplayIngredientAndDirections.this, "Your comment has been added!", Toast.LENGTH_SHORT).show();
                 textBoxForComments.getText().clear();
 
+                }
 
-
-                userRef.child(userID).child("Username").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                       String username = dataSnapshot.getValue().toString();
-                        retrievesPostFromDatabase.child(postID).child("Comments").child(uniqueCommentId).child("Username").setValue(username);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-
-
-                    }
-
-
-
-
-
-
-                });
-
-
-
-            }
-        });
+            });
 
 
 
@@ -185,9 +177,6 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
                 updateRating((float)rating);
             }
         });
-
-
-
 
 
 
