@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialGrub">
-        <activity android:name=".DisplayIngredientAndDirections"></activity>
+        <activity android:name=".CommentAdapter"></activity>
+        <activity android:name=".DisplayComments" />
+        <activity android:name=".DisplayIngredientAndDirections" />
         <activity android:name=".FinalConfirmPost" />
         <activity android:name=".AdditionalIngredients" />
         <activity android:name=".AdditionalDirections" />

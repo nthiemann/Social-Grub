@@ -31,8 +31,14 @@
 
             <RatingBar
                 android:id="@+id/ratingBar2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="243dp"
+                android:layout_height="53dp" />
+
+            <Button
+                android:id="@+id/viewComment"
+                android:layout_width="243dp"
+                android:layout_height="50dp"
+                android:text="View Comments" />
 
             <TextView
                 android:id="@+id/ratingText"
@@ -79,9 +85,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="173dp" />
 
+            <EditText
+                android:id="@+id/textBoxForComments"
+                android:layout_width="match_parent"
+                android:layout_height="89dp"
+                />
+
+            <Button
+                android:id="@+id/leaveComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="Leave Comment" />
+
             <TextView
                 android:id="@+id/textView21"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="46dp"
                 android:text="Leave a rating" />
 
@@ -92,10 +111,11 @@
 
             <Button
                 android:id="@+id/buttonGoBackToPost"
-                android:isIndicator="true"
-                android:layout_width="246dp"
+                android:layout_width="148dp"
                 android:layout_height="wrap_content"
+                android:isIndicator="true"
                 android:text="Back to Explore" />
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
