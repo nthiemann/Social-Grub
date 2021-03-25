@@ -62,7 +62,6 @@ public class ExploreActivity extends AppCompatActivity {
         //Toast.makeText(ExploreActivity.this, "Oncreate just start", Toast.LENGTH_LONG).show();
 
 
-
         spinner = (ProgressBar)findViewById(R.id.progressBar2);
 
         settingButton = (ImageButton) findViewById(R.id.settings_button);
@@ -123,7 +122,19 @@ public class ExploreActivity extends AppCompatActivity {
                     {
                         recipeTags.add((String) thisId.child("tagName").getValue());
                     }
-                    Post post = new Post(recipeID, recipeTitle, recipeUrl, recipeTags, username);
+
+                    int ratingCount = 0;
+                    double avgRating = 0;
+                    if (dataSnapshot1.hasChild("ratings"))
+                    {
+
+                        for (DataSnapshot s : dataSnapshot1.child("ratings").getChildren()) {
+                            avgRating += Double.parseDouble(s.child("rating").getValue().toString());
+                            ratingCount++;
+                        }
+                    }
+                    avgRating /= (double)ratingCount;
+                    Post post = new Post(recipeID, recipeTitle, recipeUrl, recipeTags, username, (float)avgRating);
 
 
                     listOfPosts.add(post);

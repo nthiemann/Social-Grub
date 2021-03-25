@@ -13,16 +13,33 @@ class Post implements Parcelable {
     String recipeURL; //image
     ArrayList<String> tags;
     String postID;
-
+    Float rating;
     String username;
-    float rating;
     String tagOne;
+
+    public Float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
 
     //ArrayList<String> description;
 
     public Post() {
     }
 
+    public Post(String postID, String recipeTitle, String recipeURL, ArrayList<String> tags, String username, Float rating)
+    {
+        this.postID = postID;
+        this.recipeTitle = recipeTitle;
+        this.recipeURL = recipeURL;
+        this.tags = tags;
+        this.username = username;
+        this.rating = rating;
+    }
 
     public Post(String recipeURL, String recipeTitle) {
         this.recipeURL = recipeURL;
@@ -53,6 +70,7 @@ class Post implements Parcelable {
         tags = in.createStringArrayList();
         postID = in.readString();
         username = in.readString();
+        rating = in.readFloat();
     }
 
     @Override
@@ -62,6 +80,7 @@ class Post implements Parcelable {
         dest.writeStringList(tags);
         dest.writeString(postID);
         dest.writeString(username);
+        dest.writeFloat(rating);
     }
 
     @Override

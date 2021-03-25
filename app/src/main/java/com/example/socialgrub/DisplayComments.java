@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -56,9 +57,7 @@ public class DisplayComments extends AppCompatActivity {
                     commentList.add(commentContent);
                     userList.add(username);
 
-
                 }
-
 
                 CommentAdapter commentAdapter = new CommentAdapter(DisplayComments.this, commentList,userList);
                 recyclerListOfComments.setAdapter(commentAdapter);
@@ -71,6 +70,12 @@ public class DisplayComments extends AppCompatActivity {
             }
         });
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
 

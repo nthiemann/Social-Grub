@@ -21,6 +21,7 @@ import com.example.socialgrub.R;
 import com.example.socialgrub.Recipe;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +33,7 @@ import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder>{
@@ -52,9 +54,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
 
-
-
-
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -67,17 +66,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
 
-
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
 
 
-
-        // holder.recipeDescription.setText(post.getDescription());
-
-
         holder.recipeTitle.setText(listOfPosts.get(position).getRecipeTitle());
-        //holder.recipeRatingView.setText(listOfPosts.get(position).get)
+
+        DecimalFormat df = new DecimalFormat("###.##");
+        holder.recipeRatingView.setText(df.format(listOfPosts.get(position).getRating()));
+
+
         Picasso.get().load(listOfPosts.get(position).getRecipeURL()).into(holder.imageToPost);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -85,19 +83,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             public void onClick(View v) {
 
 
-                        int indexOfClicked = holder.getAdapterPosition();
-                        postID =  listOfPosts.get(indexOfClicked).getPostID();
-                        Bundle bundle = new Bundle();
-                        bundle.putParcelable("postID", Parcels.wrap(postID));
+                int indexOfClicked = holder.getAdapterPosition();
+                postID =  listOfPosts.get(indexOfClicked).getPostID();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("postID", Parcels.wrap(postID));
 
 
-                        Intent goToViewIngredientDirections = new Intent(context.getApplicationContext(),DisplayIngredientAndDirections.class);
-                        goToViewIngredientDirections.putExtras(bundle);
-                        goToViewIngredientDirections.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.getApplicationContext().startActivity(goToViewIngredientDirections);
-
-
-
+                Intent goToViewIngredientDirections = new Intent(context.getApplicationContext(),DisplayIngredientAndDirections.class);
+                goToViewIngredientDirections.putExtras(bundle);
+                goToViewIngredientDirections.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.getApplicationContext().startActivity(goToViewIngredientDirections);
             }
         });
 
@@ -121,10 +116,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         TextView recipeRatingView;
         ChipGroup tagGroup;
 
-        // TextView recipeDescription;
-        //TextView username;
-
-
 
 
         public PostViewHolder(@NonNull View itemView) {
@@ -134,18 +125,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             recipeTitle = itemView.findViewById(R.id.postTitleInList);
             recipeRatingView = itemView.findViewById(R.id.textView5);
             tagGroup = itemView.findViewById(R.id.tagGroup);
-            //recipeDescription = itemView.findViewById(R.id.postDescriptionInList);
-            //username = itemView.findViewById(R.id.usernameIdInList);
-
 
         }
 
 
-
-
-
-
-        }
+    }
 
 
 

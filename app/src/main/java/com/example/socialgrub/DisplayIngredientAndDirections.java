@@ -253,7 +253,7 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
                 avgRating /= (double)ratingCount;
 
                 ratingBarTop.setRating((float)avgRating);
-                DecimalFormat df = new DecimalFormat("###.###");
+                DecimalFormat df = new DecimalFormat("###.##");
                 ratingText.setText("Rating: " + df.format(avgRating) + " / 5");
             }
 

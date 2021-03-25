@@ -34,12 +34,6 @@
                 android:layout_width="243dp"
                 android:layout_height="53dp" />
 
-            <Button
-                android:id="@+id/viewComment"
-                android:layout_width="243dp"
-                android:layout_height="50dp"
-                android:text="View Comments" />
-
             <TextView
                 android:id="@+id/ratingText"
                 android:layout_width="match_parent"
@@ -49,7 +43,7 @@
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroup"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="30sp" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -60,7 +54,7 @@
             <TextView
                 android:id="@+id/descriptionText"
                 android:layout_width="match_parent"
-                android:layout_height="121dp"
+                android:layout_height="74dp"
                 android:text="TextView" />
 
             <TextView
@@ -93,10 +87,16 @@
 
             <Button
                 android:id="@+id/leaveComment"
-                android:layout_width="match_parent"
+                android:layout_width="256dp"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:text="Leave Comment" />
+                android:text="Leave Comment"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/viewComment"
+                android:layout_width="243dp"
+                android:layout_height="50dp"
+                android:text="View Comments" />
 
             <TextView
                 android:id="@+id/textView21"
@@ -114,7 +114,7 @@
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
                 android:isIndicator="true"
-                android:text="Back to Explore" />
+                android:text="Back" />
 
         </LinearLayout>
     </ScrollView>
