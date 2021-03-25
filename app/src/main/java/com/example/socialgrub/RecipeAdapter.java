@@ -2,6 +2,7 @@ package com.example.socialgrub;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +27,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
 
     Context context;
     ArrayList<Recipe> profilePostList;
-
-    PostAdapter postAdapter;
-    ArrayList<Post> postList;
-
-    int tempPos;
+//    ArrayList<Post> postList;
 
     public RecipeAdapter(Context context, ArrayList<Recipe> profilePostList) {
         this.context = context;
@@ -48,7 +47,24 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
         holder.postTitle.setText(profilePostList.get(position).getRecipeTitle());
         holder.tagOne.setText(profilePostList.get(position).getOneTag());
         Picasso.get().load(profilePostList.get(position).getRecipeUrl()).into(holder.postImage);
-        tempPos = position;
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int indexOfClicked = holder.getAdapterPosition();
+
+//                String postID =  profilePostList.get(indexOfClicked).getPostID();
+                Bundle bundle = new Bundle();
+
+//                bundle.putParcelable("postID", Parcels.wrap(postID));
+
+                Intent goToViewIngredientDirections = new Intent(context.getApplicationContext(),DisplayIngredientAndDirections.class);
+                goToViewIngredientDirections.putExtras(bundle);
+                goToViewIngredientDirections.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.getApplicationContext().startActivity(goToViewIngredientDirections);
+            }
+        });
     }
 
     @Override
@@ -56,7 +72,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
         return profilePostList.size();
     }
 
-    class Holder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class Holder extends RecyclerView.ViewHolder{
 
         ImageView postImage;
         TextView tagOne, postTitle;
@@ -67,13 +83,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Holder>{
             postImage = itemView.findViewById(R.id.profileRecipeImage);
             postTitle = itemView.findViewById(R.id.profileRecipeTitle);
             tagOne = itemView.findViewById(R.id.profileRecipeTag1);
-        }
-
-        @Override
-        public void onClick(View v) {
-            final Intent intent;
-            intent =  new Intent(context, SettingsActivity.class);
-            context.startActivity(intent);
         }
     }
 }

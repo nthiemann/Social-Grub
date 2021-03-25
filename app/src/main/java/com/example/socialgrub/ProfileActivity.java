@@ -40,17 +40,18 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
 
     RecyclerView recyclerView;
-    RecipeAdapter recipeAdapter;
+    PostAdapter postAdapter;
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
     DatabaseReference retrievesPostFromDatabaseForUser = db.getReference("Users");
     DatabaseReference dbUsername = db.getReference("Users");
     StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("users/");
 
-    ArrayList<Recipe> userRecipeList;
+    ArrayList<Post> userPostList;
 
     Button editProfileBtn;
     ImageButton settingsProfileBtn;
     String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    String postID;
     TextView pUsername;
     TextView pName;
     TextView pLastName;
@@ -162,13 +163,11 @@ public class ProfileActivity extends AppCompatActivity {
         retrievesPostFromDatabaseForUser.child(userID).child("Recipes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userRecipeList = new ArrayList<>();
+                userPostList = new ArrayList<>();
                 ArrayList<String> directions = null;
-                // ArrayList<Ingredient> ingredients;
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-
+                    postID = dataSnapshot1.getKey();
                     String recipeTitle = dataSnapshot1.child("recipeTitle").getValue().toString();
-                    String description = dataSnapshot1.child("recipeDescription").getValue().toString();
                     String recipeURL = dataSnapshot1.child("recipeUrl").getValue().toString();
                     String tag = dataSnapshot1.child("recipeTags").child("0").child("tagName").getValue().toString();
 
@@ -178,13 +177,13 @@ public class ProfileActivity extends AppCompatActivity {
                         }
                     }
 
-                    Recipe recipe = new Recipe(recipeURL, recipeTitle, description, tag);
-                    userRecipeList.add(recipe);
+                    Post post = new Post(postID, recipeURL, recipeTitle, tag);
+                    userPostList.add(post);
 
                 }
 
-                recipeAdapter = new RecipeAdapter(ProfileActivity.this,userRecipeList);
-                recyclerView.setAdapter(recipeAdapter);
+                postAdapter = new PostAdapter(ProfileActivity.this,userPostList);
+                recyclerView.setAdapter(postAdapter);
 
             }
 
