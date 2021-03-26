@@ -72,11 +72,29 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         holder.recipeTitle.setText(listOfPosts.get(position).getRecipeTitle());
 
-        DecimalFormat df = new DecimalFormat("###.##");
-        holder.recipeRatingView.setText(df.format(listOfPosts.get(position).getRating()));
+        if (listOfPosts.get(position).getRating() != null)
+        {
+            holder.ratingStar.setVisibility(View.VISIBLE);
 
+            DecimalFormat df = new DecimalFormat("###.##");
+            holder.recipeRatingView.setText(df.format(listOfPosts.get(position).getRating()));
+        }
 
-        Picasso.get().load(listOfPosts.get(position).getRecipeURL()).into(holder.imageToPost);
+        if (listOfPosts.get(position).getTags() != null)
+        {
+            for (String tag : listOfPosts.get(position).getTags())
+            {
+                Chip chip = new Chip(context);
+                chip.setText(tag);
+                holder.tagGroup.addView(chip);
+
+            }
+        }
+
+        if (listOfPosts.get(position).getRecipeURL() != null)
+        {
+            Picasso.get().load(listOfPosts.get(position).getRecipeURL()).into(holder.imageToPost);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,17 +133,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         TextView recipeTitle;
         TextView recipeRatingView;
         ChipGroup tagGroup;
-
+        ImageView ratingStar;
 
 
         public PostViewHolder(@NonNull View itemView) {
 
             super(itemView);
             imageToPost = itemView.findViewById(R.id.imagePostId);
+
             recipeTitle = itemView.findViewById(R.id.postTitleInList);
             recipeRatingView = itemView.findViewById(R.id.textView5);
             tagGroup = itemView.findViewById(R.id.tagGroup);
-
+            ratingStar = itemView.findViewById(R.id.imageView4);
+            ratingStar.setVisibility(View.INVISIBLE);
         }
 
 

@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,6 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
     DatabaseReference retrievesPostFromDatabaseForUser = db.getReference("Users");
     DatabaseReference dbUsername = db.getReference("Users");
     StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("users/");
+
 
     ArrayList<Post> userPostList;
 
@@ -164,23 +166,48 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userPostList = new ArrayList<>();
-                ArrayList<String> directions = null;
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
                     postID = dataSnapshot1.getKey();
+
+
                     String recipeTitle = dataSnapshot1.child("recipeTitle").getValue().toString();
                     String recipeURL = dataSnapshot1.child("recipeUrl").getValue().toString();
-                    String tag = dataSnapshot1.child("recipeTags").child("0").child("tagName").getValue().toString();
 
-                    if(dataSnapshot1.getKey().equals("directions")) {
-                        for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
-                            directions.add(dataSnapshot2.getValue().toString());
+
+                    ArrayList<String> recipeTags = new ArrayList<>();
+                    for (DataSnapshot thisId : dataSnapshot1.child("recipeTags").getChildren())
+                    {
+                        recipeTags.add((String) thisId.child("tagName").getValue());
+                    }
+
+                    int ratingCount = 0;
+                    double avgRating = 0;
+
+                    if (dataSnapshot1.hasChild("ratings"))
+                    {
+                        for (DataSnapshot s : dataSnapshot1.child("ratings").getChildren()) {
+                            avgRating += Double.parseDouble(s.child("rating").getValue().toString());
+                            ratingCount++;
                         }
                     }
 
-                    Post post = new Post(postID, recipeURL, recipeTitle, tag);
+                    avgRating /= (double)ratingCount;
+                    //Toast.makeText(ProfileActivity.this, "Rating " + avgRating, Toast.LENGTH_SHORT).show();
+
+
+                    Post post = new Post(postID, recipeTitle, recipeURL, recipeTags);
+
                     userPostList.add(post);
+                    //Toast.makeText(ProfileActivity.this, "Added post ", Toast.LENGTH_SHORT).show();
+
 
                 }
+
+                if (userPostList ==  null || userPostList.isEmpty())
+                    Toast.makeText(ProfileActivity.this, "userPostList is null o", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(ProfileActivity.this, "Added post ", Toast.LENGTH_LONG).show();
 
                 postAdapter = new PostAdapter(ProfileActivity.this,userPostList);
                 recyclerView.setAdapter(postAdapter);
