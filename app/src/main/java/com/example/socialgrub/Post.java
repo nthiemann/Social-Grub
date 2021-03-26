@@ -15,8 +15,7 @@ class Post implements Parcelable {
     String postID;
 
     String username;
-
-    //ArrayList<String> description;
+    float rating;
 
     public Post() {
     }
@@ -25,9 +24,8 @@ class Post implements Parcelable {
     public Post(String recipeURL, String recipeTitle) {
         this.recipeURL = recipeURL;
         this.recipeTitle = recipeTitle;
-        //this.username = username;
-        //this.description = description;
     }
+
     public Post(String postID, String recipeTitle, String recipeURL, ArrayList<String> tags, String username)
     {
         this.postID = postID;
@@ -107,18 +105,5 @@ class Post implements Parcelable {
     }
 
     public void setPostID(String postID){this.postID = postID;}
-
-/*
-    public ArrayList<String> getDescription() {
-        return description;
-    }
-
-    public void setDescription(ArrayList<String> description) {
-        this.description = description;
-    }
-
-*/
-
-
 
 }

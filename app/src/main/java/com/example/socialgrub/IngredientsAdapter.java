@@ -43,10 +43,8 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
         holder.ingredientName.setText(lisOfIngredientsFromConfirmPost.get(position).getNameOfIngredient());
         holder.ingredientMeasurement.setText(lisOfIngredientsFromConfirmPost.get(position).getMeasurementUnit());
-        //holder.ingredientAmount.setText((int) lisOfIngredientsFromConfirmPost.get(position).getMeasurementValue());
-
-
-
+        String convertDoubleToString = Double.toString(lisOfIngredientsFromConfirmPost.get(position).getMeasurementValue());
+        holder.ingredientAmount.setText(convertDoubleToString);
 
 
     }
@@ -68,7 +66,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
             super(itemView);
 
-           // ingredientAmount = itemView.findViewById(R.id.amountIngredientId);
+            ingredientAmount = itemView.findViewById(R.id.amountIngredientId);
             ingredientName = itemView.findViewById(R.id.adapterIngredientNameId);
             ingredientMeasurement = itemView.findViewById(R.id.measurementIngredientId);
         }

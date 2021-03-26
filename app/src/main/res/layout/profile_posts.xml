@@ -39,25 +39,10 @@
 
             <TextView
                 android:id="@+id/profileRecipeTag1"
-                android:layout_width="101dp"
+                android:layout_width="118dp"
                 android:layout_height="wrap_content"
                 android:text="Tag"
-                android:textColor="@color/black"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/profileRecipeTag2"
-                android:layout_width="101dp"
-                android:layout_height="wrap_content"
-                android:text="Tag"
-                android:textColor="@color/black"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/profileRecipeTag3"
-                android:layout_width="101dp"
-                android:layout_height="wrap_content"
-                android:text="Tag"
+                android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
 

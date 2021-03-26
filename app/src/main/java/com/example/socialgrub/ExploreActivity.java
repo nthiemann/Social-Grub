@@ -23,7 +23,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 //import android.widget.Spinner;
 
 public class ExploreActivity extends AppCompatActivity {
@@ -34,7 +37,7 @@ public class ExploreActivity extends AppCompatActivity {
     ImageButton searchButton;
     ProgressBar spinner;
 
-    //String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
 
     RecyclerView recyclerViewListOfPosts;
@@ -42,7 +45,9 @@ public class ExploreActivity extends AppCompatActivity {
 
 
     ArrayList<Post> listOfPosts = new ArrayList<>();
-    ArrayList<Post> displayedPosts = new ArrayList<>();;
+    ArrayList<Post> displayedPosts = new ArrayList<>();
+
+
 
     final int SEARCH_REQUEST_CODE = 42;
 
@@ -53,6 +58,10 @@ public class ExploreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
+
+        Toast.makeText(ExploreActivity.this, "Oncreate just start", Toast.LENGTH_LONG).show();
+
+
 
         spinner = (ProgressBar)findViewById(R.id.progressBar2);
 
@@ -101,6 +110,7 @@ public class ExploreActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                listOfPosts.clear();
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
 
@@ -115,10 +125,10 @@ public class ExploreActivity extends AppCompatActivity {
                     }
                     Post post = new Post(recipeID, recipeTitle, recipeUrl, recipeTags, username);
 
-                    listOfPosts.add(post);
-                    displayedPosts = listOfPosts;
 
+                    listOfPosts.add(post);
                 }
+                displayedPosts = listOfPosts;
 
                 postAdapter = new PostAdapter(ExploreActivity.this,displayedPosts);
                 recyclerViewListOfPosts.setAdapter(postAdapter);
@@ -151,7 +161,7 @@ public class ExploreActivity extends AppCompatActivity {
     private void setDisplayedPosts(ArrayList<Post> postList)
     {
 
-        if (postList.size() > 1)
+        if (postList.size() > 0)
         {
             displayedPosts = postList;
 

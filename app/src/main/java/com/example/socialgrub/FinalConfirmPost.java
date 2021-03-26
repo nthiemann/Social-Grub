@@ -57,6 +57,8 @@ public class FinalConfirmPost extends AppCompatActivity {
     ArrayList<String> directions;
     ArrayList<Tag> tags;
 
+    Bundle lastBundle;
+
 
     String username = "default";
 
@@ -81,12 +83,20 @@ public class FinalConfirmPost extends AppCompatActivity {
                 uploadPost();
                 startActivity(new Intent(FinalConfirmPost.this, ExploreActivity.class));
                 Toast.makeText(FinalConfirmPost.this, "Post is successful!", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        cancelPostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FinalConfirmPost.this, ExploreActivity.class));
+                Toast.makeText(FinalConfirmPost.this, "Post was unsuccessful, try again!", Toast.LENGTH_LONG).show();
+                finish();
             }
         });
 
     }
-
-
 
     private void uploadPost() {
         if (imageUri != null) {
@@ -131,8 +141,12 @@ public class FinalConfirmPost extends AppCompatActivity {
                             postMap.put("recipeDescription", recipeDescription);
                             postMap.put("Username", username);
                             postMap.put("recipeTags", tags);
+                            postMap.put("directions", directions);
+                            postMap.put("ingredients", listOfIngredients);
+                            postMap.put("postID", postID);
 
                             getStoresRecipe.child(postID).setValue(postMap);
+                            getStoresRecipe.child(postID).child("ratings").getRef().push().setValue(new PostRating(userID, 5.0f));
                         }
 
                         @Override
@@ -142,7 +156,6 @@ public class FinalConfirmPost extends AppCompatActivity {
                     });
 
                 }
-
 
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -155,12 +168,11 @@ public class FinalConfirmPost extends AppCompatActivity {
         }
 
 
-
-
-
-
-
     }
+
+
+
+
 
 
 

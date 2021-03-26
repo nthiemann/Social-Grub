@@ -56,6 +56,7 @@ public class AddDirections extends AppCompatActivity {
 
         addBothDirections = findViewById(R.id.addBothDirectionsButton);
         addBothDirections.setEnabled(false);
+
         addBothDirections.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

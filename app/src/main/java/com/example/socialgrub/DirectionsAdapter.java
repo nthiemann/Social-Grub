@@ -39,7 +39,9 @@ public class DirectionsAdapter extends RecyclerView.Adapter<DirectionsAdapter.Di
     public void onBindViewHolder(@NonNull DirectionsAdapter.DirectionsViewHolder holder, int position) {
 
         int indexOfDirection = position + 1;
-        String convertNumberToString = indexOfDirection + "";
+        String convertNumberToString = Integer.toString(indexOfDirection);
+
+
         holder.directionNth.setText(listOfDirectionsFromConfirmPage.get(position));
         holder.directionNthIndex.setText(convertNumberToString);
 
@@ -56,7 +58,7 @@ public class DirectionsAdapter extends RecyclerView.Adapter<DirectionsAdapter.Di
 
     class DirectionsViewHolder extends RecyclerView.ViewHolder {
 
-        EditText directionNth;
+        TextView directionNth;
         TextView directionNthIndex;
 
 

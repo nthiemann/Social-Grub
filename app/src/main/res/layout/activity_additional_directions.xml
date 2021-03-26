@@ -21,21 +21,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.056" />
 
+
     <EditText
         android:id="@+id/additionalDirectionsIdEditText"
-        android:layout_width="354dp"
-        android:layout_height="71dp"
+        android:layout_width="352dp"
+        android:layout_height="124dp"
         android:ems="10"
         android:hint="Additional Direction"
         android:inputType="textPersonName"
         android:maxLength="500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.719"
+        app:layout_constraintHorizontal_bias="0.576"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.425" />
-
+        app:layout_constraintVertical_bias="0.499" />
 
     <Button
         android:id="@+id/addAdditionalDirectionButton"
@@ -49,7 +49,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.563" />
+        app:layout_constraintVertical_bias="0.698" />
 
     <Button
         android:id="@+id/toContinuePostId"

@@ -103,7 +103,7 @@ public class ProfileActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(getApplicationContext(), "No Such file or Path found!!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "The user does not have a profile picture", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -170,18 +170,15 @@ public class ProfileActivity extends AppCompatActivity {
                     String recipeTitle = dataSnapshot1.child("recipeTitle").getValue().toString();
                     String description = dataSnapshot1.child("recipeDescription").getValue().toString();
                     String recipeURL = dataSnapshot1.child("recipeUrl").getValue().toString();
+                    String tag = dataSnapshot1.child("recipeTags").child("0").child("tagName").getValue().toString();
 
                     if(dataSnapshot1.getKey().equals("directions")) {
                         for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
-
-
                             directions.add(dataSnapshot2.getValue().toString());
-
-
                         }
                     }
 
-                    Recipe recipe = new Recipe(recipeURL, recipeTitle,description);
+                    Recipe recipe = new Recipe(recipeURL, recipeTitle, description, tag);
                     userRecipeList.add(recipe);
 
                 }

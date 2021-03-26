@@ -121,3 +121,23 @@ Users will be able to post their recipes and search recipe results. This will al
 * Ricardo Mangandi - Worked on the Explore page to ensure that all previously posted items in the database appeared for the user. Wrote some manual tests.
 * Allec Pereira - Worked on changing account information and project demonstration
 * Rudolph Garcia - Worked on the UI of the Add Ingredients, Add Directions, and the Log In page
+
+# Sprint 7
+* [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
+* Burndown Chart: 
+* ![Sprint7](https://user-images.githubusercontent.com/62866287/111926033-8d3e0b80-8a81-11eb-9e81-95bd19054105.png)
+* Velocity Chart: 
+* ![Velocity Chart (7)](https://user-images.githubusercontent.com/63211233/111926224-59afb100-8a82-11eb-8c9b-8b74ea08d023.png)
+* [Manual Test](https://github.com/Jixster07/Social-Grub/blob/master/manuelTestweek7.md)
+* [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
+* [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
+* [Automated Tests](https://github.com/Jixster07/Social-Grub/tree/master/app/src/androidTest/java/com/example/socialgrub)
+* [Product Demonstration](https://youtu.be/fstJTme7R34)
+
+
+## Task Allocation
+* Kyle Karacadag - Added user information on the profile page and worked on making the posts clickable. 
+* Nicholas Thiemann - Completed Tags page. Completed Explore page Search. Wrote manual tests for both.
+* Ricardo Mangandi - Completed the page where the user can modify their directions and ingredients before they post. Collaborated on the tags page. 
+* Allec Pereira - Worked on the edit profile page activity, wrote automated tests for the profile activity, and recorded the demonstration video
+* Rudolph Garcia - Worked the post's U.I for the explore page, modified the design of the Log In Page, and contributed to the Search page

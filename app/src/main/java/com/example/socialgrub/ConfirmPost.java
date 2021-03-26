@@ -59,24 +59,12 @@ public class ConfirmPost extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
     String recipeTitle;
     String recipeDescription;
     Uri imageUri;
     ArrayList<Ingredient> listOfIngredients;
     ArrayList<String> directions;
     ArrayList<Tag> tags;
-
-
-
-
-
-
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +76,7 @@ public class ConfirmPost extends AppCompatActivity {
 
 
 
-        Toast.makeText(ConfirmPost.this, "Tag array size is: " + tags.size(), Toast.LENGTH_SHORT).show();
+
 
 
         //ingredients recycler view and adapter functions
@@ -153,7 +141,6 @@ public class ConfirmPost extends AppCompatActivity {
 
         ingredientListId = findViewById(R.id.ingredientListId);
         directionsListId = findViewById(R.id.directionsListId);
-
         buttonAddMoreIngredients = findViewById(R.id.buttonAddMoreIngredients);
         buttonAddMoreDirections = findViewById(R.id.buttonAddMoreDirections);
         continuePostId = findViewById(R.id.continuePostId);
