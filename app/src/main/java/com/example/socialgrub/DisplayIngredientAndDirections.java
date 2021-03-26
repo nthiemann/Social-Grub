@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.media.Rating;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -34,11 +37,15 @@ import java.util.ArrayList;
 public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
     Button buttonToGoToExplore;
+    Button leaveComment;
+    Button goToCommentList;
 
 
     ArrayList<Ingredient> listOfIngredients = new ArrayList<>();
     ArrayList<String> directions = new ArrayList<>();
     ArrayList<String> tags = new ArrayList<>();
+
+
 
     ImageView picture;
     TextView postTitleView;
@@ -50,8 +57,13 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
     TextView userView;
     RatingBar ratingBarBottom;
     ChipGroup tagChipGroup;
+    EditText textBoxForComments;
 
+    String username;
     String postID;
+    String aComment;
+    //String username;
+    String uniqueCommentId;
 
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
     DatabaseReference retrievesPostFromDatabase = db.getReference("Image Dish");
@@ -65,6 +77,14 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_display_ingredient_and_directions);
+
+
+
+
+
+
+
+
 
         buttonToGoToExplore = findViewById(R.id.buttonGoBackToPost);
         picture = findViewById(R.id.imageView);
@@ -80,6 +100,55 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
 
         postID = Parcels.unwrap(getIntent().getParcelableExtra("postID"));
+
+
+
+        leaveComment = findViewById(R.id.leaveComment);
+        goToCommentList = findViewById(R.id.viewComment);
+        textBoxForComments = findViewById(R.id.textBoxForComments);
+
+
+
+        userRef.child(userID).child("Username").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                username = dataSnapshot.getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+
+
+            }});
+
+        leaveComment.setEnabled(false);
+        leaveComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aComment = textBoxForComments.getText().toString();
+
+                //places the comment inside the database under that post
+                //will generate a random key for that comment
+                uniqueCommentId = retrievesPostFromDatabase.push().getKey();
+                retrievesPostFromDatabase.child(postID).child("Comments").child(uniqueCommentId).child("Username").getRef().setValue(username);
+
+                retrievesPostFromDatabase.child(postID).child("Comments").child(uniqueCommentId).child("Comment String").getRef().setValue(aComment);
+
+                Toast.makeText(DisplayIngredientAndDirections.this, "Your comment has been added!", Toast.LENGTH_SHORT).show();
+                textBoxForComments.getText().clear();
+
+                }
+
+            });
+
+
+
+
+
+        textBoxForComments.addTextChangedListener(addCommentTextWatcher);
+
 
 
         ratingBarTop.setMax(5);
@@ -108,6 +177,31 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
                 updateRating((float)rating);
             }
         });
+
+
+
+
+        goToCommentList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToViewComments = new Intent(DisplayIngredientAndDirections.this, DisplayComments.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("postID", Parcels.wrap(postID));
+
+
+                goToViewComments.putExtras(bundle);
+                startActivity(goToViewComments);
+
+            }
+        });
+
+
+
+
+
+
+
 
     }
     private void updateRating(float rating){
@@ -159,7 +253,7 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
                 avgRating /= (double)ratingCount;
 
                 ratingBarTop.setRating((float)avgRating);
-                DecimalFormat df = new DecimalFormat("###.###");
+                DecimalFormat df = new DecimalFormat("###.##");
                 ratingText.setText("Rating: " + df.format(avgRating) + " / 5");
             }
 
@@ -233,6 +327,26 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
 
     }
+
+    private TextWatcher addCommentTextWatcher= new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String commentInput = textBoxForComments.getText().toString();
+            leaveComment.setEnabled(!commentInput.isEmpty());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+
 
 
 

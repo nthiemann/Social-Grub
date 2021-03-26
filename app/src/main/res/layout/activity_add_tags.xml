@@ -25,7 +25,7 @@
         android:layout_width="64dp"
         android:layout_height="25dp"
         android:text="Search"
-        android:textSize="20dp"
+        android:textSize="20sp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,8 +50,8 @@
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup2"
-        android:layout_width="364dp"
-        android:layout_height="243dp"
+        android:layout_width="360dp"
+        android:layout_height="231dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -75,14 +75,13 @@
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="346dp"
-        android:layout_height="216dp"
+        android:layout_width="343dp"
+        android:layout_height="195dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.348" />
+        app:layout_constraintVertical_bias="0.333" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

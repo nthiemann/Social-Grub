@@ -41,5 +41,18 @@
         app:layout_constraintVertical_bias="0.007"
         app:srcCompat="@android:drawable/ic_menu_revert" />
 
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="176dp"
+        android:layout_height="58dp"
+        android:text="Settings"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.049" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

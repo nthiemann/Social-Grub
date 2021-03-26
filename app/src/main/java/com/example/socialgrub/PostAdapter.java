@@ -21,7 +21,9 @@ import com.example.socialgrub.R;
 import com.example.socialgrub.Recipe;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +33,7 @@ import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder>{
@@ -41,18 +44,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     ArrayList<Post> listOfPosts;
     String postID;
 
-   // OnPostListener mOnPostListener;
-
-
-/*
-    public PostAdapter( Context context, ArrayList<Post> listOfPosts, OnPostListener onPostListener) {
-
-        this.context = context;
-        this.listOfPosts = listOfPosts;
-        this.mOnPostListener = onPostListener;
-        //this.postID = postID;
-    }
-    */
 
     public PostAdapter( Context context, ArrayList<Post> listOfPosts) {
 
@@ -61,9 +52,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
        // this.mOnPostListener = onPostListener;
         //this.postID = postID;
     }
-
-
-
 
 
     @NonNull
@@ -78,37 +66,51 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
 
-
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
 
 
-
-        // holder.recipeDescription.setText(post.getDescription());
-
-
         holder.recipeTitle.setText(listOfPosts.get(position).getRecipeTitle());
-        //holder.recipeRatingView.setText(listOfPosts.get(position).get)
-        Picasso.get().load(listOfPosts.get(position).getRecipeURL()).into(holder.imageToPost);
+
+        if (listOfPosts.get(position).getRating() != null)
+        {
+            holder.ratingStar.setVisibility(View.VISIBLE);
+
+            DecimalFormat df = new DecimalFormat("###.##");
+            holder.recipeRatingView.setText(df.format(listOfPosts.get(position).getRating()));
+        }
+
+        if (listOfPosts.get(position).getTags() != null)
+        {
+            for (String tag : listOfPosts.get(position).getTags())
+            {
+                Chip chip = new Chip(context);
+                chip.setText(tag);
+                holder.tagGroup.addView(chip);
+
+            }
+        }
+
+        if (listOfPosts.get(position).getRecipeURL() != null)
+        {
+            Picasso.get().load(listOfPosts.get(position).getRecipeURL()).into(holder.imageToPost);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                int indexOfClicked = holder.getAdapterPosition();
 
+                int indexOfClicked = holder.getAdapterPosition();
                 postID =  listOfPosts.get(indexOfClicked).getPostID();
                 Bundle bundle = new Bundle();
-
                 bundle.putParcelable("postID", Parcels.wrap(postID));
+
 
                 Intent goToViewIngredientDirections = new Intent(context.getApplicationContext(),DisplayIngredientAndDirections.class);
                 goToViewIngredientDirections.putExtras(bundle);
                 goToViewIngredientDirections.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.getApplicationContext().startActivity(goToViewIngredientDirections);
-
-
-
             }
         });
 
@@ -131,32 +133,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         TextView recipeTitle;
         TextView recipeRatingView;
         ChipGroup tagGroup;
-
-        // TextView recipeDescription;
-        //TextView username;
-
-
+        ImageView ratingStar;
 
 
         public PostViewHolder(@NonNull View itemView) {
 
             super(itemView);
             imageToPost = itemView.findViewById(R.id.imagePostId);
+
             recipeTitle = itemView.findViewById(R.id.postTitleInList);
             recipeRatingView = itemView.findViewById(R.id.textView5);
             tagGroup = itemView.findViewById(R.id.tagGroup);
-            //recipeDescription = itemView.findViewById(R.id.postDescriptionInList);
-            //username = itemView.findViewById(R.id.usernameIdInList);
-
-
+            ratingStar = itemView.findViewById(R.id.imageView4);
+            ratingStar.setVisibility(View.INVISIBLE);
         }
 
 
-
-
-
-
-        }
+    }
 
 
 

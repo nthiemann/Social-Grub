@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,17 +41,19 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
 
     RecyclerView recyclerView;
-    RecipeAdapter recipeAdapter;
+    PostAdapter postAdapter;
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
     DatabaseReference retrievesPostFromDatabaseForUser = db.getReference("Users");
     DatabaseReference dbUsername = db.getReference("Users");
     StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("users/");
 
-    ArrayList<Recipe> userRecipeList;
+
+    ArrayList<Post> userPostList;
 
     Button editProfileBtn;
     ImageButton settingsProfileBtn;
     String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    String postID;
     TextView pUsername;
     TextView pName;
     TextView pLastName;
@@ -162,29 +165,52 @@ public class ProfileActivity extends AppCompatActivity {
         retrievesPostFromDatabaseForUser.child(userID).child("Recipes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userRecipeList = new ArrayList<>();
-                ArrayList<String> directions = null;
-                // ArrayList<Ingredient> ingredients;
+                userPostList = new ArrayList<>();
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
-                    String recipeTitle = dataSnapshot1.child("recipeTitle").getValue().toString();
-                    String description = dataSnapshot1.child("recipeDescription").getValue().toString();
-                    String recipeURL = dataSnapshot1.child("recipeUrl").getValue().toString();
-                    String tag = dataSnapshot1.child("recipeTags").child("0").child("tagName").getValue().toString();
+                    postID = dataSnapshot1.getKey();
 
-                    if(dataSnapshot1.getKey().equals("directions")) {
-                        for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
-                            directions.add(dataSnapshot2.getValue().toString());
+
+                    String recipeTitle = dataSnapshot1.child("recipeTitle").getValue().toString();
+                    String recipeURL = dataSnapshot1.child("recipeUrl").getValue().toString();
+
+
+                    ArrayList<String> recipeTags = new ArrayList<>();
+                    for (DataSnapshot thisId : dataSnapshot1.child("recipeTags").getChildren())
+                    {
+                        recipeTags.add((String) thisId.child("tagName").getValue());
+                    }
+
+                    int ratingCount = 0;
+                    double avgRating = 0;
+
+                    if (dataSnapshot1.hasChild("ratings"))
+                    {
+                        for (DataSnapshot s : dataSnapshot1.child("ratings").getChildren()) {
+                            avgRating += Double.parseDouble(s.child("rating").getValue().toString());
+                            ratingCount++;
                         }
                     }
 
-                    Recipe recipe = new Recipe(recipeURL, recipeTitle, description, tag);
-                    userRecipeList.add(recipe);
+                    avgRating /= (double)ratingCount;
+                    //Toast.makeText(ProfileActivity.this, "Rating " + avgRating, Toast.LENGTH_SHORT).show();
+
+
+                    Post post = new Post(postID, recipeTitle, recipeURL, recipeTags);
+
+                    userPostList.add(post);
+                    //Toast.makeText(ProfileActivity.this, "Added post ", Toast.LENGTH_SHORT).show();
+
 
                 }
 
-                recipeAdapter = new RecipeAdapter(ProfileActivity.this,userRecipeList);
-                recyclerView.setAdapter(recipeAdapter);
+                if (userPostList ==  null || userPostList.isEmpty())
+                    Toast.makeText(ProfileActivity.this, "userPostList is null o", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(ProfileActivity.this, "Added post ", Toast.LENGTH_LONG).show();
+
+                postAdapter = new PostAdapter(ProfileActivity.this,userPostList);
+                recyclerView.setAdapter(postAdapter);
 
             }
 
