@@ -17,28 +17,77 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/titleView"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
-                android:text="TextView" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/userView"
+                <TextView
+                    android:id="@+id/titleView"
+                    android:layout_width="286dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textSize="25dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="34dp"
-                android:text="TextView" />
+                android:layout_height="match_parent">
 
-            <RatingBar
-                android:id="@+id/ratingBar2"
-                android:layout_width="243dp"
-                android:layout_height="53dp" />
+                <TextView
+                    android:id="@+id/userView"
+                    android:layout_width="279dp"
+                    android:layout_height="31dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:text="TextView"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/ratingText"
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteY="97dp">
+
+                <RatingBar
+                    android:id="@+id/ratingBar2"
+                    android:layout_width="236dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginEnd="159dp"
+                    android:layout_marginRight="159dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ratingText"
+                    android:layout_width="127dp"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="252dp"
+                    android:layout_marginLeft="252dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginRight="32dp"
+                    android:gravity="center"
+                    android:text="Rating:"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroup"
@@ -51,28 +100,59 @@
                 android:layout_height="398dp"
                 android:src="@android:drawable/ic_menu_camera" />
 
-            <TextView
-                android:id="@+id/descriptionText"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="74dp"
-                android:text="TextView" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView17"
+                <TextView
+                    android:id="@+id/descriptionText"
+                    android:layout_width="354dp"
+                    android:layout_height="106dp"
+                    android:text="TextView"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="Ingredients" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="296dp"
+                    android:layout_height="42dp"
+                    android:gravity="center"
+                    android:text="Ingredients"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewIngredient"
                 android:layout_width="match_parent"
                 android:layout_height="178dp" />
 
-            <TextView
-                android:id="@+id/textView23"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="41dp"
-                android:text="Directions" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="301dp"
+                    android:layout_height="43dp"
+                    android:gravity="center"
+                    android:text="Directions"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewDirections"
@@ -85,36 +165,93 @@
                 android:layout_height="89dp"
                 />
 
-            <Button
-                android:id="@+id/leaveComment"
-                android:layout_width="256dp"
-                android:layout_height="wrap_content"
-                android:text="Leave Comment"
-                android:textAllCaps="false" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/viewComment"
-                android:layout_width="243dp"
-                android:layout_height="50dp"
-                android:text="View Comments" />
+                <Button
+                    android:id="@+id/leaveComment"
+                    android:layout_width="256dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="77dp"
+                    android:layout_marginLeft="77dp"
+                    android:layout_marginEnd="78dp"
+                    android:layout_marginRight="78dp"
+                    android:gravity="center"
+                    android:text="Leave Comment"
+                    android:textAllCaps="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/textView21"
-                android:layout_width="wrap_content"
-                android:layout_height="46dp"
-                android:text="Leave a rating" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <RatingBar
-                android:id="@+id/ratingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/viewComment"
+                    android:layout_width="243dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="84dp"
+                    android:layout_marginLeft="84dp"
+                    android:layout_marginEnd="84dp"
+                    android:layout_marginRight="84dp"
+                    android:text="View Comments"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:id="@+id/buttonGoBackToPost"
-                android:layout_width="148dp"
-                android:layout_height="wrap_content"
-                android:isIndicator="true"
-                android:text="Back" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="143dp"
+                    android:layout_height="46dp"
+                    android:text="Leave a rating"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonGoBackToPost"
+                    android:layout_width="148dp"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+                    android:text="Back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </ScrollView>
