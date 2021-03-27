@@ -142,28 +142,6 @@ public class Search extends AppCompatActivity {
         });
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_search, menu);
-        MenuItem menuItem = menu.findItem(R.id.searchView2);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                // Filter array list
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-        return super.onCreateOptionsMenu(menu);
-    }*/
-
 
     private void populateTagsSearchList()
     {
@@ -204,12 +182,23 @@ public class Search extends AppCompatActivity {
                     String recipeName = dataSnapshot1.child("recipeTitle").getValue().toString().toLowerCase().toLowerCase().trim();
                     String userName = dataSnapshot1.child("Username").getValue().toString().toLowerCase().toLowerCase().trim();
 
-
                     ArrayList<String> recipeTagsList = new ArrayList<>();
                     for (DataSnapshot thisId : dataSnapshot1.child("recipeTags").getChildren())
                     {
                         recipeTagsList.add(thisId.child("tagName").getValue().toString());
                     }
+
+                    int ratingCount = 0;
+                    double avgRating = 0;
+                    if (dataSnapshot1.hasChild("ratings"))
+                    {
+
+                        for (DataSnapshot s : dataSnapshot1.child("ratings").getChildren()) {
+                            avgRating += Double.parseDouble(s.child("rating").getValue().toString());
+                            ratingCount++;
+                        }
+                    }
+                    avgRating /= (double)ratingCount;
 
                     boolean recipeNameMatch =  ((recipeNameToSearch.length() < 1) || (recipeName.contains(recipeNameToSearch)));
                     boolean userNameMatch = ((userNameToSearch.length() < 1) || (userName.contains(userNameToSearch)));
@@ -220,7 +209,7 @@ public class Search extends AppCompatActivity {
                     {
                         String recipeUrl = dataSnapshot1.child("recipeUrl").getValue().toString();
 
-                        Post post = new Post(dataSnapshot1.getKey(), recipeName, recipeUrl, recipeTagsList, userName);
+                        Post post = new Post(dataSnapshot1.getKey(), recipeName, recipeUrl, recipeTagsList, userName, (float) avgRating);
 
                         listOfPosts.add(post);
                     }
