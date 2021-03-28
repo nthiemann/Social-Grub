@@ -148,7 +148,7 @@ Users will be able to post their recipes and search recipe results. This will al
 * Burndown Chart:
 * ![sprint8burndownchart](https://user-images.githubusercontent.com/62866287/112738927-b0633200-8f3d-11eb-91a9-27a7964dd4db.png)
 * Velocity Chart:
-* Manuel Tests:
+* [Manuel Tests](https://github.com/Jixster07/Social-Grub/blob/master/week8ManuelTests.md)
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
 * [Automated Tests](https://github.com/Jixster07/Social-Grub/tree/master/app/src/androidTest/java/com/example/socialgrub)
