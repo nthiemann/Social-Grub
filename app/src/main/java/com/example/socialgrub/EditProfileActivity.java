@@ -53,7 +53,7 @@ public class EditProfileActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
     DatabaseReference ref;
-    String userName,newUsername,firstName,newFirstName,lastName,newLastName;
+    String userName,newUsername,firstName,newFirstName,lastName,newLastName,newDescription,oldDescription;
     EditText firstNameEditText,lastNameEditText,userNameEditText;
     TextInputEditText changeLastNameEditText,changeFirstNameEditText,newUserNameEditText,textBoxEditText;
     TextView descriptionTextView;
@@ -89,6 +89,7 @@ public class EditProfileActivity extends AppCompatActivity {
         loadUserName();
         loadFirstName();
         loadLastName();
+        loadDescription();
 
 
 
@@ -111,6 +112,15 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
+        textBoxChangeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (descriptionChanged()){
+                    loadDescription();
+                }
+            }
+        });
+
         // changes profile image if user clicks change button
         changeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,39 +132,14 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-        loadDescription();
-        changeDescription();
-
     }
 
-    private void changeDescription(){
+    private Boolean descriptionChanged() {
+        newDescription = textBoxEditText.getText().toString();
+        db.getReference().child("Users").child(user.getUid()).child("Description").setValue(newDescription);
+        return true;
 
-        ref = db.getReference().child("Users").child(user.getUid()).child("Description");
 
-        textBoxChangeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String newDescription = textBoxEditText.getText().toString();
-                        String description = dataSnapshot.getValue().toString();
-
-                        if (!newDescription.equals(description)) {
-                            textBoxEditText.setText(newDescription);
-                            ref.setValue(newDescription);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Toast.makeText(EditProfileActivity.this, "There was an error changing the description", Toast.LENGTH_SHORT).show();
-                    }
-
-                });
-            }
-        });
     }
 
     private void loadDescription(){
@@ -164,8 +149,8 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String description = dataSnapshot.getValue().toString();
-                if (!description.isEmpty())
-                    textBoxEditText.setText(description);
+                textBoxEditText.setText(description);
+
             }
 
             @Override
