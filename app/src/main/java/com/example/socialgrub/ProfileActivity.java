@@ -204,11 +204,6 @@ public class ProfileActivity extends AppCompatActivity {
 
                 }
 
-                if (userPostList ==  null || userPostList.isEmpty())
-                    Toast.makeText(ProfileActivity.this, "userPostList is null o", Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(ProfileActivity.this, "Added post ", Toast.LENGTH_LONG).show();
-
                 postAdapter = new PostAdapter(ProfileActivity.this,userPostList);
                 recyclerView.setAdapter(postAdapter);
 

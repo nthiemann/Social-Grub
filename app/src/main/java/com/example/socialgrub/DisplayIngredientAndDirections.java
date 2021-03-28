@@ -7,17 +7,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.media.Rating;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +30,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -47,6 +53,7 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
 
 
+    ImageButton profilePic;
     ImageView picture;
     TextView postTitleView;
     TextView descriptionView;
@@ -58,6 +65,7 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
     RatingBar ratingBarBottom;
     ChipGroup tagChipGroup;
     EditText textBoxForComments;
+    Button viewProfileButton;
 
     String username;
     String postID;
@@ -65,9 +73,16 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
     //String username;
     String uniqueCommentId;
 
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://social-grub-default-rtdb.firebaseio.com/");
     DatabaseReference retrievesPostFromDatabase = db.getReference("Image Dish");
     DatabaseReference userRef = db.getReference("Users");
+    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+
+
+    StorageReference profilePicRef;
+
+
     String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     boolean userHasRated;
@@ -77,13 +92,6 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_display_ingredient_and_directions);
-
-
-
-
-
-
-
 
 
         buttonToGoToExplore = findViewById(R.id.buttonGoBackToPost);
@@ -102,11 +110,28 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
         postID = Parcels.unwrap(getIntent().getParcelableExtra("postID"));
 
 
-
         leaveComment = findViewById(R.id.leaveComment);
         goToCommentList = findViewById(R.id.viewComment);
         textBoxForComments = findViewById(R.id.textBoxForComments);
 
+
+        /*userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot s: dataSnapshot.getChildren())
+                {
+                    s.getRef().orderByChild("Recipes").equalTo(postID).on("value",)
+                    {
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
 
 
         userRef.child(userID).child("Username").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -118,8 +143,6 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
-
 
             }});
 
@@ -143,13 +166,7 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
             });
 
-
-
-
-
         textBoxForComments.addTextChangedListener(addCommentTextWatcher);
-
-
 
         ratingBarTop.setMax(5);
         ratingBarTop.setStepSize(0.1f);
@@ -178,9 +195,6 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
             }
         });
 
-
-
-
         goToCommentList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,16 +206,8 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
                 goToViewComments.putExtras(bundle);
                 startActivity(goToViewComments);
-
             }
         });
-
-
-
-
-
-
-
 
     }
     private void updateRating(float rating){
@@ -224,7 +230,6 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
             }
 
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(DisplayIngredientAndDirections.this, "Cannot load data", Toast.LENGTH_SHORT).show();
@@ -232,8 +237,6 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
         });
 
     }
-
-
 
     private void getPostInfo(String postID) {
 
@@ -263,8 +266,18 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
             }
         });
 
+        if (profilePicRef != null)
+        {
+            // loads profile image
+            profilePicRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(DisplayIngredientAndDirections.this).load(uri).into(profilePic);
+                }
+            });
+        }
 
-                retrievesPostFromDatabase.child(postID).addListenerForSingleValueEvent(new ValueEventListener() {
+        retrievesPostFromDatabase.child(postID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -323,9 +336,6 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
         });
 
-
-
-
     }
 
     private TextWatcher addCommentTextWatcher= new TextWatcher() {
@@ -345,9 +355,4 @@ public class DisplayIngredientAndDirections extends AppCompatActivity  {
 
         }
     };
-
-
-
-
-
 }

@@ -25,18 +25,16 @@
         android:id="@+id/edit_profile_button"
         android:layout_width="156dp"
         android:layout_height="35dp"
-        android:background="#FFFFFF"
         android:text="edit profile"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
         app:iconTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.784"
+        app:layout_constraintHorizontal_bias="0.788"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.385"
-        app:strokeColor="#FFFFFF" />
+        app:layout_constraintVertical_bias="0.347" />
 
     <ImageButton
         android:id="@+id/settings_profile_button"
@@ -62,10 +60,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_profile_button" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilePicture"
-        android:layout_width="166dp"
-        android:layout_height="188dp"
+        android:layout_width="115dp"
+        android:layout_height="169dp"
         android:layout_marginTop="70dp"
         app:layout_constraintBottom_toTopOf="@+id/profilePostView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,8 +97,8 @@
         android:id="@+id/profileName"
         android:layout_width="55dp"
         android:layout_height="20dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="9dp"
         android:text="Name"
@@ -130,12 +128,13 @@
         android:layout_width="107dp"
         android:layout_height="19dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
         android:layout_marginBottom="10dp"
         android:text="Last Name"
         app:layout_constraintBottom_toTopOf="@+id/profileDescription"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profileName"
         app:layout_constraintTop_toBottomOf="@+id/profileUsername"
         app:layout_constraintVertical_bias="0.526" />
 

@@ -146,7 +146,7 @@ public class ExploreActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ExploreActivity.this, "Something is wrong", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ExploreActivity.this, "Something is wrong", Toast.LENGTH_SHORT).show();
             }
         });
 

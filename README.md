@@ -141,3 +141,23 @@ Users will be able to post their recipes and search recipe results. This will al
 * Ricardo Mangandi - Completed the page where the user can modify their directions and ingredients before they post. Collaborated on the tags page. 
 * Allec Pereira - Worked on the edit profile page activity, wrote automated tests for the profile activity, and recorded the demonstration video
 * Rudolph Garcia - Worked the post's U.I for the explore page, modified the design of the Log In Page, and contributed to the Search page
+
+
+# Sprint 8
+* [Trello Board (Backlogs and Requirements)](https://trello.com/b/08WbAgdr/social-grub)
+* Burndown Chart:
+* ![sprint8burndownchart](https://user-images.githubusercontent.com/62866287/112738927-b0633200-8f3d-11eb-91a9-27a7964dd4db.png)
+* Velocity Chart:
+* [Manuel Tests](https://github.com/Jixster07/Social-Grub/blob/master/week8ManuelTests.md)
+* [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
+* [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
+* [Automated Tests](https://github.com/Jixster07/Social-Grub/tree/master/app/src/androidTest/java/com/example/socialgrub)
+* Product Demonstration:
+
+
+## Task Allocation
+* Kyle Karacadag - 
+* Nicholas Thiemann - 
+* Ricardo Mangandi - Completed the feature to allow comments on posts and fixed minor bugs.
+* Allec Pereira - 
+* Rudolph Garcia - 
