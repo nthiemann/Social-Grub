@@ -47,19 +47,19 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="398dp"
+                android:layout_width="272dp"
+                android:layout_height="177dp"
                 android:src="@android:drawable/ic_menu_camera" />
 
             <TextView
                 android:id="@+id/descriptionText"
-                android:layout_width="match_parent"
-                android:layout_height="74dp"
+                android:layout_width="363dp"
+                android:layout_height="88dp"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/textView17"
-                android:layout_width="match_parent"
+                android:layout_width="83dp"
                 android:layout_height="40dp"
                 android:text="Ingredients" />
 
@@ -70,7 +70,7 @@
 
             <TextView
                 android:id="@+id/textView23"
-                android:layout_width="match_parent"
+                android:layout_width="88dp"
                 android:layout_height="41dp"
                 android:text="Directions" />
 

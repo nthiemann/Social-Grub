@@ -25,16 +25,18 @@
         android:id="@+id/edit_profile_button"
         android:layout_width="156dp"
         android:layout_height="35dp"
+        android:background="#FFFFFF"
         android:text="edit profile"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
         app:iconTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.788"
+        app:layout_constraintHorizontal_bias="0.784"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.347" />
+        app:layout_constraintVertical_bias="0.385"
+        app:strokeColor="#FFFFFF" />
 
     <ImageButton
         android:id="@+id/settings_profile_button"
@@ -128,12 +130,13 @@
         android:layout_width="107dp"
         android:layout_height="19dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:layout_marginBottom="10dp"
         android:text="Last Name"
         app:layout_constraintBottom_toTopOf="@+id/profileDescription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/profileUsername"
+        app:layout_constraintVertical_bias="0.526" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
