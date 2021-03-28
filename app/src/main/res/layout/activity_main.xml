@@ -59,8 +59,8 @@
     <Button
         android:id="@+id/forgotPassword"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="184dp"
-        android:layout_height="47dp"
+        android:layout_width="166dp"
+        android:layout_height="60dp"
         android:layout_marginStart="113dp"
         android:layout_marginLeft="113dp"
         android:layout_marginEnd="114dp"

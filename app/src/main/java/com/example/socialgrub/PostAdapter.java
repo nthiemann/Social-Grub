@@ -49,8 +49,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         this.context = context;
         this.listOfPosts = listOfPosts;
-       // this.mOnPostListener = onPostListener;
-        //this.postID = postID;
+
     }
 
 
@@ -58,9 +57,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-      //  View view = LayoutInflater.from(context).inflate(R.layout.post_adapter,parent,false);
 
-        // return new PostViewHolder(view,mOnPostListener);
         return new PostViewHolder(LayoutInflater.from(context).inflate(R.layout.post_adapter,parent,false));
 
     }
@@ -113,6 +110,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 context.getApplicationContext().startActivity(goToViewIngredientDirections);
             }
         });
+
+
+
+
+
 
         }
 
