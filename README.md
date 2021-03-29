@@ -156,7 +156,7 @@ Users will be able to post their recipes and search recipe results. This will al
 
 
 ## Task Allocation
-* Kyle Karacadag - 
+* Kyle Karacadag - Worked on fixing the formatting for the profile page and parts of the final video
 * Nicholas Thiemann - 
 * Ricardo Mangandi - Completed the feature to allow comments on posts and fixed minor bugs.
 * Allec Pereira - 
