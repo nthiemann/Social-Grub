@@ -148,6 +148,7 @@ Users will be able to post their recipes and search recipe results. This will al
 * Burndown Chart:
 * ![sprint8burndownchart](https://user-images.githubusercontent.com/62866287/112738927-b0633200-8f3d-11eb-91a9-27a7964dd4db.png)
 * Velocity Chart:
+* ![Velocity Chart (8)](https://user-images.githubusercontent.com/63211233/112780265-7a45b100-9016-11eb-9f98-f1a96b4a73fe.png)
 * [Manuel Tests](https://github.com/Jixster07/Social-Grub/blob/master/week8ManuelTests.md)
 * [System Architecture](https://github.com/Jixster07/Social-Grub/blob/master/System%20Architecture.md)
 * [Source Code](https://github.com/Jixster07/Social-Grub/tree/master/app/src/main/java/com/example/socialgrub)
@@ -160,4 +161,4 @@ Users will be able to post their recipes and search recipe results. This will al
 * Nicholas Thiemann - Completed the rating system. Added ratings and tags to each post card. Formatting.
 * Ricardo Mangandi - Completed the feature to allow comments on posts and fixed minor bugs.
 * Allec Pereira - Help fix edit profie page bugs
-* Rudolph Garcia - 
+* Rudolph Garcia - Edited the design and format for the pages of the app and the post card
